@@ -42,10 +42,9 @@
 - #### Super Admin
 - email: superadmin@i2a.co
 - password : password
-- #### Writer
 - #### Admin
 - email: admin@i2a.co
 - password : password
-- #### Writer
+- #### User
 - email: user@i2a.co
 - password: password
