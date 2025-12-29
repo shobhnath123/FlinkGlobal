@@ -20,40 +20,42 @@
         <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200">
             <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false" class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"></div>
 
-            @include('layouts.sidebar');
+            @include('layouts.sidebar')
 
             <div class="flex-1 flex flex-col overflow-scroll">
 
                     @include('layouts.header')
 
-                    @if(\Session::has('success'))
-                        <div class="text-green-600 pt-5 pl-5">
-                            <ul>
-                                <li>{!! \Session::get('success') !!}</li>
-                            </ul>
-                        </div>
-                    @endif
 
-                    @if(\Session::has('error'))
-                        <div class="text-green-600 pt-5 pl-5">
-                            <ul>
-                                <li>{!! \Session::get('error') !!}</li>
-                            </ul>
-                        </div>
-                    @endif
+                        @if(\Session::has('success'))
+                            <div class="text-green-600 pt-5 pl-5">
+                                <ul>
+                                    <li>{!! \Session::get('success') !!}</li>
+                                </ul>
+                            </div>
+                        @endif
 
-                    @if ($errors->any())
-                        <div class="text-red-600  pt-5 pl-5">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                        @if(\Session::has('error'))
+                            <div class="text-green-600 pt-5 pl-5">
+                                <ul>
+                                    <li>{!! \Session::get('error') !!}</li>
+                                </ul>
+                            </div>
+                        @endif
 
-                    {{ $slot }}
+                        @if ($errors->any())
+                            <div class="text-red-600  pt-5 pl-5">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
 
+                        {{ $slot }}
+
+                    @include('layouts.footer')
             </div>
         </div>
     </body>

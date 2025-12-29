@@ -39,7 +39,19 @@
                     </div>
 
                     @can('Post edit')
-                    <div class="flex flex-col space-y-2">
+                      <div class="flex flex-col space-y-2">
+                    <label for="user_ids" class="text-gray-700 select-none font-medium">Assign to Users</label>
+                    <select name="user_ids[]" id="user_ids" multiple class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200">
+                        @foreach(\App\Models\User::all() as $user)
+                            <option value="{{ $user->id }}"
+                                {{ in_array($user->id, old('user_ids', $post->users->pluck('id')->toArray())) ? 'selected' : '' }}>
+                                {{ $user->name }} ({{ $user->email }})
+                            </option>
+                        @endforeach
+                    </select>
+                    <small class="text-gray-500">Hold Ctrl (Windows) / Cmd (Mac) to select multiple users</small>
+                </div>
+                    {{-- <div class="flex flex-col space-y-2">
                         <label for="user_id" class="text-gray-700 select-none font-medium">Assign to User</label>
                         <select name="user_id" id="user_id" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200">
                             @if(Auth::user()->hasRole('superadmin'))
@@ -51,7 +63,7 @@
                             <option value="{{ $post->user_id }}" selected>{{ $post->user->name ?? 'Unknown' }} ({{ $post->user->email ?? 'N/A' }})</option>
                             @endif
                         </select>
-                    </div>
+                    </div> --}}
                     @endcan
 
                     <h3 class="text-xl my-4 text-gray-600">Status</h3>
@@ -73,5 +85,4 @@
             </div>
         </main>
     </div>
-</div>
 </x-app-layout>

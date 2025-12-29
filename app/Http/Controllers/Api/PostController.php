@@ -12,22 +12,54 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::where('publish', true)->get(['id', 'title', 'url', 'website_password', 'username', 'created_at', 'updated_at']);
+        $user = Auth::user();
 
-        $posts->transform(function ($post) {
+        if ($user->hasRole('superadmin') || $user->hasRole('admin')) {
+            // Admin & Superadmin → ALL posts
+            $posts = Post::with('users:id,name,email')->get();
+        } else {
+            // Normal user → only assigned posts
+            $posts = Post::whereHas('users', function ($q) use ($user) {
+                $q->where('users.id', $user->id);
+            })
+            ->with('users:id,name,email')
+            ->get();
+        }
+
+        return response()->json($posts->map(function ($post) {
             return [
                 'id' => $post->id,
                 'title' => $post->title,
                 'url' => $post->url,
                 'password' => $post->decrypted_password,
                 'username' => $post->username,
+                'assigned_users' => $post->users,
                 'created_at' => $post->created_at,
                 'updated_at' => $post->updated_at,
             ];
-        });
-
-        return response()->json($posts);
+        }));
     }
+
+
+
+    // public function index()
+    // {
+    //     $posts = Post::where('publish', true)->get(['id', 'title', 'url', 'website_password', 'username', 'created_at', 'updated_at']);
+
+    //     $posts->transform(function ($post) {
+    //         return [
+    //             'id' => $post->id,
+    //             'title' => $post->title,
+    //             'url' => $post->url,
+    //             'password' => $post->decrypted_password,
+    //             'username' => $post->username,
+    //             'created_at' => $post->created_at,
+    //             'updated_at' => $post->updated_at,
+    //         ];
+    //     });
+
+    //     return response()->json($posts);
+    // }
 
     public function show($id)
     {

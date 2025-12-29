@@ -45,6 +45,10 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    public function ownedPosts()
+    {
+        return $this->hasMany(Post::class, 'user_id');
+    }
     /**
      * Get the posts for the user.
      */

@@ -13,7 +13,7 @@
                   <thead>
                     <tr>
                       <th class="py-4 px-6 bg-grey-lightest font-bold text-sm text-grey-dark border-b border-grey-light">Permission Name</th>
-                      
+
                       <th class="py-4 px-6 bg-grey-lightest font-bold text-sm text-grey-dark border-b border-grey-light text-right">Actions</th>
                     </tr>
                   </thead>
@@ -39,13 +39,12 @@
                       </tr>
                       @endforeach
                     @endcan
-                    
+
                   </tbody>
                 </table>
               </div>
-  
+
             </div>
         </main>
     </div>
-</div>
 </x-app-layout>

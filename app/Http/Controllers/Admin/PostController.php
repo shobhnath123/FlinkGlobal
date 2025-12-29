@@ -28,11 +28,21 @@ class PostController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->hasRole('superadmin')) {
-            $Post = Post::paginate(10);
-        } else {
-            $Post = Post::where('user_id', Auth::user()->id)->paginate(4);
-        }
+        // if (Auth::user()->hasRole('superadmin')) {
+        //     $Post = Post::paginate(10);
+        // } else {
+        //     $Post = Post::where('user_id', Auth::user()->id)->paginate(4);
+        // }
+        $user = Auth::user();
+        if ($user->hasRole(['superadmin', 'admin'])) {
+        // Admin & Superadmin → ALL posts
+        $Post = Post::with('users')->paginate(10);
+    } else {
+        // Normal user → only assigned posts
+        $Post = Post::whereHas('users', function ($q) use ($user) {
+            $q->where('users.id', $user->id);
+        })->paginate(10);
+    }
 
         return view('post.index',['posts'=>$Post]);
     }
@@ -78,6 +88,13 @@ class PostController extends Controller
         }
 
         $Post = Post::create($data);
+
+        if (Auth::user()->hasRole('superadmin') && $request->filled('user_ids')) {
+            $Post->users()->sync($request->user_ids); // sync avoids duplicates
+        } else {
+            // Assign creator to the post in pivot table too
+            $Post->users()->sync([Auth::id()]);
+        }
         return redirect()->route('admin.posts.index')->withSuccess('Post created !!!');
     }
 
@@ -137,6 +154,11 @@ class PostController extends Controller
         }
 
         $post->update($data);
+
+        if (Auth::user()->hasRole('superadmin')) {
+            $userIds = $request->filled('user_ids') ? $request->user_ids : [$post->user_id];
+            $post->users()->sync($userIds);
+        }
         return redirect()->route('admin.posts.index')->withSuccess('Post updated !!!');
     }
 

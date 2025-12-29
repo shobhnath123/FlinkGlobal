@@ -19,6 +19,13 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
+     /**
+     * Multiple assigned users (many-to-many)
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'post_user', 'post_id', 'user_id');
+    }
     /**
      * Get the decrypted password.
      */

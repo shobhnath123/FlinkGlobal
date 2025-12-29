@@ -18,7 +18,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    
+
                     @can('User access')
                       @foreach($users as $user)
                       <tr class="hover:bg-grey-lighter">
@@ -49,9 +49,8 @@
                   </tbody>
                 </table>
               </div>
-  
+
             </div>
         </main>
     </div>
-</div>
 </x-app-layout>

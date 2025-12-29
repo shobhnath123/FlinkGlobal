@@ -25,7 +25,7 @@
                           <div class="flex flex-col">
                               <label class="inline-flex items-center mt-3">
                                   <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600" name="permissions[]" value="{{$permission->id}}"  @if(count($role->permissions->where('id',$permission->id)))
-                                      checked 
+                                      checked
                                     @endif
                                   ><span class="ml-2 text-gray-700">{{ $permission->name }}</span>
                               </label>
@@ -38,9 +38,8 @@
                 </div>
               </div>
 
-             
+
             </div>
         </main>
     </div>
-</div>
 </x-app-layout>

@@ -40,6 +40,19 @@
 
                 @can('Post create')
                 <div class="flex flex-col space-y-2">
+                    <label for="user_ids" class="text-gray-700 select-none font-medium">Assign to Users</label>
+                    <select name="user_ids[]" id="user_ids" multiple class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200">
+                        @foreach(\App\Models\User::all() as $user)
+                            <option value="{{ $user->id }}"
+                                {{ (collect(old('user_ids'))->contains($user->id)) ? 'selected':'' }}>
+                                {{ $user->name }} ({{ $user->email }})
+                            </option>
+                        @endforeach
+                    </select>
+                    <small class="text-gray-500">Hold Ctrl (Windows) / Cmd (Mac) to select multiple users</small>
+                </div>
+
+                {{-- <div class="flex flex-col space-y-2">
                   <label for="user_id" class="text-gray-700 select-none font-medium">Assign to User</label>
                   <select name="user_id" id="user_id" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200">
                     @if(Auth::user()->hasRole('superadmin'))
@@ -51,7 +64,7 @@
                       <option value="{{ Auth::id() }}" selected>{{ Auth::user()->name }} ({{ Auth::user()->email }})</option>
                     @endif
                   </select>
-                </div>
+                </div> --}}
                 @endcan
 
                 <h3 class="text-xl my-4 text-gray-600">Status</h3>
@@ -74,5 +87,4 @@
             </div>
         </main>
     </div>
-</div>
 </x-app-layout>
