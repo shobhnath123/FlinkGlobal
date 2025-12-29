@@ -26,8 +26,9 @@ class PostFactory extends Factory
     {
         return [
             'title' => $this->faker->text,
+            'username' => $this->faker->name,
             'url' => $this->faker->url,
-            'website_password' => 'password123', // Store plain text for copy functionality
+            'website_password' => 'password123',
             'description' => $this->faker->paragraph,
             'user_id' => User::all()->random()->id,
             'publish' => $this->faker->randomElement([0,1])

@@ -1,9 +1,9 @@
 <x-app-layout>
-  <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-      <div class="container mx-auto px-4 sm:px-6 py-2">
+    <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+        <div class="container mx-auto px-4 sm:px-6 py-2">
           <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4">
             <div class="mb-4 sm:mb-0">
-              <h1 class="text-xl font-semibold text-gray-800">Posts Management</h1>
+              <h1 class="text-xl font-semibold text-gray-800">Password Management</h1>
             </div>
             <div class="flex justify-end">
               @can('Post create')
@@ -56,11 +56,11 @@
               @can('Post access')
                 @foreach($posts as $post)
                 <tr class="hover:bg-grey-lighter">
-                  <td class="py-3 px-3 sm:py-4 sm:px-6 border-b border-grey-light">
+                  <td class="py-2 px-3 sm:py-2 sm:px-4 border-b border-grey-light">
                     <input form="bulk-delete-form" type="checkbox" name="post_ids[]" value="{{ $post->id }}" class="row-checkbox form-checkbox h-4 w-4 sm:h-5 sm:w-5 text-blue-600">
                   </td>
                   <td class="py-3 px-3 sm:py-4 sm:px-6 border-b border-grey-light text-xs sm:text-sm">{{  $loop->iteration }}</td>
-                  <td class="py-3 px-3 sm:py-4 sm:px-6 border-b border-grey-light">
+                  <td class="py-2 px-3 sm:py-2 sm:px-4 border-b border-grey-light">
                     <div class="max-w-xs sm:max-w-none">
                       <div class="font-medium text-gray-900 text-sm sm:text-base">{{ Str::limit($post->title, 30) }}</div>
                       <div class="text-xs text-gray-500 md:hidden">{{ $post->username }}</div>
@@ -79,7 +79,7 @@
                       </button>
                     </div>
                   </td>
-                  <td class="py-3 px-3 sm:py-4 sm:px-6 border-b border-grey-light">
+                  <td class="py-2 px-3 sm:py-2 sm:px-4 border-b border-grey-light">
                       @if($post->publish)
                       <span class="text-white inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none bg-green-500 rounded-full">Published</span>
                       @else
@@ -117,8 +117,8 @@
 
       </div>
   </main>
+  @include('layouts.footer');
 </div>
-
 <style>
 /* Additional responsive styles */
 @media (max-width: 640px) {

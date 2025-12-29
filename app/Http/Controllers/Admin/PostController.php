@@ -29,7 +29,7 @@ class PostController extends Controller
     public function index()
     {
         if (Auth::user()->hasRole('superadmin')) {
-            $Post = Post::paginate(4);
+            $Post = Post::paginate(10);
         } else {
             $Post = Post::where('user_id', Auth::user()->id)->paginate(4);
         }

@@ -5,25 +5,34 @@
               <div class="bg-white shadow-md rounded my-6 p-5">
                 <form method="POST" action="{{ route('admin.posts.store') }}">
                   @csrf
-                  <div class="flex flex-col space-y-2">
+
+                <div class="flex flex-col space-y-2">
                     <label for="title" class="text-gray-700 select-none font-medium">Website Name</label>
                     <input id="title" type="text" name="title" value="{{ old('title') }}"
                       placeholder="Enter title" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200"
                     />
                 </div>
-                <div class="flex flex-col space-y-2">
-                  <label for="url" class="text-gray-700 select-none font-medium">Web Site URL</label>
-                  <input id="url" type="text" name="url" value="{{ old('url') }}" placeholder="Enter URL" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200" />
+
+                 <div class="flex flex-col space-y-2">
+                  <label for="username" class="text-gray-700 select-none font-medium">User Name</label>
+                  <input id="username" type="text" name="username" value="{{ old('username') }}" placeholder="Enter User Name" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200" />
                 </div>
+
                 <div class="flex flex-col space-y-2">
                   <label for="website_password" class="text-gray-700 select-none font-medium">Enter Password</label>
                   <input id="website_password" type="text" name="website_password" value="{{ old('website_password') }}" placeholder="Enter Password" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200" />
                 </div>
+
                 <div class="flex flex-col space-y-2">
                   <label for="rpassword" class="text-gray-700 select-none font-medium">Re-enter Password</label>
                   <input id="rpassword" type="text" name="rpassword" value="{{ old('rpassword') }}" placeholder="**********" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200" />
                 </div>
-        
+
+                <div class="flex flex-col space-y-2">
+                  <label for="url" class="text-gray-700 select-none font-medium">Web Site URL</label>
+                  <input id="url" type="text" name="url" value="{{ old('url') }}" placeholder="Enter URL" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200" />
+                </div>
+
                 <div class="flex flex-col space-y-2">
                     <label for="description" class="text-gray-700 select-none font-medium">Note</label>
                     <textarea name="description" id="description" placeholder="Enter short note" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200" rows="5">{{ old('description') }}</textarea>
@@ -44,7 +53,7 @@
                   </select>
                 </div>
                 @endcan
-    
+
                 <h3 class="text-xl my-4 text-gray-600">Status</h3>
                 <div class="grid grid-cols-3 gap-4">
                   <div class="relative inline-flex">
@@ -55,12 +64,13 @@
                     </select>
                   </div>
                 </div>
+
                 <div class="text-center mt-16 mb-16">
                   <button type="submit" class="bg-blue-500 text-white font-bold px-5 py-1 rounded focus:outline-none shadow hover:bg-blue-500 transition-colors ">Submit</button>
                 </div>
-              </div>
 
-             
+              </div>
+            </form>
             </div>
         </main>
     </div>

@@ -19,14 +19,14 @@ class AdminSeeder extends Seeder
     {
         $super_admin = User::create([
             'name'=>'SuperAdmin',
-            'email'=>'superadmin@admin.co',
+            'email'=>'superadmin@i2a.co',
             'password'=>bcrypt('password'),
             'profile' => 'user.avif'
         ]);
 
         $admin = User::create([
             'name'=>'Admin',
-            'email'=>'admin@admin.co',
+            'email'=>'admin@i2a.co',
             'password'=>bcrypt('password'),
             'profile' => 'user.avif'
         ]);
@@ -72,7 +72,7 @@ class AdminSeeder extends Seeder
         $user->assignRole($user_role);
 
 
-        $super_admin->givePermissionTo(Permission::all());
+        $super_admin_role->givePermissionTo(Permission::all());
         $admin_role->givePermissionTo(Permission::all());
     }
 }
