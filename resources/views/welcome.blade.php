@@ -5,8 +5,8 @@
         <header class="h-24 sm:h-32 flex items-center">
             <div class="container mx-auto px-6 sm:px-12 flex items-center justify-between">
                 <div class="text-black font-black text-2xl flex items-center">
-                    <img src="{{ asset('images/Logo.webp') }}" alt="WowDash Logo" class="h-10 mr-3">
-                    {{-- <span class="w-6 h-6 rounded-full bg-blue-500 mr-4"></span> WowDash --}}
+                    <img src="{{ asset('flinktech_logo.webp') }}" alt="FlinkTech Logo" class="h-10 mr-3">
+                    {{-- <span class="w-6 h-6 rounded-full bg-blue-500 mr-4"></span> FlinkTech --}}
                 </div>
                 <div class="flex items-center">
                     <nav class="text-black text-lg hidden lg:flex items-center">
@@ -37,8 +37,8 @@
         </header>
         <div class="container mx-auto px-6 sm:px-12 flex flex-col-reverse sm:flex-row items-center">
             <div class="sm:w-2/5 flex flex-col items-start mt-8 sm:mt-0">
-                <h1 class="text-4xl lg:text-6xl leading-none mb-4"><strong class="font-black">WowDash</strong> Kit</h1>
-                <p class="lg:text-lg mb-4 sm:mb-12">I2A Technologies Private Limited</p>
+                <h1 class="text-4xl lg:text-6xl leading-none mb-4"><strong class="font-black">FlinkTech</strong></h1>
+                <p class="lg:text-lg mb-4 sm:mb-12">FlinkTech</p>
                 <a href="#" class="font-semibold text-lg bg-blue-500 hover:bg-blue-400 text-white py-3 px-10 rounded-full">Learn more</a>
             </div>
             <div class="sm:w-3/5">

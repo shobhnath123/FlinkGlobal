@@ -2,11 +2,8 @@
     <div>
         <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
             <div class="container mx-auto px-6 py-8">
-
-
-                <h3 class="text-gray-700 text-3xl font-medium">Welcome : {{ auth()->user()->name }}</h3>
-
-                <p>Role : <b>
+                <h3 class="text-gray-700 text-3xl font-medium hidden">Welcome : {{ auth()->user()->name }}</h3>
+                <p class="hidden">Role : <b>
                         @foreach (auth()->user()->roles as $role)
                             {{ $role->name }}
                         @endforeach
@@ -15,7 +12,7 @@
                 <!-- Statistics Cards -->
                 <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <!-- Users Card -->
-                    <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="bg-white rounded-lg shadow-md p-6 hidden">
                         <div class="flex items-center">
                             <div class="p-3 rounded-full bg-blue-500 text-white">
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -42,33 +39,12 @@
                                 </svg>
                             </div>
                             <div class="ml-4">
-                                <h4 class="text-gray-600 text-sm font-medium">Total Posts</h4>
+                                <h4 class="text-gray-600 text-sm font-medium">Total Records</h4>
                                 <p class="text-gray-800 text-2xl font-bold">{{ $postCount }}</p>
                             </div>
                         </div>
                     </div>
-
-                    <!-- My Posts Card (for non-superadmin users) -->
-                    @if (!auth()->user()->hasRole('superadmin'))
-                        <div class="bg-white rounded-lg shadow-md p-6">
-                            <div class="flex items-center">
-                                <div class="p-3 rounded-full bg-purple-500 text-white">
-                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <div class="ml-4">
-                                    <h4 class="text-gray-600 text-sm font-medium">My Posts</h4>
-                                    <p class="text-gray-800 text-2xl font-bold">{{ auth()->user()->posts()->count() }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
                 </div>
-
             </div>
         </main>
     </div>

@@ -20,7 +20,10 @@ use App\Models\Post;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('business-cash-account');
+});
+Route::get('/business-credit-account', function () {
+    return view('business-credit-account');
 });
 
 

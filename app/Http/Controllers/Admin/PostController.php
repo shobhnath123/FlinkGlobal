@@ -65,6 +65,18 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
+            'website_password' => 'required|string|min:6',
+            'rpassword' => 'required|same:website_password',
+            'url' => 'required|url',
+            'description' => 'nullable|string',
+            'user_ids' => 'nullable|array',
+            'user_ids.*' => 'exists:users,id',
+            'publish' => 'required|boolean',
+        ]);
+
         $data = $request->all();
 
         // Handle user assignment

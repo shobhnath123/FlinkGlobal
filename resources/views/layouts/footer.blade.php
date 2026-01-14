@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between text-sm text-gray-600">
       <span>
         © {{ date('Y') }}
-        <span class="font-medium text-gray-800">I2A Technologies pvt ltd.</span>
+        <span class="font-medium text-gray-800">FlinkTech</span>
         All rights reserved.
       </span>
 

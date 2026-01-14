@@ -3,9 +3,9 @@
         <div class="container mx-auto px-4 sm:px-6 py-2">
             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4">
                 <div class="mb-4 sm:mb-0">
-                <h1 class="text-xl font-semibold text-gray-800">Password Management</h1>
+                <h1 class="text-xl font-semibold text-gray-800">Form Management</h1>
                 </div>
-                <div class="flex justify-end">
+                <div class="flex justify-end hidden">
                 @can('Post create')
                     <a href="{{route('admin.posts.create')}}" class="bg-blue-500 text-white font-bold px-4 py-2 rounded focus:outline-none shadow hover:bg-blue-600 transition-colors text-sm sm:text-base">New post</a>
                 @endcan
@@ -44,11 +44,10 @@
                     </form>
                     </th>
                     <th class="py-3 px-3 sm:py-4 sm:px-6 bg-grey-lightest font-bold text-xs sm:text-sm text-grey-dark border-b border-grey-light">#</th>
-                    <th class="py-3 px-3 sm:py-4 sm:px-6 bg-grey-lightest font-bold text-xs sm:text-sm text-grey-dark border-b border-grey-light">Title</th>
+                    <th class="py-3 px-3 sm:py-4 sm:px-6 bg-grey-lightest font-bold text-xs sm:text-sm text-grey-dark border-b border-grey-light">Form Name</th>
                     <th class="py-3 px-3 sm:py-4 sm:px-6 bg-grey-lightest font-bold text-xs sm:text-sm text-grey-dark border-b border-grey-light hidden md:table-cell">Username</th>
-                    <th class="py-3 px-3 sm:py-4 sm:px-6 bg-grey-lightest font-bold text-xs sm:text-sm text-grey-dark border-b border-grey-light hidden lg:table-cell">URL</th>
-                    <th class="py-3 px-3 sm:py-4 sm:px-6 bg-grey-lightest font-bold text-xs sm:text-sm text-grey-dark border-b border-grey-light hidden xl:table-cell">Password</th>
-                    <th class="py-3 px-3 sm:py-4 sm:px-6 bg-grey-lightest font-bold text-xs sm:text-sm text-grey-dark border-b border-grey-light">Status</th>
+                    <th class="py-3 px-3 sm:py-4 sm:px-6 bg-grey-lightest font-bold text-xs sm:text-sm text-grey-dark border-b border-grey-light hidden lg:table-cell">Form URL</th>
+                    <th class="py-3 px-3 sm:py-4 sm:px-6 bg-grey-lightest font-bold text-xs sm:text-sm text-grey-dark border-b border-grey-light">Email Status</th>
                     <th class="py-3 px-3 sm:py-4 sm:px-6 bg-grey-lightest font-bold text-xs sm:text-sm text-grey-dark border-b border-grey-light text-right">Actions</th>
                 </tr>
                 </thead>
@@ -71,14 +70,7 @@
                     <td class="py-3 px-3 sm:py-4 sm:px-6 border-b border-grey-light hidden lg:table-cell">
                         <a href="{{ $post->url }}" target="_blank" class="text-blue-600 hover:text-blue-800 underline text-sm">{{ Str::limit($post->url, 25) }}</a>
                     </td>
-                    <td class="py-3 px-3 sm:py-4 sm:px-6 border-b border-grey-light hidden xl:table-cell">
-                        <div class="flex items-center space-x-2">
-                        <span class="password-text font-mono text-xs sm:text-sm">{{ Str::limit($post->decrypted_password, 15) }}</span>
-                        <button type="button" onclick="window.copyToClipboard({{ json_encode($post->decrypted_password) }}, this)" class="copy-btn bg-gray-200 hover:bg-gray-300 text-gray-700 px-1 py-1 sm:px-2 sm:py-1 rounded text-xs">
-                            Copy
-                        </button>
-                        </div>
-                    </td>
+                    
                     <td class="py-2 px-3 sm:py-2 sm:px-4 border-b border-grey-light">
                         @if($post->publish)
                         <span class="text-white inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none bg-green-500 rounded-full">Published</span>
