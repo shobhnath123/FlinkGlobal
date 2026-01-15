@@ -216,7 +216,8 @@
     <h1 style="text-align: center; font-size: 24px;">Business - Credit Account Application</h1>
     <p style="text-align: center; font-size: 14px;">To Be Completed by Applicants - Please complete all sections and read the Terms and Conditions of Trade.</p>
 
-    <form>
+    <form action="{{ route('business.account.store') }}" method="POST">
+        @csrf
         <!-- SECTION 1: CLIENT DETAILS -->
         <h2>Client Details</h2>
         <div class="form-row">
@@ -252,7 +253,7 @@
             </div>
             <div class="form-group">
                 <label>D.O.B:</label>
-                <input type="date" name="dob">
+                <input type="text" name="dob" placeholder="dd/mm/yyyy" pattern="\d{2}/\d{2}/\d{4}">
             </div>
             <div class="form-group">
                 <label>Email Address:</label>
@@ -317,59 +318,44 @@
 
         <!-- SECTION 3: DIRECTORS DETAILS -->
         <h2>Directors Details</h2>
-        <!-- Director 1 -->
-        <h3>Director (1)</h3>
         <div class="form-row">
             <div class="form-group">
-                <label>Full Name:</label>
-                <input type="text" name="dir1_name">
-            </div>
-            <div class="form-group">
-                <label>Mobile No:</label>
-                <input type="tel" name="dir1_mobile">
-            </div>
-            <div class="form-group">
-                <label>Driver's Licence:</label>
-                <input type="text" name="dir1_dl">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group">
-                <label>Private Address:</label>
-                <input type="text" name="dir1_address">
-            </div>
-            <div class="form-group" style="flex: 0 0 100px;">
-                <label>Post Code:</label>
-                <input type="text" name="dir1_pc">
+                <label>Number of Directors: <span style="color: red;">*</span></label>
+                <input type="number" name="num_directors" id="num_directors" min="1" max="10" required>
             </div>
         </div>
 
-        <!-- Director 2 -->
-        <h3>Director (2)</h3>
-        <div class="form-row">
-            <div class="form-group">
-                <label>Full Name:</label>
-                <input type="text" name="dir2_name">
+        <!-- Directors Container -->
+        <div id="directors-container"></div>
+
+        <!-- Director 1 (Template) -->
+        <template id="director-template">
+            <h3>Director (<span class="director-number"></span>)</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Full Name:</label>
+                    <input type="text" class="dir_name" name="">
+                </div>
+                <div class="form-group">
+                    <label>Mobile No:</label>
+                    <input type="tel" class="dir_mobile" name="">
+                </div>
+                <div class="form-group">
+                    <label>Driver's Licence:</label>
+                    <input type="text" class="dir_dl" name="">
+                </div>
             </div>
-            <div class="form-group">
-                <label>Mobile No:</label>
-                <input type="tel" name="dir2_mobile">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Private Address:</label>
+                    <input type="text" class="dir_address" name="">
+                </div>
+                <div class="form-group" style="flex: 0 0 100px;">
+                    <label>Post Code:</label>
+                    <input type="text" class="dir_pc" name="">
+                </div>
             </div>
-            <div class="form-group">
-                <label>Driver's Licence:</label>
-                <input type="text" name="dir2_dl">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group">
-                <label>Private Address:</label>
-                <input type="text" name="dir2_address">
-            </div>
-            <div class="form-group" style="flex: 0 0 100px;">
-                <label>Post Code:</label>
-                <input type="text" name="dir2_pc">
-            </div>
-        </div>
+        </template>
 
         <!-- SECTION 4: PAYMENT TERMS -->
         <h2>Account Payment Terms</h2>
@@ -587,8 +573,59 @@
              <label for="accept_terms" style="display:inline; margin-left: 10px;">I/We confirm I/We have read, understood, and accept the terms of this Guarantee and Indemnity, and I/We agree to be bound by this Guarantee and Indemnity.</label>
         </div>
 
+        <h2>Account Details</h2>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Account Name:</label>
+                <input type="text" name="account_name" required>
+            </div>
+            <div class="form-group">
+                <label>Amount:</label>
+                <input type="number" step="0.01" name="amount" required>
+            </div>
+        </div>
+
         <button type="submit" class="submit-btn">Submit Application</button>
     </form>
+
+    <script>
+        // Director Details Dynamic Generation
+        const numDirectorsInput = document.getElementById('num_directors');
+        const directorsContainer = document.getElementById('directors-container');
+        const directorTemplate = document.getElementById('director-template');
+
+        numDirectorsInput.addEventListener('input', function() {
+            const numDirectors = parseInt(this.value) || 0;
+            directorsContainer.innerHTML = ''; // Clear existing directors
+
+            if (numDirectors > 0) {
+                for (let i = 1; i <= numDirectors; i++) {
+                    // Clone the template
+                    const clone = directorTemplate.content.cloneNode(true);
+                    
+                    // Update director number
+                    clone.querySelector('.director-number').textContent = i;
+                    
+                    // Update input names
+                    clone.querySelector('.dir_name').name = `dir${i}_name`;
+                    clone.querySelector('.dir_mobile').name = `dir${i}_mobile`;
+                    clone.querySelector('.dir_dl').name = `dir${i}_dl`;
+                    clone.querySelector('.dir_address').name = `dir${i}_address`;
+                    clone.querySelector('.dir_pc').name = `dir${i}_pc`;
+                    
+                    // Append to container
+                    directorsContainer.appendChild(clone);
+                }
+            }
+        });
+
+        // Trigger on page load in case a value was pre-filled
+        window.addEventListener('DOMContentLoaded', function() {
+            if (numDirectorsInput.value) {
+                numDirectorsInput.dispatchEvent(new Event('input'));
+            }
+        });
+    </script>
 </div>
 
 </x-front-guest-layout>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\{
 };
 use App\Models\User;
 use App\Models\Post;
+use App\Http\Controllers\BusinessAccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +20,14 @@ use App\Models\Post;
 |
 */
 
-Route::get('/', function () {
+Route::get('/test', function () {
     return view('business-cash-account');
 });
-Route::get('/business-credit-account', function () {
+Route::get('/', function () {
     return view('business-credit-account');
 });
+
+Route::post('/business-account', [BusinessAccountController::class, 'store'])->name('business.account.store');
 
 
 Route::get('/test-mail',function(){

@@ -47,7 +47,8 @@
 
     <h1 style="text-align: center;">Business - Cash Account Application</h1>
 
-    <form action="submit.php" method="POST">
+    <form action="{{ route('business.account.store') }}" method="POST">
+        @csrf
         
         <h2>Client Details:</h2>
         <div class="form-row">
@@ -179,6 +180,18 @@
             <label>
                 <input type="checkbox" name="terms_agreed" value="1" required> I agree to the Terms & Conditions and authorise the use of my personal information.
             </label>
+        </div>
+
+        <h2>Account Details:</h2>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Account Name:</label>
+                <input type="text" name="account_name" required>
+            </div>
+            <div class="form-group">
+                <label>Amount:</label>
+                <input type="number" step="0.01" name="amount" required>
+            </div>
         </div>
 
         <button type="submit" class="btn-submit">Submit Application</button>

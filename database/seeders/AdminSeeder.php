@@ -19,21 +19,21 @@ class AdminSeeder extends Seeder
     {
         $super_admin = User::create([
             'name'=>'SuperAdmin',
-            'email'=>'superadmin@i2a.co',
+            'email'=>'superadmin@gmail.com',
             'password'=>bcrypt('password'),
             'profile' => 'user.avif'
         ]);
 
         $admin = User::create([
             'name'=>'Admin',
-            'email'=>'admin@i2a.co',
+            'email'=>'admin@gmail.com',
             'password'=>bcrypt('password'),
             'profile' => 'user.avif'
         ]);
 
         $user = User::create([
             'name'=>'User',
-            'email'=>'user@i2a.co',
+            'email'=>'user@gmail.com',
             'password'=>bcrypt('password')
         ]);
 
