@@ -20,14 +20,22 @@ use App\Http\Controllers\BusinessAccountController;
 |
 */
 
+Route::get('/tc', function () {
+    return view('business-credit-account-tc');
+});
 Route::get('/test', function () {
     return view('business-cash-account');
 });
 Route::get('/', function () {
     return view('business-credit-account');
 });
+Route::post('/business-account', [BusinessAccountController::class,'store'])
+    ->name('business.account.store');
 
-Route::post('/business-account', [BusinessAccountController::class, 'store'])->name('business.account.store');
+Route::get('/business-account/{id}/pdf', [BusinessAccountController::class,'pdf'])
+    ->name('business.account.pdf');
+
+// Route::post('/business-account', [BusinessAccountController::class, 'store'])->name('business.account.store');
 
 
 Route::get('/test-mail',function(){

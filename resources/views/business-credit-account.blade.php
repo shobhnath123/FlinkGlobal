@@ -190,6 +190,40 @@
         /* .legal-text li { margin-bottom: 10px; } */
         .notes { font-size: 10px; font-style: italic; margin-top: 20px; border-top: 1px solid #ccc; padding-top: 10px; }
 
+        .phone-input {
+            display: flex;
+            align-items: center;
+        }
+
+        .country-code {
+            padding: 9px 10px;
+            background: #f3f4f6;
+            border: 1px solid #ccc;
+            border-right: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 14px;
+        }
+
+        .phone-input input {
+            border-radius: 0 4px 4px 0;
+            flex: 1;
+        }
+        
+        /* Error color */
+        .text-danger {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 4px;
+        }
+        .error {
+            border: 2px solid #dc2626 !important; /* red border */
+            /* background-color: #ffe6e6;  */
+            outline: none; /* remove default outline */
+        }
+        input[type="checkbox"].error {
+            outline: 2px solid #dc2626;
+        }
+
         @media (max-width: 600px) {
             header { flex-direction: column; text-align: center; }
             .company-info { text-align: center; margin-top: 10px; width: 100%; }
@@ -201,118 +235,166 @@
     <header>
         <div class="logo-section">
             <img src="{{ asset("flinktech_logo.webp") }}" alt="FlinkTech Logo" style="height: 40px; vertical-align: middle;">
-
             <div class="subtext"><img src="{{ asset("fervour-logo.webp") }}" alt="fervour Logo" style="height: 20px; vertical-align: center;"><img src="{{ asset("uvw-logo.png") }}" alt="uvw Logo" style="height: 20px; vertical-align: center;"></div>
-            
         </div>
         <div class="company-info">
-            <strong>23 Stewart Gibson Place, Manurewa, AUCKLAND 2105</strong><br>
+            <strong>FlinkGlobal Limited T/A FlinkTech</strong><br>
+            23 Stewart Gibson Place, Manurewa, AUCKLAND 2105<br>
             Phone: (09) 393 0900<br>
             Email: contact@flinkglobal.com<br>
             Web: www.flinkglobal.com
         </div>
     </header>
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
     <h1 style="text-align: center; font-size: 24px;">Business - Credit Account Application</h1>
     <p style="text-align: center; font-size: 14px;">To Be Completed by Applicants - Please complete all sections and read the Terms and Conditions of Trade.</p>
-
     <form action="{{ route('business.account.store') }}" method="POST">
         @csrf
         <!-- SECTION 1: CLIENT DETAILS -->
         <h2>Client Details</h2>
         <div class="form-row">
             <div class="form-group">
-                <label>Full Name (Contact Person):</label>
-                <input type="text" name="contact_person">
+                <label>Full Name (Contact Person):<span style="color: red;">*</span></label>
+                <input type="text" name="contact_person" value="{{old('contact_person')}}" class="@error('contact_person') error @enderror">
+                @error('contact_person') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
         </div>
         <div class="form-row">
             <div class="form-group">
-                <label>Physical Address:</label>
-                <input type="text" name="physical_address">
+                <label>Physical Address:<span style="color: red;">*</span></label>
+                <input type="text" name="physical_address" value="{{ old('physical_address')}}" class="@error('physical_address') error @enderror">
+                 @error('physical_address') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
             <div class="form-group" style="flex: 0 0 100px;">
-                <label>Postcode:</label>
-                <input type="text" name="postcode_phy">
+                <label>Postcode:<span style="color: red;">*</span></label>
+                <input type="text" name="postcode_phy" value="{{old('postcode_phy')}}" class="@error('postcode_phy') error @enderror">
+                 @error('postcode_phy') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
         </div>
         <div class="form-row">
             <div class="form-group">
-                <label>Billing Address:</label>
-                <input type="text" name="billing_address">
+                <label>Billing Address:<span style="color: red;">*</span></label>
+                <input type="text" name="billing_address" value="{{old('billing_address')}}" class="@error('billing_address') error @enderror">
+                 @error('billing_address') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
             <div class="form-group" style="flex: 0 0 100px;">
-                <label>Postcode:</label>
-                <input type="text" name="postcode_bill">
+                <label>Postcode:<span style="color: red;">*</span></label>
+                <input type="text" name="postcode_bill" value="{{old('postcode_bill')}}" class="@error('postcode_bill') error @enderror">
+                @error('contact_person') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
         </div>
         <div class="form-row">
             <div class="form-group">
-                <label>Driver’s Licence No:</label>
-                <input type="text" name="drivers_licence">
+                <label>Driver’s Licence No:<span style="color: red;">*</span></label>
+                <input type="text" name="drivers_licence" value="{{old('drivers_licence')}}" class="@error('drivers_licence') error @enderror">
+                 @error('drivers_licence') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
             <div class="form-group">
-                <label>D.O.B:</label>
-                <input type="text" name="dob" placeholder="dd/mm/yyyy" pattern="\d{2}/\d{2}/\d{4}">
+                <label>D.O.B:<span style="color: red;">*</span></label>
+                <input type="date" name="dob"  value="{{old ('dob')}}" class="@error('dob') error @enderror">
+                 @error('dob') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
             <div class="form-group">
-                <label>Email Address:</label>
-                <input type="email" name="email">
+                <label>Email Address:<span style="color: red;">*</span></label>
+                <input type="email" name="email" value="{{old('email')}}" class="@error('email') error @enderror">
+                 @error('email') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
             <div class="form-group">
-                <label>Mobile No:</label>
-                <input type="tel" name="mobile">
+            <label>Mobile No:<span style="color: red;">*</span></label>
+            <div class="phone-input">
+                <span class="country-code">+64</span>
+                <input 
+                    type="tel" 
+                    name="mobile"
+                    placeholder="21 123 4567"
+                    pattern="[0-9]{7,10}"
+                    value="{{old('mobile')}}" class="@error('mobile') error @enderror"
+                >
+                 @error('mobile') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
+        </div>
+
         </div>
 
         <!-- SECTION 2: BUSINESS DETAILS -->
         <h2>Business Details</h2>
         <div class="form-row">
             <div class="form-group">
-                <label>Legal Name:</label>
-                <input type="text" name="legal_name">
+                <label>Legal Name:<span style="color: red;">*</span></label>
+                <input type="text" name="legal_name" value="{{old('legal_name')}}" class="@error('legal_name') error @enderror">
+                 @error('legal_name') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
             <div class="form-group">
-                <label>Trading Name:</label>
-                <input type="text" name="trading_name">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group">
-                <label>GST No:</label>
-                <input type="text" name="gst_no">
-            </div>
-            <div class="form-group">
-                <label>Company Number:</label>
-                <input type="text" name="company_no">
-            </div>
-            <div class="form-group">
-                <label>NZBN Number:</label>
-                <input type="text" name="nzbn">
+                <label>Trading Name:<span style="color: red;">*</span></label>
+                <input type="text" name="trading_name" value="{{old('trading_name')}}" class="@error('trading_name') error @enderror">
+                 @error('trading_name') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
         </div>
         <div class="form-row">
             <div class="form-group">
-                <label>Nature of Business:</label>
-                <input type="text" name="nature_business">
+                <label>GST No:<span style="color: red;">*</span></label>
+                <input type="text" name="gst_no" value="{{old('gst_no')}}" class="@error('gst_no') error @enderror">
+                 @error('gst_no') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
             <div class="form-group">
-                <label>Date Incorp:</label>
-                <input type="date" name="date_incorp">
+                <label>Company Number:<span style="color: red;">*</span></label>
+                <input type="text" name="company_no" value="{{old('company_no')}}" class="@error('company_no') error @enderror">
+                 @error('company_no') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+            <div class="form-group">
+                <label>NZBN Number:<span style="color: red;">*</span></label>
+                <input type="text" name="nzbn" value="{{old('nzbn')}}" class="@error('nzbn') error @enderror">
+                 @error('nzbn') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
         </div>
         <div class="form-row">
             <div class="form-group">
-                <label>Paid Up Capital ($):</label>
-                <input type="number" name="paid_capital">
+                <label>Nature of Business:<span style="color: red;">*</span></label>
+                <input type="text" name="nature_business" value="{{old('nature_business')}}" class="@error('nature_business') error @enderror">
+                 @error('nature_business') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
             <div class="form-group">
-                <label>Est. Monthly Purchases ($):</label>
-                <input type="number" name="monthly_purchases">
+                <label>Date Incorp:<span style="color: red;">*</span></label>
+                <input type="date" name="date_incorp" value="{{old('date_incorp')}}" class="@error('date_incorp') error @enderror">
+                 @error('date_incorp') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Paid Up Capital ($):<span style="color: red;">*</span></label>
+                <input type="number" name="paid_capital" value="{{old('paid_capital')}}" class="@error('paid_capital') error @enderror">
+                 @error('paid_capital') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
             <div class="form-group">
-                <label>Credit Limit Required ($):</label>
-                <input type="number" name="credit_limit">
+                <label>Est. Monthly Purchases ($):<span style="color: red;">*</span></label>
+                <input type="number" name="monthly_purchases" value="{{old('monthly_purchases')}}" class="@error('monthly_purchases') error @enderror">
+                 @error('monthly_purchases') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+            <div class="form-group">
+                <label>Credit Limit Required ($):<span style="color: red;">*</span></label>
+                <input type="number" name="credit_limit" value="{{old('credit_limit')}}" class="@error('credit_limit') error @enderror">
+                 @error('credit_limit') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+        </div>
+         <div class="form-row">
+            <div class="form-group">
+                <label>Principal Place of Business is:<span style="color: red;">*</span></label>
+                <input type="text" name="principal_place_of_business_is" value="{{old('principal_place_of_business_is')}}" class="@error('principal_place_of_business_is') error @enderror">
+                 @error('principal_place_of_business_is') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+            <div class="form-group">
+                <label>(to whom):<span style="color: red;">*</span></label>
+                 <input type="text" name="to_whom" value="{{old('to_whom')}}" class="@error('to_whom') error @enderror">
+                  @error('to_whom') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
         </div>
 
@@ -321,7 +403,9 @@
         <div class="form-row">
             <div class="form-group">
                 <label>Number of Directors: <span style="color: red;">*</span></label>
-                <input type="number" name="num_directors" id="num_directors" min="1" max="10" required>
+                <input type="number" name="num_directors" id="num_directors" min="1" max="10" value="{{ old('num_directors') }}" class="@error('num_directors') error @enderror">
+                @error('num_directors') <span class="text-danger">{{ $message }}</span> @enderror
+
             </div>
         </div>
 
@@ -333,25 +417,30 @@
             <h3>Director (<span class="director-number"></span>)</h3>
             <div class="form-row">
                 <div class="form-group">
-                    <label>Full Name:</label>
+                    <label>Full Name:<span style="color: red;">*</span></label>
                     <input type="text" class="dir_name" name="">
                 </div>
                 <div class="form-group">
-                    <label>Mobile No:</label>
-                    <input type="tel" class="dir_mobile" name="">
+                    <label>D.O.B:<span style="color: red;">*</span></label>
+                    <input type="text" class="dir_dob" name="" placeholder="dd/mm/yyyy" pattern="\d{2}/\d{2}/\d{4}">
                 </div>
                 <div class="form-group">
-                    <label>Driver's Licence:</label>
-                    <input type="text" class="dir_dl" name="">
+                    <label>Mobile No:<span style="color: red;">*</span></label>
+                    <input type="tel" class="dir_mobile" name="">
                 </div>
+                
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label>Private Address:</label>
+                    <label>Private Address:<span style="color: red;">*</span></label>
                     <input type="text" class="dir_address" name="">
                 </div>
+                <div class="form-group">
+                    <label>Driver's Licence:<span style="color: red;">*</span></label>
+                    <input type="text" class="dir_dl" name="">
+                </div>
                 <div class="form-group" style="flex: 0 0 100px;">
-                    <label>Post Code:</label>
+                    <label>Post Code:<span style="color: red;">*</span></label>
                     <input type="text" class="dir_pc" name="">
                 </div>
             </div>
@@ -361,42 +450,52 @@
         <h2>Account Payment Terms</h2>
         <div class="form-row">
             <div class="form-group">
-                <label>Purchase Order Required?</label>
-                <select name="po_required">
-                    <option value="No">No</option>
-                    <option value="Yes">Yes</option>
+                <label>Purchase Order Required? <span style="color: red;">*</span></label>
+                <select name="po_required" class="@error('po_required') error @enderror">
+                    <option value="Yes{{ old('po_required') == 'Yes' ? 'selected' : '' }}">Yes</option>
+                    <option value="No {{ old('accounts_email_opt') == 'Yes' ? 'selected' : '' }}">No</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Accounts to be emailed?</label>
-                <select name="accounts_email_opt">
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
+                <label>Accounts to be emailed? <span style="color: red;">*</span></label>
+                <select name="accounts_email_opt" class="@error('accounts_email_opt') error @enderror">
+                    <option value="Yes {{ old('accounts_email_opt') == 'Yes' ? 'selected' : '' }}">Yes</option>
+                    <option value="No {{ old('accounts_email_opt') == 'Yes' ? 'selected' : '' }}">No</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Accounts Email Address:</label>
-                <input type="email" name="accounts_email">
+                <label>Accounts Email Address:<span style="color: red;">*</span></label>
+                <input type="email" name="accounts_email" value="{{old("accounts_email")}}" class="@error('accounts_email') error @enderror">
+                @error('accounts_email') <span class="text-danger">{{ $message }}</span> @enderror
+
             </div>
         </div>
         <div class="form-row">
             <div class="form-group">
-                <label>Accounts Contact:</label>
-                <input type="text" name="accounts_contact">
+                <label>Accounts Contact:<span style="color: red;">*</span></label>
+                <input type="text" name="accounts_contact" value="{{old("accounts_contact")}}" class="@error('accounts_email') error @enderror">
+                 @error('accounts_email') <span class="text-danger">{{ $message }}</span> @enderror
+
             </div>
             <div class="form-group">
-                <label>Mobile No:</label>
-                <input type="tel" name="accounts_mobile">
+                <label>Mobile No:<span style="color: red;">*</span></label>
+                <input type="tel" name="accounts_mobile" value="{{old("accounts_mobile")}}" class="@error('accounts_mobile') error @enderror">
+                @error('accounts_mobile') <span class="text-danger">{{ $message }}</span> @enderror
+
             </div>
         </div>
         <div class="form-row">
             <div class="form-group">
-                <label>Bank and Branch:</label>
-                <input type="text" name="bank_branch">
+                <label>Bank and Branch:<span style="color: red;">*</span></label>
+                <input type="text" name="bank_branch" value="{{old("bank_branch")}}" class="@error('bank_branch') error @enderror">
+                @error('bank_branch') <span class="text-danger">{{ $message }}</span> @enderror
+
             </div>
             <div class="form-group">
-                <label>Account No:</label>
-                <input type="text" name="bank_account_no">
+                <label>Account No:<span style="color: red;">*</span></label>
+                <input type="text" name="bank_account_no" value="{{old("bank_account_no")}}" class="@error('bank_account_no') error @enderror">
+                @error('bank_account_no') <span class="text-danger">{{ $message }}</span> @enderror
+
             </div>
         </div>
 
@@ -430,21 +529,24 @@
         </table>
 
         <div class="declaration">
-            <p>I certify that the above information is true and correct and that I accept the supply of credit by the Supplier (if applicable). I have read and understood the TERMS AND CONDITIONS OF TRADE (under mentioned) of Flinkglobal Limited T/A FlinkTech which form part of and are intended to be read in conjunction with this Credit account application and agree to be bound by these conditions. I authorise the use of my personal information as detailed in the Privacy Act clause therein.</p>
+            <p>I certify that the above information is true and correct and that I accept the supply of credit by the Supplier.</p>
         </div>
 
         <div class="form-row">
             <div class="form-group">
                 <label>SIGNED (CLIENT) Name:</label>
-                <input type="text">
+                <input type="text" name="sing_client_name" value="{{ old("sing_client_name") }}" class="@error('sing_client_name') error @enderror">
+                 @error('sing_client_name') <span class="text-danger">{{ $message }}</span> @enderror   
             </div>
             <div class="form-group">
                 <label>Position:</label>
-                <input type="text">
+                <input type="text" name="signed_position" value="{{ old('signed_position') }}" class="@error('signed_position') error @enderror">
+                 @error('signed_position') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
             <div class="form-group">
                 <label>Date:</label>
-                <input type="date">
+                <input type="date" name="signed_date" value="{{ old('signed_date') }}" class="@error('signed_date') error @enderror">
+                 @error('signed_date') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
         </div>
 
@@ -456,25 +558,8 @@
         <div class="document-container">
                 <h1>Personal/Directors Guarantee and Indemnity</h1>
                 <div class="legal-text">
-                <p><strong>IN CONSIDERATION</strong> of Flinkglobal Limited T/A FlinkTech and its successors and assigns ("the Supplier") at the request of the Guarantor supplying and continuing to supply goods and/or services to the Client.</p>
-                
+                <p><strong>IN CONSIDERATION</strong> of Flinkglobal Limited T/A FlinkTech and its successors and assigns </p>
                 <p><strong>I/WE (the "Guarantor/s") UNCONDITIONALLY AND IRREVOCABLY:</strong></p>
-                <ol>
-                    <li><strong>GUARANTEE</strong> the due and punctual payment to the Supplier of all monies which are now owing to the Supplier by the Client and all further sums of money from time to time owing to the Supplier by the Client in respect of goods and services supplied or to be supplied by the Supplier to the Client or any other liability of the Client to the Supplier, and the due observance and performance by the Client of all its obligations contained or implied in any contract or agreement with the Supplier, including but not limited to the Terms & Conditions of Trade signed by the Client and annexed to this Guarantee and Indemnity. If for any reason the Client does not pay any amount owing to the Supplier, the Guarantor will immediately on demand pay the relevant amount to the Supplier. In consideration of the Supplier agreeing to supply the goods and/or services to the Client, the Guarantor charges all of its right, title and interest (joint or several) in any land, realty or other assets capable of being charged, owned by the Guarantor now or in the future, to secure the performance by the Guarantor of its obligations under this Guarantee and Indemnity (including, but not limited to, the payment of any money) and the Guarantor acknowledges that this personal guarantee and indemnity constitutes a security agreement for the purposes of the Personal Property Securities Act 1999 (“PPSA”) and unequivocally consents to the Supplier registering any interest so charged. Furthermore, it is agreed by both parties that where the Guarantor is acting in the capacity as a trustee for a trust, then the Guarantor agrees to charge all its right title and interest in any land realty, or other assets capable of being charged in its own capacity and in its capacity as trustee and shall be subject to the PPSA Registration as stated above. The Guarantor irrevocably appoints the Supplier and each director of the Supplier as the Guarantor’s true and lawful attorney/s to perform all necessary acts to give effect to this clause including, but not limited to, signing any document on the Guarantor’s behalf which the Supplier may reasonably require to:<ol type="a">
-                        <li>register a financing statement or financing change statement in relation to a security interest on the Personal Property Securities Register;</li>
-                        <li>register any other document required to be registered by the PPSA or any other law; or</li>
-                        <li>correct a defect in a statement referred to in clause 1(a) or 1(b).</li>
-                    </ol></li>
-                    <li><strong>HOLD HARMLESS AND INDEMNIFY</strong> the Supplier on demand as a separate obligation against any liability (including but not limited to damages, costs, losses and legal fees calculated on a solicitor and own client basis) incurred by, or assessed against, the Supplier in connection with:<ol type="a">
-                        <li>the supply of goods and/or services to the Client; or</li>
-                        <li>the recovery of monies owing to the Supplier by the Client including the enforcement of this Guarantee and Indemnity, and including but not limited to the Supplier’s nominees’ costs of collection and legal costs; or</li>
-                        <li>monies paid by the Supplier with the Client’s consent in settlement of a dispute that arises or results from a dispute between, the Supplier, the Client, and a third party or any combination thereof, over the supply of goods and/or services by the Supplier to the Client.</li>
-                    </ol></li>
-                    <li>The liability under this Guarantee shall not be discharged by any alteration to contract, liquidation of Client, etc. [cite: 326]</li>
-                    <li>I/We have been advised to obtain independent legal advice before executing this Guarantee. [cite: 331]</li>
-                    <li>I/We authorise the Supplier to obtain/provide credit information from/to third parties. [cite: 333]</li>
-                </ol>
-                
                 <p style="text-align: center; font-weight: bold;">
                     For and on behalf of the Client I/We confirm I/We have read, understood, and accept the terms of this Guarantee and Indemnity. [cite: 336]
                 </p>
@@ -484,55 +569,80 @@
             <!-- Guarantor 1 -->
             <div class="form-group guarantor-container">
                 <h3>GUARANTOR-1</h3>
-                <label>Full Name:</label>
-                <input type="text" name="g1_name">
-                <label>Home Address:</label>
-                <input type="text" name="g1_address">
-                <label>Date of Birth:</label>
-                <input type="date" name="g1_dob">
-                
-                <div class="signature-line">Signed (Guarantor 1)</div>
-                
-                <hr style="margin: 20px 0;">
-                
-                <label>Name of Witness:</label>
-                <input type="text" name="g1_witness_name">
-                <label>Occupation:</label>
-                <input type="text" name="g1_witness_occ">
-                <label>Present Address:</label>
-                <input type="text" name="g1_witness_addr">
-                <div class="signature-line">Signature of Witness</div>
+                <label>Signed:<span style="color: red;">*</span></label>
+                <input type="text" name="g1_signed" value="{{old('g1_signed')}}" class="@error('g1_signed') error @enderror">
+                @error('g1_signed') <span class="text-danger">{{ $message }}</span> @enderror
+
+                <label>Full Name:<span style="color: red;">*</span></label>
+                <input type="text" name="g1_name" value="{{old('g1_name')}}" class="@error('g1_name')error @enderror">
+                @error('g1_name') <span class="text-danger">{{ $message }}</span> @enderror
+
+                <label>Home Address:<span style="color: red;">*</span></label>
+                <input type="text" name="g1_address" value="{{old('g1_address')}}" class="@error('g1_address') error @enderror">
+                @error('g1_address') <span class="text-danger">{{ $message }}</span> @enderror
+
+                <label>Date of Birth:<span style="color: red;">*</span></label>
+                <input type="date" name="g1_dob" value="{{old('g1_dob')}}" class="@error('g1_dob') error @enderror">
+                @error('g1_dob') <span class="text-danger">{{ $message }}</span> @enderror
+
+                <label>Signature of Witness:<span style="color: red;">*</span></label>
+                <input type="date" name="g1_signature_of_witness" value="{{old('g1_signature_of_witness')}}" class="@error('g1_signature_of_witness') error @enderror">
+                @error('g1_signature_of_witness') <span class="text-danger">{{ $message }}</span> @enderror
+
+                <label>Name of Witness:<span style="color: red;">*</span></label>
+                <input type="text" name="g1_witness_name" value="{{old('g1_witness_name')}}" class="@error('g1_witness_name') error @enderror">
+                 @error('g1_witness_name') <span class="text-danger">{{ $message }}</span> @enderror
+
+                <label>Occupation:<span style="color: red;">*</span></label>
+                <input type="text" name="g1_witness_occ" value="{{old('g1_witness_occ')}}" class="@error('g1_witness_occ') error @enderror">
+                 @error('g1_witness_occ') <span class="text-danger">{{ $message }}</span> @enderror
+
+                <label>Present Address:<span style="color: red;">*</span></label>
+                <input type="text" name="g1_witness_addr" value="{{old('g1_witness_addr')}}" class="@error('g1_witness_addr') error @enderror">
+                 @error('g1_witness_addr') <span class="text-danger">{{ $message }}</span> @enderror
+
             </div>
 
             <!-- Guarantor 2 -->
             <div class="form-group guarantor-container">
                 <h3>GUARANTOR-2</h3>
-                <label>Full Name:</label>
-                <input type="text" name="g2_name">
-                <label>Home Address:</label>
-                <input type="text" name="g2_address">
-                <label>Date of Birth:</label>
-                <input type="date" name="g2_dob">
-                
-                <div class="signature-line">Signed (Guarantor 2)</div>
+                 <label>Signed:<span style="color: red;">*</span></label>
+                <input type="text" name="g2_signed" value="{{old('g2_signed')}}" class="@error('g2_signed') error @enderror">
+                @error('g2_signed') <span class="text-danger">{{ $message }}</span> @enderror
 
-                <hr style="margin: 20px 0;">
+                <label>Full Name:<span style="color: red;">*</span></label>
+                <input type="text" name="g2_name" value="{{old('g2_name')}}" class="@error('g2_name')error @enderror">
+                @error('g2_name') <span class="text-danger">{{ $message }}</span> @enderror
 
-                <label>Name of Witness:</label>
-                <input type="text" name="g2_witness_name">
-                <label>Occupation:</label>
-                <input type="text" name="g2_witness_occ">
-                <label>Present Address:</label>
-                <input type="text" name="g2_witness_addr">
-                <div class="signature-line">Signature of Witness</div>
+                <label>Home Address:<span style="color: red;">*</span></label>
+                <input type="text" name="g2_address" value="{{old('g2_address')}}" class="@error('g2_address') error @enderror">
+                @error('g2_address') <span class="text-danger">{{ $message }}</span> @enderror
+
+                <label>Date of Birth:<span style="color: red;">*</span></label>
+                <input type="date" name="g2_dob" value="{{old('g2_dob')}}" class="@error('g2_dob') error @enderror">
+                @error('g2_dob') <span class="text-danger">{{ $message }}</span> @enderror
+
+                <label>Signature of Witness:<span style="color: red;">*</span></label>
+                <input type="date" name="g2_signature_of_witness" value="{{old('g2_signature_of_witness')}}" class="@error('g2_signature_of_witness') error @enderror">
+                @error('g2_signature_of_witness') <span class="text-danger">{{ $message }}</span> @enderror
+
+                <label>Name of Witness:<span style="color: red;">*</span></label>
+                <input type="text" name="g2_witness_name" value="{{old('g2_witness_name')}}" class="@error('g2_witness_name') error @enderror">
+                @error('g2_witness_name') <span class="text-danger">{{ $message }}</span> @enderror
+
+                <label>Occupation:<span style="color: red;">*</span></label>
+                <input type="text" name="g2_witness_occ" value="{{old('g2_witness_occ')}}" class="@error('g2_witness_occ') error @enderror">
+                @error('g2_witness_occ') <span class="text-danger">{{ $message }}</span> @enderror
+
+                <label>Present Address:<span style="color: red;">*</span></label>
+                <input type="text" name="g2_witness_addr" value="{{old('g2_witness_addr')}}" class="@error('g2_witness_addr') error @enderror">
+                 @error('g2_witness_addr') <span class="text-danger">{{ $message }}</span> @enderror
+
             </div>
             <div class="notes">
                 <strong>Notes:</strong><br>
                 1. If the Client is a proprietary limited company, the Guarantor(s) must be the director(s).<br>
-                2. If the Client is a limited partnership, the Guarantor(s) must be the general partners.<br>
-                3. If the Client is a sole trader, the Guarantor(s) should be a suitable person.<br>
-                4.  If the Client is a club or incorporated society the Guarantor(s) should be the president and secretary or other committee members.
-            </div>
+              </div>
         </div>
 
         <!-- PAGE 3: TERMS AND CONDITIONS -->
@@ -541,50 +651,20 @@
         <div class="terms-box">
             <h3>1. Definitions</h3>
             <p>1.1 “Client” means the person/s, entities or any person acting on behalf of and with the authority of the Client requesting the Supplier to provide the Services as specified in any proposal, quotation, order, invoice or other documentation.</p>
-            <p>1.2 “Contract” means the terms and conditions contained herein, together with any quotation, order, invoice or other document or amendments expressed to be supplemental to this Contract.</p>
-            <p>1.4 “Goods” means all Goods or Services supplied by the Supplier to the Client at the Client’s request from time to time.</p>
-            <p>1.5 “Price” means the Price payable (plus any Goods and Services Tax (“GST”) where applicable) for the Goods as agreed between the Supplier and the Client.</p>
-            
-            <h3>2. Acceptance</h3>
-            <p>2.1 The parties acknowledge and agree that: (a) they have read and understood the terms and conditions contained in this Contract; and (b) the parties are taken to have exclusively accepted and are immediately bound, jointly and severally, by these terms and conditions if the Client places an order for or accepts Delivery of the Goods.</p>
-
-            <h3>5. Price and Payment</h3>
-            <p>5.1 At the Supplier’s sole discretion the Price shall be either: (a) as indicated on any invoice provided by the Supplier to the Client; or (b) the Supplier’s quoted Price which will be valid for the period stated in the quotation or otherwise for a period of thirty (30) days.</p>
-            <p>5.5 Time for payment for the Goods being of the essence, the Price will be payable by the Client on the date/s determined by the Supplier.</p>
-
+            <h3>2. Acceptance</h3>            
             <h3>9. Title</h3>
-            <p>9.1 The Supplier and the Client agree that ownership of the Goods shall not pass until: (a) the Client has paid the Supplier all amounts owing to the Supplier; and (b) the Client has met all of its other obligations to the Supplier.</p>
-
-            <h3>10. Personal Property Securities Act 1999 (“PPSA”)</h3>
-            <p>10.1 Upon assenting to these terms and conditions in writing the Client acknowledges and agrees that: (a) these terms and conditions constitute a security agreement for the purposes of the PPSA; and (b) a security interest is taken in all Goods that have previously been supplied and that will be supplied in the future by the Supplier to the Client.</p>
-
-            <h3>11. Security and Charge</h3>
-            <p>11.1 In consideration of the Supplier agreeing to supply the Goods, the Client charges all of its rights, title and interest (whether joint or several) in any land, realty or other assets capable of being charged, owned by the Client either now or in the future, and the Client grants a security interest in all of its present and after-acquired property, to secure the performance by the Client of its obligations under these terms and conditions.</p>
-            <p>11.3 The Client irrevocably appoints the Supplier and each director of the Supplier as the Client’s true and lawful attorney/s to perform all necessary acts to give effect to the provisions of this clause 11 including, but not limited to, signing any document on the Client’s behalf.</p>
-
-            <h3>18. Privacy Policy</h3>
-            <p>18.1 All emails, documents, images or other recorded information held or used by the Supplier is “Personal Information” considered confidential. The Supplier acknowledges its obligation in relation to the handling, use, disclosure and processing of Personal Information pursuant to the Privacy Act 2020.</p>
             
-            <p><em>(Note: Full Terms and Conditions from the original document are incorporated by reference here to save space, but the Security/Charge and PPSA sections have been explicitly included above as they are critical.)</em></p>
+            <h3>11. Security and Charge</h3>
+            
         </div>
         
         <div class="form-row">
-             <input type="checkbox" id="accept_terms" name="accept_terms" required>
+        <input type="checkbox" id="accept_terms" name="accept_terms" value="1" {{ old('accept_terms') ? 'checked' : '' }} required>
+            @error('accept_terms')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
              <label for="accept_terms" style="display:inline; margin-left: 10px;">I/We confirm I/We have read, understood, and accept the terms of this Guarantee and Indemnity, and I/We agree to be bound by this Guarantee and Indemnity.</label>
         </div>
-
-        <h2>Account Details</h2>
-        <div class="form-row">
-            <div class="form-group">
-                <label>Account Name:</label>
-                <input type="text" name="account_name" required>
-            </div>
-            <div class="form-group">
-                <label>Amount:</label>
-                <input type="number" step="0.01" name="amount" required>
-            </div>
-        </div>
-
         <button type="submit" class="submit-btn">Submit Application</button>
     </form>
 
@@ -608,6 +688,7 @@
                     
                     // Update input names
                     clone.querySelector('.dir_name').name = `dir${i}_name`;
+                    clone.querySelector('.dir_dob').name = `dir${i}_name`;
                     clone.querySelector('.dir_mobile').name = `dir${i}_mobile`;
                     clone.querySelector('.dir_dl').name = `dir${i}_dl`;
                     clone.querySelector('.dir_address').name = `dir${i}_address`;
