@@ -21,7 +21,7 @@
             max-width: 900px;
             margin: 0 auto;
             background: white;
-            padding: 40px;
+            padding: 25px;
             box-shadow: 0 0 15px rgba(0,0,0,0.1);
             border-top: 5px solid var(--primary-color);
         }
@@ -52,13 +52,13 @@
 
         .company-info {
             text-align: right;
-            font-size: 13px;
+            font-size: 12px;
         }
 
         h2 {
             background-color: var(--text-dark);
             color: white;
-            padding: 10px;
+            padding: 5px;
             font-size: 18px;
             margin-top: 30px;
             border-radius: 4px;
@@ -87,7 +87,7 @@
         label {
             display: block;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             margin-bottom: 5px;
         }
 
@@ -98,10 +98,12 @@
         input[type="tel"],
         select {
             width: 100%;
+            height: 35px;
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box; /* Ensures padding doesn't affect width */
+            font-size: 12px;
         }
 
         input:focus {
@@ -124,7 +126,7 @@
 
         th {
             background-color: var(--bg-light);
-            font-size: 13px;
+            font-size: 12px;
         }
 
         /* Terms Box */
@@ -142,7 +144,7 @@
             background-color: var(--bg-light);
             padding: 15px;
             border: 1px solid var(--border-color);
-            font-size: 13px;
+            font-size: 12px;
             margin: 20px 0;
         }
 
@@ -201,7 +203,7 @@
             border: 1px solid #ccc;
             border-right: none;
             border-radius: 4px 0 0 4px;
-            font-size: 14px;
+            font-size: 11px;
         }
 
         .phone-input input {
@@ -255,6 +257,12 @@
     </div>
 @endif
 
+
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif  
     <h1 style="text-align: center; font-size: 24px;">Business - Credit Account Application</h1>
     <p style="text-align: center; font-size: 14px;">To Be Completed by Applicants - Please complete all sections and read the Terms and Conditions of Trade.</p>
     <form action="{{ route('business.account.store') }}" method="POST">
@@ -403,7 +411,7 @@
         <div class="form-row">
             <div class="form-group">
                 <label>Number of Directors: <span style="color: red;">*</span></label>
-                <input type="number" name="num_directors" id="num_directors" min="1" max="10" value="{{ old('num_directors') }}" class="@error('num_directors') error @enderror">
+                <input type="number" name="num_directors" id="num_directors" min="1" max="6" value="{{ old('num_directors') }}" class="@error('num_directors') error @enderror">
                 @error('num_directors') <span class="text-danger">{{ $message }}</span> @enderror
 
             </div>
@@ -418,30 +426,30 @@
             <div class="form-row">
                 <div class="form-group">
                     <label>Full Name:<span style="color: red;">*</span></label>
-                    <input type="text" class="dir_name" name="">
+                    <input type="text" class="dir_name" name="" required>
                 </div>
                 <div class="form-group">
                     <label>D.O.B:<span style="color: red;">*</span></label>
-                    <input type="text" class="dir_dob" name="" placeholder="dd/mm/yyyy" pattern="\d{2}/\d{2}/\d{4}">
+                    <input type="date" class="dir_dob" name="" required>
                 </div>
                 <div class="form-group">
                     <label>Mobile No:<span style="color: red;">*</span></label>
-                    <input type="tel" class="dir_mobile" name="">
+                    <input type="tel" class="dir_mobile" name="" required>
                 </div>
                 
             </div>
             <div class="form-row">
                 <div class="form-group">
                     <label>Private Address:<span style="color: red;">*</span></label>
-                    <input type="text" class="dir_address" name="">
+                    <input type="text" class="dir_address" name="" required>
                 </div>
                 <div class="form-group">
                     <label>Driver's Licence:<span style="color: red;">*</span></label>
-                    <input type="text" class="dir_dl" name="">
+                    <input type="text" class="dir_dl" name="" required>
                 </div>
                 <div class="form-group" style="flex: 0 0 100px;">
                     <label>Post Code:<span style="color: red;">*</span></label>
-                    <input type="text" class="dir_pc" name="">
+                    <input type="text" class="dir_pc" name="" required>
                 </div>
             </div>
         </template>
@@ -639,12 +647,12 @@
                  @error('g2_witness_addr') <span class="text-danger">{{ $message }}</span> @enderror
 
             </div>
-            <div class="notes">
-                <strong>Notes:</strong><br>
-                1. If the Client is a proprietary limited company, the Guarantor(s) must be the director(s).<br>
-              </div>
+            
         </div>
-
+        <div class="notes">
+            <strong>Notes:</strong><br>
+                1. If the Client is a proprietary limited company, the Guarantor(s) must be the director(s).<br>
+        </div>
         <!-- PAGE 3: TERMS AND CONDITIONS -->
         <h2>Terms & Conditions of Trade</h2>
         <p>Please scroll to read the full Terms and Conditions.</p>
@@ -669,41 +677,21 @@
     </form>
 
     <script>
-        // Director Details Dynamic Generation
-        const numDirectorsInput = document.getElementById('num_directors');
-        const directorsContainer = document.getElementById('directors-container');
-        const directorTemplate = document.getElementById('director-template');
-
-        numDirectorsInput.addEventListener('input', function() {
-            const numDirectors = parseInt(this.value) || 0;
-            directorsContainer.innerHTML = ''; // Clear existing directors
-
-            if (numDirectors > 0) {
-                for (let i = 1; i <= numDirectors; i++) {
-                    // Clone the template
-                    const clone = directorTemplate.content.cloneNode(true);
-                    
-                    // Update director number
-                    clone.querySelector('.director-number').textContent = i;
-                    
-                    // Update input names
-                    clone.querySelector('.dir_name').name = `dir${i}_name`;
-                    clone.querySelector('.dir_dob').name = `dir${i}_name`;
-                    clone.querySelector('.dir_mobile').name = `dir${i}_mobile`;
-                    clone.querySelector('.dir_dl').name = `dir${i}_dl`;
-                    clone.querySelector('.dir_address').name = `dir${i}_address`;
-                    clone.querySelector('.dir_pc').name = `dir${i}_pc`;
-                    
-                    // Append to container
-                    directorsContainer.appendChild(clone);
-                }
-            }
-        });
-
-        // Trigger on page load in case a value was pre-filled
-        window.addEventListener('DOMContentLoaded', function() {
-            if (numDirectorsInput.value) {
-                numDirectorsInput.dispatchEvent(new Event('input'));
+        document.getElementById('num_directors').addEventListener('change', function () {
+            const container = document.getElementById('directors-container');
+            const template = document.getElementById('director-template').content;
+            container.innerHTML = '';
+            const count = parseInt(this.value);
+            for (let i = 1; i <= count; i++) {
+                const clone = document.importNode(template, true);
+                clone.querySelector('.director-number').innerText = i;
+                clone.querySelector('.dir_name').name = `dir${i}_name`;
+                clone.querySelector('.dir_dob').name = `dir${i}_dob`;
+                clone.querySelector('.dir_mobile').name = `dir${i}_mobile`;
+                clone.querySelector('.dir_address').name = `dir${i}_address`;
+                clone.querySelector('.dir_dl').name = `dir${i}_dl`;
+                clone.querySelector('.dir_pc').name = `dir${i}_pc`;
+                container.appendChild(clone);
             }
         });
     </script>

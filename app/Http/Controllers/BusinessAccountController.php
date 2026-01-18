@@ -1,15 +1,20 @@
 <?php
 namespace App\Http\Controllers;
-
+use Spatie\Browsershot\Browsershot;
 use App\Models\BusinessApplication;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\BusinessCreditApplication;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\BusinessCreditPdfMail;
+
 class BusinessAccountController extends Controller
 {
     public function store(Request $request)
      {
         // ✅ VALIDATION
+        // dd($request->all());
         $request->validate([
             // CLIENT DETAILS
             'contact_person' => 'required|string|max:255',
@@ -142,6 +147,11 @@ class BusinessAccountController extends Controller
                 'address' => $request["dir{$i}_address"] ?? null,
                 'drivers_licence' => $request["dir{$i}_dl"] ?? null,
                 'postcode' => $request["dir{$i}_pc"] ?? null,
+            ],[
+                "dir{$i}_name.required" => "Director {$i} name is required",
+                "dir{$i}_dob.required"  => "Director {$i} date of birth is required",
+                "dir{$i}_dob.date"      => "Director {$i} date of birth must be a valid date",
+                "dir{$i}_mobile.required"=> "Director {$i} mobile is required",
             ]);
         }
 
@@ -179,16 +189,42 @@ class BusinessAccountController extends Controller
             'ip_address' => request()->ip(),
         ]);
 
-        return redirect()->route('business.account.pdf', $app->id);
+        /* ================= GENERATE PDF (BROWSERSHOT) ================= */
+
+        $html = view('pdf.business-credit', compact('app'))->render();
+
+        $pdfBinary = Browsershot::html($html)
+            ->format('A4')
+            ->margins(10, 10, 10, 10)
+            ->showBackground()
+            ->pdf();
+
+        /* ---------------- SEND EMAIL WITH PDF ---------------- */
+        Mail::to($app->email)
+            ->cc($app->accounts_email)
+            ->send(new BusinessCreditPdfMail($app, $pdfBinary));
+
+        return redirect() ->back() ->with('success', 'Form submitted successfully.');    
+    
     }
+    /*
+    * VIEW PDF (OPTIONAL)
+     */
+    public function pdf($id)
+    {
+        $app = BusinessCreditApplication::with([
+            'directors','guarantors','references','terms'
+        ])->findOrFail($id);
 
-    //  public function pdf($id)
-    // {
-    //     $app = BusinessCreditApplication::with(['directors','guarantors','references'])->findOrFail($id);
-
-    //     $pdf = Pdf::loadView('pdf.business-credit', compact('app'))
-    //               ->setPaper('a4','portrait');
-
-    //     return $pdf->stream('business-credit-application.pdf');
-    // }
+        return response(
+            Browsershot::html(
+                view('pdf.business-credit', compact('app'))->render()
+            )
+            ->format('A4')
+            ->pdf(),
+            200,
+            ['Content-Type' => 'application/pdf']
+        );
+    }
+    
 }
