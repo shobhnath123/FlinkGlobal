@@ -257,7 +257,9 @@ class BusinessAccountController extends Controller
              | 3. GENERATE PDF
              ========================================================= */
 
-            $html = view('pdf.business-credit', compact('app'))->render();
+            $app->load(['directors', 'guarantors', 'references', 'terms']);
+
+            $html = view('pdf.business-credit-filled', compact('app'))->render();
 
             $pdfBinary = Browsershot::html($html)
                 ->format('A4')
