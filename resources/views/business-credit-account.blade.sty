@@ -82,7 +82,6 @@
         .form-group {
             flex: 1;
             min-width: 200px;
-            position: relative;
         }
 
         label {
@@ -123,25 +122,11 @@
             border: 1px solid var(--border-color);
             padding: 8px;
             text-align: left;
-            vertical-align: top;
         }
 
         th {
             background-color: var(--bg-light);
             font-size: 12px;
-        }
-
-        /* Error messages in table cells */
-        td .text-danger {
-            display: block;
-            margin-top: 4px;
-            color: red;
-            font-size: 0.9em;
-        }
-
-        td input.error {
-            border: 2px solid #dc2626 !important;
-            width: 100%;
         }
 
         /* Terms Box */
@@ -184,7 +169,6 @@
             padding: 20px;
             margin-bottom: 20px;
             background-color: #fffbfb;
-            overflow: visible;
         }
 
         button.submit-btn {
@@ -243,32 +227,31 @@
         }
         /* Address Suggestions */
         .address-wrapper {
-            position: relative;
-            width: 100%;
-            overflow: visible !important;
-        }
+    position: relative;
+    width: 100%;
+}
 
-        .suggestions {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            z-index: 10000;
+.suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 10000;
 
-            background: #ffffff;
-            border: 1px solid #dcdcdc;
-            border-top: none;
+    background: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-top: none;
 
-            list-style: none;
-            margin: 0;
-            padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 
-            max-height: 220px;
-            overflow-y: auto;
+    max-height: 220px;
+    overflow-y: auto;
 
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-            border-radius: 0 0 6px 6px;
-        }
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    border-radius: 0 0 6px 6px;
+}
 
 .suggestions li {
     padding: 10px 14px;
@@ -296,78 +279,6 @@
             .form-row { flex-direction: column; }
             .signature-row { flex-direction: column; gap: 0; }
         }
-
-        /* Success Popup Modal */
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .popup-overlay.show {
-            display: flex;
-        }
-
-        .popup-content {
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            max-width: 500px;
-            animation: slideIn 0.3s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .popup-icon {
-            font-size: 60px;
-            color: #22c55e;
-            margin-bottom: 20px;
-        }
-
-        .popup-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .popup-message {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        .popup-btn {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 16px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .popup-btn:hover {
-            background-color: #a01925;
-        }
     </style>
 <div class="container">
     <header>
@@ -383,17 +294,6 @@
             Web: www.flinkglobal.com
         </div>
     </header>
-    
-    <!-- Success Popup Modal -->
-    <div id="successPopup" class="popup-overlay">
-        <div class="popup-content">
-            <div class="popup-icon">✓</div>
-            <div class="popup-title">Form Submitted Successfully</div>
-            <div class="popup-message">Your application has been submitted successfully. We will review it and contact you soon.</div>
-            <button class="popup-btn" onclick="closePopup()">Close</button>
-        </div>
-    </div>
-
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul class="mb-0">
@@ -426,8 +326,8 @@
         <div class="form-row">
             <div class="form-group address-wrapper">
                  <label>Physical Address:<span style="color: red;">*</span></label>
-                <input type="text" id="address_input" name="physical_address" value="{{ old('physical_address')}}" class="@error('physical_address') error @enderror" autocomplete="off">
-                <input type="hidden" id="physical_address_dpid" name="physical_address_dpid">
+                <input type="text" id="address_input" name="address" value="{{ old('physical_address')}}" class="@error('physical_address') error @enderror" autocomplete="off">
+                <input type="hidden" id="physical_address" name="physical_address">
                 <ul id="address_suggestions" class="suggestions"></ul>
                 {{-- @error('postcode_phy') <span class="text-danger">{{ $message }}</span> @enderror --}}
             </div>
@@ -445,7 +345,7 @@
         <div class="form-row">
             <div class="form-group address-wrapper">
                 <label>Billing Address:<span style="color: red;">*</span></label>
-                <input type="text" id="billing_address_input" name="billing_address" value="{{ old('billing_address') }}" autocomplete="off" data-postcode="postcode_bill">
+                <input type="text" id="billing_address_input" name="billing_address" autocomplete="off" data-postcode="postcode_bill">
                 <input type="hidden" id="billing_address_dpid" name="billing_address_dpid">
                 <ul id="billing_address_suggestions" class="suggestions"></ul>
                 @error('billing_address')
@@ -666,8 +566,8 @@
                 <div class="phone-input">
                     <span class="country-code">+64</span>            
                     <input type="tel" name="accounts_mobile" value="{{old("accounts_mobile")}}" class="@error('accounts_mobile') error @enderror">
+                    @error('accounts_mobile') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
-                @error('accounts_mobile') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
         </div>
         <div class="form-row">
@@ -690,61 +590,40 @@
         <table>
             <thead>
                 <tr>
-                    <th style="width: 30%;">Name <span style="color: red;">*</span></th>
-                    <th style="width: 40%;">Company Name/ Address <span style="color: red;">*</span></th>
-                    <th style="width: 30%;">Mobile No/ Email <span style="color: red;">*</span></th>
+                    <th style="width: 30%;">Name</th>
+                    <th style="width: 40%;">Company Name/ Address</th>
+                    <th style="width: 30%;">Mobile No/ Email</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>
-                        <input type="text" name="ref1_name" value="{{ old('ref1_name') }}" class="@error('ref1_name') error @enderror">
-                        @error('ref1_name') <span class="text-danger">{{ $message }}</span> @enderror
-                    </td>
-                    <td>
-                        <input type="text" name="ref1_company" value="{{ old('ref1_company') }}" class="@error('ref1_company') error @enderror" >
-                        @error('ref1_company') <span class="text-danger">{{ $message }}</span> @enderror
-                    </td>
+                    <td><input type="text" name="ref1_name"></td>
+                    <td><input type="text" name="ref1_company"></td>
                     <td>
                         <div class="phone-input">
                             <span class="country-code">+64</span>
-                            <input type="text" name="ref1_contact" value="{{ old('ref1_contact') }}" class="@error('ref1_contact') error @enderror" >
-                        </div>
-                        @error('ref1_contact') <span class="text-danger">{{ $message }}</span> @enderror                    
+                        <input type="text" name="ref1_contact">
+                        </div>                    
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <input type="text" name="ref2_name" value="{{ old('ref2_name') }}" class="@error('ref2_name') error @enderror" >
-                        @error('ref2_name') <span class="text-danger">{{ $message }}</span> @enderror
-                    </td>
-                    <td>
-                        <input type="text" name="ref2_company" value="{{ old('ref2_company') }}" class="@error('ref2_company') error @enderror" >
-                        @error('ref2_company') <span class="text-danger">{{ $message }}</span> @enderror
-                    </td>
+                    <td><input type="text" name="ref2_name"></td>
+                    <td><input type="text" name="ref2_company"></td>
                     <td>
                         <div class="phone-input">
                             <span class="country-code">+64</span>
-                            <input type="text" name="ref2_contact" value="{{ old('ref2_contact') }}" class="@error('ref2_contact') error @enderror" >
+                        <input type="text" name="ref2_contact">
                         </div>
-                        @error('ref2_contact') <span class="text-danger">{{ $message }}</span> @enderror
-                    </td>
+                    <td>
                 </tr>
                 <tr>
-                    <td>
-                        <input type="text" name="ref3_name" value="{{ old('ref3_name') }}" class="@error('ref3_name') error @enderror" >
-                        @error('ref3_name') <span class="text-danger">{{ $message }}</span> @enderror
-                    </td>
-                    <td>
-                        <input type="text" name="ref3_company" value="{{ old('ref3_company') }}" class="@error('ref3_company') error @enderror" >
-                        @error('ref3_company') <span class="text-danger">{{ $message }}</span> @enderror
-                    </td>
+                    <td><input type="text" name="ref3_name"></td>
+                    <td><input type="text" name="ref3_company"></td>
                     <td>
                         <div class="phone-input">
                             <span class="country-code">+64</span>
-                            <input type="text" name="ref3_contact" value="{{ old('ref3_contact') }}" class="@error('ref3_contact') error @enderror" >
+                            <input type="text" name="ref3_contact">
                         </div>
-                        @error('ref3_contact') <span class="text-danger">{{ $message }}</span> @enderror
                     </td>   
                 </tr>
             </tbody>
@@ -800,13 +679,16 @@
                 @error('g1_name') <span class="text-danger">{{ $message }}</span> @enderror
 
                 <label>Home Address:<span style="color: red;">*</span></label>
-                <div class="address-wrapper">
-                    <input type="text" id="g1_address_input" name="g1_address" value="{{ old('g1_address')}}" class="@error('g1_address') error @enderror" autocomplete="off">
-                    <input type="hidden" id="g1_address_dpid" name="g1_address_dpid">
-                    <ul id="g1_address_suggestions" class="suggestions"></ul>
-                </div>
+                <input type="text" id="g1_address_input" name="g1_address" value="{{ old('g1_address')}}" class="@error('g1_address') error @enderror" autocomplete="off">
+                <input type="hidden" id="g1_address" name="g1_address">
+                <ul id="g1_address_suggestions" class="suggestions"></ul>
+
+                {{-- <input type="text" name="g1_address" value="{{old('g1_address')}}" class="@error('g1_address') error @enderror"> --}}
                 @error('g1_address') <span class="text-danger">{{ $message }}</span> @enderror
-               
+                <label>Postcode:<span style="color: red;">*</span></label>
+                <input type="text" name="g1_postcode" value="{{old('g1_postcode')}}" class="@error('g1_postcode') error @enderror">
+                 @error('g1_postcode') <span class="text-danger">{{ $message }}</span> @enderror
+
                 <label>Date of Birth:<span style="color: red;">*</span></label>
                 <input type="date" name="g1_dob" value="{{old('g1_dob')}}" class="@error('g1_dob') error @enderror">
                 @error('g1_dob') <span class="text-danger">{{ $message }}</span> @enderror
@@ -824,11 +706,7 @@
                  @error('g1_witness_occ') <span class="text-danger">{{ $message }}</span> @enderror
 
                 <label>Present Address:<span style="color: red;">*</span></label>
-                <div class="address-wrapper">
-                    <input type="text" id="g1_witness_addr_input" name="g1_witness_addr" value="{{old('g1_witness_addr')}}" class="@error('g1_witness_addr') error @enderror" autocomplete="off">
-                    <input type="hidden" id="g1_witness_addr_dpid" name="g1_witness_addr_dpid">
-                    <ul id="g1_witness_addr_suggestions" class="suggestions"></ul>
-                </div>
+                <input type="text" name="g1_witness_addr" value="{{old('g1_witness_addr')}}" class="@error('g1_witness_addr') error @enderror">
                  @error('g1_witness_addr') <span class="text-danger">{{ $message }}</span> @enderror
 
             </div>
@@ -845,11 +723,7 @@
                 @error('g2_name') <span class="text-danger">{{ $message }}</span> @enderror
 
                 <label>Home Address:<span style="color: red;">*</span></label>
-                <div class="address-wrapper">
-                    <input type="text" id="g2_address_input" name="g2_address" value="{{old('g2_address')}}" class="@error('g2_address') error @enderror" autocomplete="off">
-                    <input type="hidden" id="g2_address_dpid" name="g2_address_dpid">
-                    <ul id="g2_address_suggestions" class="suggestions"></ul>
-                </div>
+                <input type="text" name="g2_address" value="{{old('g2_address')}}" class="@error('g2_address') error @enderror">
                 @error('g2_address') <span class="text-danger">{{ $message }}</span> @enderror
 
                 <label>Date of Birth:<span style="color: red;">*</span></label>
@@ -869,11 +743,7 @@
                 @error('g2_witness_occ') <span class="text-danger">{{ $message }}</span> @enderror
 
                 <label>Present Address:<span style="color: red;">*</span></label>
-                <div class="address-wrapper">
-                    <input type="text" id="g2_witness_addr_input" name="g2_witness_addr" value="{{old('g2_witness_addr')}}" class="@error('g2_witness_addr') error @enderror" autocomplete="off">
-                    <input type="hidden" id="g2_witness_addr_dpid" name="g2_witness_addr_dpid">
-                    <ul id="g2_witness_addr_suggestions" class="suggestions"></ul>
-                </div>
+                <input type="text" name="g2_witness_addr" value="{{old('g2_witness_addr')}}" class="@error('g2_witness_addr') error @enderror">
                  @error('g2_witness_addr') <span class="text-danger">{{ $message }}</span> @enderror
 
             </div>
@@ -924,35 +794,6 @@
                 container.appendChild(clone);
             }
         });
-
-        // Popup functions
-        function showSuccessPopup() {
-            document.getElementById('successPopup').classList.add('show');
-        }
-
-        function closePopup() {
-            document.getElementById('successPopup').classList.remove('show');
-        }
-
-        // Form submission handler
-        document.querySelector('form').addEventListener('submit', function(e) {
-            // Only show popup if form is valid (no errors)
-            // The form will redirect after showing success message
-            const hasErrors = document.querySelector('.alert-danger') !== null;
-            if (!hasErrors && this.method === 'POST') {
-                // Show popup on successful submission
-                setTimeout(() => {
-                    showSuccessPopup();
-                }, 500);
-            }
-        });
-
-        // Close popup when clicking outside
-        document.getElementById('successPopup').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closePopup();
-            }
-        });
     </script>
     <script>
         function initAddressAutocomplete(inputId, listId, dpidId, postcodeName) {
@@ -961,7 +802,6 @@
 
             const input = document.getElementById(inputId);
             const list  = document.getElementById(listId);
-            const wrapper = input.closest('.address-wrapper');
 
             input.addEventListener('keyup', function (e) {
                 const query = this.value.trim();
@@ -1004,8 +844,7 @@
                                 const li = document.createElement('li');
                                 li.textContent = addr.FullAddress;
 
-                                li.addEventListener('click', function(e) {
-                                    e.stopPropagation();
+                                li.onclick = () => {
                                     input.value = addr.FullAddress;
                                     document.getElementById(dpidId).value = addr.FullAddress;
 
@@ -1016,7 +855,7 @@
                                     }
 
                                     list.innerHTML = '';
-                                }, {once: true});
+                                };
 
                                 list.appendChild(li);
                             });
@@ -1034,7 +873,7 @@
             }
 
             document.addEventListener('click', function (e) {
-                if (wrapper && !wrapper.contains(e.target)) {
+                if (!e.target.closest('.address-wrapper')) {
                     list.innerHTML = '';
                 }
             });
@@ -1044,7 +883,7 @@
         initAddressAutocomplete(
             'address_input',
             'address_suggestions',
-            'physical_address_dpid',
+            'physical_address',
             'postcode_phy'
         );
 
@@ -1058,29 +897,8 @@
         initAddressAutocomplete(
             'g1_address_input',
             'g1_address_suggestions',
-            'g1_address_dpid',
-            null
-        );
-
-        initAddressAutocomplete(
-            'g2_address_input',
-            'g2_address_suggestions',
-            'g2_address_dpid',
-            null
-        );
-
-        initAddressAutocomplete(
-            'g1_witness_addr_input',
-            'g1_witness_addr_suggestions',
-            'g1_witness_addr_dpid',
-            null
-        );
-
-        initAddressAutocomplete(
-            'g2_witness_addr_input',
-            'g2_witness_addr_suggestions',
-            'g2_witness_addr_dpid',
-            null
+            'g1_address',
+            'g1_postcode'
         );  
     </script>
 

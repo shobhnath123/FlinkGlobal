@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\{
 use App\Models\User;
 use App\Models\Post;
 use App\Http\Controllers\BusinessAccountController;
-
+use App\Http\Controllers\AddressController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +36,7 @@ Route::get('/business-account/{id}/pdf', [BusinessAccountController::class,'pdf'
     ->name('business.account.pdf');
 
 // Route::post('/business-account', [BusinessAccountController::class, 'store'])->name('business.account.store');
+Route::get('/address/suggest', [AddressController::class, 'suggest'])->name('address.suggest');
 
 
 Route::get('/test-mail',function(){

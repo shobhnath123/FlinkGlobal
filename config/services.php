@@ -29,5 +29,11 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    // config/services.php
+    'nzpost' => [
+        'client_id' => env('NZPOST_CLIENT_ID'),
+        'client_secret' => env('NZPOST_CLIENT_SECRET'),
+    ],
+
 
 ];
