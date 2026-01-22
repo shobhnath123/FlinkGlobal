@@ -17,7 +17,7 @@
         }
 
         .container {
-            max-width: 210mm;
+            max-width: 210mm; /* A4 Width */
             margin: 0 auto;
         }
 
@@ -26,13 +26,14 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         .logo-section {
             width: 50%;
         }
 
+        /* Simulating the Logos with text/css since we don't have the image files */
         .main-logo {
             font-size: 24px;
             font-weight: bold;
@@ -48,6 +49,7 @@
             font-weight: bold;
             display: flex;
             gap: 15px;
+            margin-left: 33px;
         }
         .fervour {
             background-color: #000;
@@ -63,7 +65,7 @@
         .company-info {
             width: 50%;
             text-align: right;
-            font-size: 9px;
+            font-size: 11px;
             line-height: 1.3;
         }
 
@@ -71,7 +73,7 @@
         h1 {
             text-align: center;
             font-family: "Times New Roman", serif;
-            font-size: 18px;
+            font-size: 22px;
             margin: 10px 0 5px 0;
             font-weight: normal;
         }
@@ -79,44 +81,45 @@
         .instruction {
             text-align: center;
             font-weight: bold;
-            font-size: 9px;
-            margin-bottom: 10px;
+            font-size: 10px;
         }
 
         /* Form Tables */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 0;
+            margin-bottom: 0; /* Tables are stacked tight */
         }
 
         td, th {
-            border: 1px solid black;
+            border: 0.5pt solid black;
             padding: 2px 4px;
-            vertical-align: top;
-            height: auto;
-            min-height: 14px;
+            vertical-align: bottom; /* Aligns text like a form input line */
+            height: 14px;
         }
 
+
+        /* Utility Classes for Columns */
         .section-header {
-            background-color: #f0f0f0;
+            background-color: #fff;
             font-weight: bold;
             border-bottom: 1px solid black;
         }
         
         .label {
             white-space: nowrap;
-            width: 1%;
-            font-weight: bold;
+            width: 1%; /* Shrink to fit content */
         }
         
         .input-cell {
-            /* Areas where data displays */
+            /* Areas where user writes */
         }
 
+        /* Specific Table Tweaks */
         .no-top-border { border-top: none; }
         .no-bottom-border { border-bottom: none; }
 
+        /* Footer / Declaration */
         .declaration {
             margin-top: 10px;
             font-size: 8px;
@@ -149,6 +152,7 @@
             margin-right: 10px;
         }
 
+        /* Print Settings */
         @media print {
             body { padding: 0; }
             .container { width: 100%; max-width: none; }
@@ -162,13 +166,13 @@
     <!-- Header -->
     <div class="header">
         <div class="logo-section">
+            <!-- Simulated Logo -->
             <div class="main-logo">
-                <span class="logo-red">▲FLINK</span><span class="logo-black">TECH</span>
-                <div style="font-size: 8px; margin-left: 20px; color: #555;">Brilliance... Delivered</div>
+                <img src="https://flinktech.nz/wp-content/uploads/2021/05/flinktech_logo-1536x293-removebg-preview.png" alt="flinktech" style="height: 35px; vertical-align: middle;">
             </div>
             <div class="sub-logos">
-                <span class="fervour">FERVOUR</span>
-                <span class="uvw">UvW</span>
+                <img src="https://www.fervour.info/wp-content/uploads/2024/03/fervour-logo.webp" alt="Fervour" style="height: 22px; vertical-align: middle;">
+                <img src="https://flinkglobal.com/uvw/wp-content/uploads/2020/10/logo-small-1.png" alt="UvW" style="height: 22px; vertical-align: middle;">
             </div>
         </div>
         <div class="company-info">
@@ -182,7 +186,7 @@
 
     <h1>Business - Credit Account Application</h1>
     <div class="instruction">
-        To Be Completed by Applicants - Please complete all sections and read the Terms and Conditions of Trade under mentioned.
+        To Be Completed by Applicants - Please complete all sections and read the Terms and Conditions of Trade under mentioned.    
     </div>
 
     <!-- Client Details -->
@@ -190,17 +194,19 @@
         <tr class="section-header"><td colspan="4">Client Details:</td></tr>
         <tr>
             <td class="label">Full Name (Contact Person):</td>
-            <td colspan="3">{{ $app->contact_person }}</td>
+            <td colspan="3"></td>
         </tr>
         <tr>
             <td class="label">Physical Address:</td>
-            <td colspan="2">{{ $app->physical_address }}</td>
-            <td style="width: 150px;">Postcode: {{ $app->postcode_phy }}</td>
+            <td colspan="1">{{ $app->physical_address }}</td>
+            <td style="width: 122px;">Postcode:</td>
+			<td style="width: 122px;">{{ $app->postcode_phy }} </div>
         </tr>
         <tr>
             <td class="label">Billing Address:</td>
-            <td colspan="2">{{ $app->billing_address }}</td>
-            <td>Postcode: {{ $app->postcode_bill }}</td>
+            <td colspan="1">{{ $app->billing_address }}</td>
+            <td>Postcode:</td>
+			<td style="width: 122px;">{{ $app->postcode_bill }}</td>
         </tr>
         <tr>
             <td class="label">Driver's Licence No:</td>
@@ -273,7 +279,7 @@
         </tr>
         <tr>
             <td class="label">Private Address:</td>
-            <td colspan="6">{{ $director->address }}</td>
+            <td colspan="5">{{ $director->address }}</td>
             <td class="label">Postcode:</td>
             <td>{{ $director->postcode }}</td>
         </tr>
@@ -314,7 +320,7 @@
     <!-- Trade References -->
     <table style="margin-top: -1px;">
         <tr class="section-header"><td colspan="3">Trade / Personal References:</td></tr>
-        <tr style="text-align: center;">
+        <tr style="text-align: left;">
             <td style="width: 30%;"><strong>Name:</strong></td>
             <td style="width: 40%;"><strong>Company Name/ Address:</strong></td>
             <td style="width: 30%;"><strong>Mobile No/ Email:</strong></td>

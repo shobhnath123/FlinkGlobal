@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Credit Account Application</title>
     <style>
+        @page {
+    margin: 10px 30px 90px 30px;
+}
         /* General Page Layout */
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -26,7 +29,7 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         .logo-section {
@@ -49,6 +52,7 @@
             font-weight: bold;
             display: flex;
             gap: 15px;
+            margin-left: 33px;
         }
         .fervour {
             background-color: #000;
@@ -64,7 +68,7 @@
         .company-info {
             width: 50%;
             text-align: right;
-            font-size: 9px;
+            font-size: 11px;
             line-height: 1.3;
         }
 
@@ -72,7 +76,7 @@
         h1 {
             text-align: center;
             font-family: "Times New Roman", serif;
-            font-size: 18px;
+            font-size: 22px;
             margin: 10px 0 5px 0;
             font-weight: normal;
         }
@@ -80,8 +84,7 @@
         .instruction {
             text-align: center;
             font-weight: bold;
-            font-size: 9px;
-            margin-bottom: 10px;
+            font-size: 10px;
         }
 
         /* Form Tables */
@@ -92,11 +95,12 @@
         }
 
         td, th {
-            border: 1px solid black;
+            border: 0.5pt solid black;
             padding: 2px 4px;
             vertical-align: bottom; /* Aligns text like a form input line */
             height: 14px;
         }
+
 
         /* Utility Classes for Columns */
         .section-header {
@@ -167,12 +171,11 @@
         <div class="logo-section">
             <!-- Simulated Logo -->
             <div class="main-logo">
-                <span class="logo-red">▲FLINK</span><span class="logo-black">TECH</span>
-                <div style="font-size: 8px; margin-left: 20px; color: #555;">Brilliance... Delivered</div>
+                <img src="https://flinktech.nz/wp-content/uploads/2021/05/flinktech_logo-1536x293-removebg-preview.png" alt="flinktech" style="height: 35px; vertical-align: middle;">
             </div>
             <div class="sub-logos">
-                <span class="fervour">FERVOUR</span>
-                <span class="uvw">UvW</span>
+                <img src="https://www.fervour.info/wp-content/uploads/2024/03/fervour-logo.webp" alt="Fervour" style="height: 22px; vertical-align: middle;">
+                <img src="https://flinkglobal.com/uvw/wp-content/uploads/2020/10/logo-small-1.png" alt="UvW" style="height: 22px; vertical-align: middle;">
             </div>
         </div>
         <div class="company-info">
@@ -186,7 +189,7 @@
 
     <h1>Business - Credit Account Application</h1>
     <div class="instruction">
-        To Be Completed by Applicants - Please complete all sections and read the Terms and Conditions of Trade under mentioned.
+        To Be Completed by Applicants - Please complete all sections and read the Terms and Conditions of Trade under mentioned.    
     </div>
 
     <!-- Client Details -->
@@ -198,13 +201,15 @@
         </tr>
         <tr>
             <td class="label">Physical Address:</td>
-            <td colspan="2"></td>
+            <td colspan="1"></td>
             <td style="width: 150px;">Postcode:</td>
+            <td style="width: 122px;"></td>
         </tr>
         <tr>
             <td class="label">Billing Address:</td>
-            <td colspan="2"></td>
+            <td colspan="1"></td>
             <td>Postcode:</td>
+            <td></td>
         </tr>
         <tr>
             <td class="label">Driver’s Licence No:</td>
@@ -222,6 +227,7 @@
 
     <!-- Business Details -->
     <table style="margin-top: -1px;"> <!-- Negative margin to merge double borders -->
+        <tr class="section-header" ><td height: 2px; colspan="6"></td></tr>
         <tr class="section-header"><td colspan="6">Business Details:</td></tr>
         <tr>
             <td class="label">Legal Name:</td>
@@ -255,13 +261,15 @@
         </tr>
         <tr>
             <td class="label">Principal Place of Business is:</td>
-            <td colspan="5" style="color: #555; font-style: italic;">(to whom):</td>
+            <td colspan="3" style="color: #555; font-style: italic;"></td>
+            <td class="label">(to whom):</td>
+            <td></td>
         </tr>
     </table>
 
     <!-- Directors Details -->
     <table style="margin-top: -1px;">
-        <tr class="section-header"><td colspan="6">Directors Details:</td></tr>
+        <tr class="section-header"><td colspan="8">Directors Details:</td></tr>
         
         <!-- Director 1 -->
         <tr>
