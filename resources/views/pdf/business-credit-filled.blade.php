@@ -6,14 +6,49 @@
     <title>Credit Account Application</title>
     <style>
         /* General Page Layout */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 10px;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
+            font-size: 16px;
             background-color: white;
             color: #000;
+        }
+
+        .page-wrapper {
+            position: relative;
+            page-break-after: auto;
+            margin: 0;
+            padding: 0;
+            min-height: 297mm; /* A4 Height */
+        }
+
+        .page-header {
+            position: relative;
+            margin-bottom: 10px;
+            padding-top: 0;
+            padding-bottom: 10px;
+            display: block;
+        }
+
+        .page-content {
+            position: relative;
+            display: block;
+            min-height: calc(297mm - 140mm);
+            padding: 0;
+        }
+
+        .page-footer {
+            position: relative;
+            margin-top: 20px;
+            padding-top: 10px;
+            /* border-top: 1px solid #ddd; */
+            display: block;
+            font-size: 8px;
         }
 
         .container {
@@ -26,7 +61,7 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .logo-section {
@@ -66,7 +101,7 @@
             width: 50%;
             text-align: right;
             font-size: 11px;
-            line-height: 1.3;
+            line-height: 1.2;
         }
 
         /* Title Section */
@@ -81,7 +116,7 @@
         .instruction {
             text-align: center;
             font-weight: bold;
-            font-size: 10px;
+            font-size: 12px;
         }
 
         /* Form Tables */
@@ -89,13 +124,14 @@
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 0; /* Tables are stacked tight */
+            table-layout: fixed;
         }
-
-        td, th {
-            border: 0.5pt solid black;
+        td, th {   
+            border: 1px solid #000;          
             padding: 2px 4px;
             vertical-align: bottom; /* Aligns text like a form input line */
             height: 14px;
+            font-size: 11px;
         }
 
 
@@ -103,7 +139,7 @@
         .section-header {
             background-color: #fff;
             font-weight: bold;
-            border-bottom: 1px solid black;
+            /* border-bottom: 1px solid black; */
         }
         
         .label {
@@ -132,7 +168,7 @@
             display: flex;
             justify-content: space-between;
             font-weight: bold;
-            font-size: 10px;
+            font-size: 12px;
         }
         
         .footer-logo {
@@ -153,37 +189,61 @@
         }
 
         /* Print Settings */
+        @page {
+            size: A4;
+            margin: 15mm 10mm;
+        }
+
         @media print {
-            body { padding: 0; }
-            .container { width: 100%; max-width: none; }
+            body { 
+                margin: 0; 
+                padding: 0;
+            }
+            .page-wrapper {
+                margin: 0;
+                padding: 0;
+            }
+            .page-header {
+                position: relative;
+                display: block;
+            }
+            .page-footer {
+                position: relative;
+                display: block;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-
-    <!-- Header -->
-    <div class="header">
-        <div class="logo-section">
-            <!-- Simulated Logo -->
-            <div class="main-logo">
-                <img src="https://flinktech.nz/wp-content/uploads/2021/05/flinktech_logo-1536x293-removebg-preview.png" alt="flinktech" style="height: 35px; vertical-align: middle;">
+<div class="page-wrapper">
+    <!-- Page Header (repeats on every page) -->
+    <div class="page-header">
+        <div class="container">
+            <div class="header">
+                <div class="logo-section">
+                    <div class="main-logo">
+                        <img src="https://flinktech.nz/wp-content/uploads/2021/05/flinktech_logo-1536x293-removebg-preview.png" alt="flinktech" style="height: 35px; vertical-align: middle;">
+                    </div>
+                    <div class="sub-logos">
+                        <img src="https://www.fervour.info/wp-content/uploads/2024/03/fervour-logo.webp" alt="Fervour" style="height: 22px; vertical-align: middle;">
+                        <img src="https://flinkglobal.com/uvw/wp-content/uploads/2020/10/logo-small-1.png" alt="UvW" style="height: 22px; vertical-align: middle;">
+                    </div>
+                </div>
+                <div class="company-info">
+                    FlinkGlobal Limited T/A <strong>FlinkTech</strong><br>
+                    23 Stewart Gibson Place, Manurewa, AUCKLAND 2105<br>
+                    Phone: (09) 393 0900<br>
+                    Email: contact@flinkglobal.com<br>
+                    Web: www.flinkglobal.com
+                </div>
             </div>
-            <div class="sub-logos">
-                <img src="https://www.fervour.info/wp-content/uploads/2024/03/fervour-logo.webp" alt="Fervour" style="height: 22px; vertical-align: middle;">
-                <img src="https://flinkglobal.com/uvw/wp-content/uploads/2020/10/logo-small-1.png" alt="UvW" style="height: 22px; vertical-align: middle;">
-            </div>
-        </div>
-        <div class="company-info">
-            FlinkGlobal Limited T/A <strong>FlinkTech</strong><br>
-            23 Stewart Gibson Place, Manurewa, AUCKLAND 2105<br>
-            Phone: (09) 393 0900<br>
-            Email: contact@flinkglobal.com<br>
-            Web: www.flinkglobal.com
         </div>
     </div>
 
+    <!-- Page Content -->
+    <div class="page-content">
+    <div class="container">
     <h1>Business - Credit Account Application</h1>
     <div class="instruction">
         To Be Completed by Applicants - Please complete all sections and read the Terms and Conditions of Trade under mentioned.    
@@ -224,6 +284,7 @@
 
     <!-- Business Details -->
     <table style="margin-top: -1px;">
+        <tr> <td colspan="6"  style="height: 4px; padding: 0;"></td></tr>
         <tr class="section-header"><td colspan="6">Business Details:</td></tr>
         <tr>
             <td class="label">Legal Name:</td>
@@ -292,6 +353,7 @@
 
     <!-- Account Payment Terms -->
     <table style="margin-top: -1px;">
+        <tr> <td colspan="4"  style="height: 4px; padding: 0;"></td></tr>
         <tr class="section-header"><td colspan="4">Account Payment Terms:</td></tr>
         <tr>
             <td class="label">Purchase Order Required?</td>
@@ -319,6 +381,7 @@
 
     <!-- Trade References -->
     <table style="margin-top: -1px;">
+        <tr> <td colspan="3"  style="height: 4px; padding: 0;"></td></tr>
         <tr class="section-header"><td colspan="3">Trade / Personal References:</td></tr>
         <tr style="text-align: left;">
             <td style="width: 30%;"><strong>Name:</strong></td>
@@ -378,35 +441,23 @@
     </div>
 
     <!-- Signatures -->
-    <table style="margin-top: 15px;">
-        <tr>
-            <td colspan="3" style="font-weight: bold;">SIGNED (CLIENT):</td>
-        </tr>
-        <tr>
-            <td class="label">Name:</td>
-            <td>{{ $app->sing_client_name }}</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td class="label">Position:</td>
-            <td>{{ $app->signed_position }}</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td class="label">Date:</td>
-            <td>{{ \Carbon\Carbon::parse($app->signed_date)->format('d/m/Y') }}</td>
-            <td></td>
-        </tr>
-    </table>
-
+     <div class="signature-section">
+        <div>SIGNED (CLIENT):{{ $app->sing_client_name }}</div>
+    </div>
+    <div class="signature-section" style="margin-top: 30px; font-weight: normal;">
+        <div style="width: 40%;  padding-top: 2px;">Name:{{ $app->sing_client_name }}</div>
+        <div style="width: 30%;  padding-top: 2px;">Position:{{ $app->signed_position }}</div>
+        <div style="width: 20%;  padding-top: 2px;">Date:{{ \Carbon\Carbon::parse($app->signed_date)->format('d/m/Y') }}</div>
+    </div>
     <!-- Footer Logo -->
     <div class="footer-logo">
         <span class="ec-logo">ec</span> <span style="color:#0099cc;">CREDIT CONTROL</span>
         <span style="margin-left: 10px;">Protected by EC Credit Control – Credit Management Specialists</span>
     </div>
-    {{-- <div class="pagebreak" style="page-break-before: always;"></div> --}}
+        </div>
+    </div>
 </div>
-@include('business-credit-account-tc')
-
+{{-- Terms and Conditions on new page --}}
+@include('business-credit-account-tc')  
 </body>
 </html>

@@ -151,7 +151,7 @@ class BusinessAccountController extends Controller
             'g2_signature_of_witness.required' => 'Witness signature date for Guarantor 2 is required.',
             'g2_witness_name.required' => 'Witness name for Guarantor 2 is required.',
             'g2_witness_occ.required' => 'Witness occupation for Guarantor 2 is required.',
-            'g2_witness_addr.required' => 'Witness address for Guarantor 2 is required.',
+            'g2_witness_addr.required' => 'Witness address for Guarantor 2 is required.'
         ];
 
         $validated = $request->validate($rules, $messages);
@@ -263,8 +263,9 @@ class BusinessAccountController extends Controller
 
             $pdfBinary = Browsershot::html($html)
                 ->format('A4')
-                ->margins(10, 10, 10, 10)
+                ->margins(15, 10, 15, 10)
                 ->showBackground()
+                ->waitForNavigation()
                 ->pdf();
 
             /* =========================================================
@@ -303,6 +304,26 @@ class BusinessAccountController extends Controller
                 view('pdf.business-credit', compact('app'))->render()
             )
             ->format('A4')
+            ->margins(15, 10, 15, 10)
+            ->showBackground()
+            ->pdf(),
+            200,
+            ['Content-Type' => 'application/pdf']
+        );
+    }
+    public function pdfPreview($id)
+    {
+        $app = BusinessCreditApplication::with([
+            'directors','guarantors','references','terms'
+        ])->findOrFail($id);
+
+        return response(
+            Browsershot::html(
+                view('pdf.business-credit-filled', compact('app'))->render()
+            )
+            ->format('A4')
+            ->margins(15, 10, 15, 10)
+            ->showBackground()
             ->pdf(),
             200,
             ['Content-Type' => 'application/pdf']

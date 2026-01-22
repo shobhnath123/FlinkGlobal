@@ -35,6 +35,9 @@ Route::post('/business-account', [BusinessAccountController::class,'store'])
 Route::get('/business-account/{id}/pdf', [BusinessAccountController::class,'pdf'])
     ->name('business.account.pdf');
 
+Route::get('/business-account/{id}/pdf-preview', [BusinessAccountController::class, 'pdfPreview'])
+    ->name('business.account.pdf.preview');
+
 // Route::post('/business-account', [BusinessAccountController::class, 'store'])->name('business.account.store');
 Route::get('/address/suggest', [AddressController::class, 'suggest'])->name('address.suggest');
 

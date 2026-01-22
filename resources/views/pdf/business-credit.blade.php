@@ -6,17 +6,55 @@
     <title>Credit Account Application</title>
     <style>
         @page {
-    margin: 10px 30px 90px 30px;
-}
+            size: A4;
+            margin: 15mm 10mm;
+        }
+        
         /* General Page Layout */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 10px; /* Kept small to fit everything on one page like the original */
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
+            font-size: 10px;
             background-color: white;
             color: #000;
+        }
+
+        .page-wrapper {
+            position: relative;
+            page-break-after: always;
+            margin: 0;
+            padding: 0;
+            min-height: 297mm; /* A4 Height */
+        }
+
+        .page-header {
+            position: relative;
+            margin-bottom: 10px;
+            padding-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            display: block;
+        }
+
+        .page-content {
+            position: relative;
+            display: block;
+            min-height: calc(297mm - 140mm);
+            padding: 0;
+        }
+
+        .page-footer {
+            position: relative;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+            display: block;
+            font-size: 8px;
         }
 
         .container {
@@ -156,36 +194,62 @@
         }
 
         /* Print Settings */
+        @page {
+            size: A4;
+            margin: 15mm 10mm;
+        }
+
         @media print {
-            body { padding: 0; }
-            .container { width: 100%; max-width: none; }
+            body { 
+                margin: 0; 
+                padding: 0;
+            }
+            .page-wrapper {
+                margin: 0;
+                padding: 0;
+                page-break-after: always;
+            }
+            .page-header {
+                position: relative;
+                display: block;
+            }
+            .page-footer {
+                position: relative;
+                display: block;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-
-    <!-- Header -->
-    <div class="header">
-        <div class="logo-section">
-            <!-- Simulated Logo -->
-            <div class="main-logo">
-                <img src="https://flinktech.nz/wp-content/uploads/2021/05/flinktech_logo-1536x293-removebg-preview.png" alt="flinktech" style="height: 35px; vertical-align: middle;">
+<div class="page-wrapper">
+    <!-- Page Header (repeats on every page) -->
+    <div class="page-header">
+        <div class="container">
+            <div class="header">
+                <div class="logo-section">
+                    <div class="main-logo">
+                        <img src="https://flinktech.nz/wp-content/uploads/2021/05/flinktech_logo-1536x293-removebg-preview.png" alt="flinktech" style="height: 35px; vertical-align: middle;">
+                    </div>
+                    <div class="sub-logos">
+                        <img src="https://www.fervour.info/wp-content/uploads/2024/03/fervour-logo.webp" alt="Fervour" style="height: 22px; vertical-align: middle;">
+                        <img src="https://flinkglobal.com/uvw/wp-content/uploads/2020/10/logo-small-1.png" alt="UvW" style="height: 22px; vertical-align: middle;">
+                    </div>
+                </div>
+                <div class="company-info">
+                    FlinkGlobal Limited T/A <strong>FlinkTech</strong><br>
+                    23 Stewart Gibson Place, Manurewa, AUCKLAND 2105<br>
+                    Phone: (09) 393 0900<br>
+                    Email: contact@flinkglobal.com<br>
+                    Web: www.flinkglobal.com
+                </div>
             </div>
-            <div class="sub-logos">
-                <img src="https://www.fervour.info/wp-content/uploads/2024/03/fervour-logo.webp" alt="Fervour" style="height: 22px; vertical-align: middle;">
-                <img src="https://flinkglobal.com/uvw/wp-content/uploads/2020/10/logo-small-1.png" alt="UvW" style="height: 22px; vertical-align: middle;">
-            </div>
-        </div>
-        <div class="company-info">
-            FlinkGlobal Limited T/A <strong>FlinkTech</strong><br>
-            23 Stewart Gibson Place, Manurewa, AUCKLAND 2105<br>
-            Phone: (09) 393 0900<br>
-            Email: contact@flinkglobal.com<br>
-            Web: www.flinkglobal.com
         </div>
     </div>
+
+    <!-- Page Content -->
+    <div class="page-content">
+        <div class="container">
 
     <h1>Business - Credit Account Application</h1>
     <div class="instruction">
@@ -454,7 +518,26 @@
         <span class="ec-logo">ec</span> <span style="color:#0099cc;">CREDIT CONTROL</span>
         <span style="margin-left: 10px;">Protected by EC Credit Control – Credit Management Specialists<br>© Copyright 1999 - 2023 - #35596</span>
     </div>
+        </div>
+    </div>
 
+    <!-- Page Footer (repeats on every page) -->
+    <div class="page-footer">
+        <div class="container" style="border-top: 1px solid #ddd; padding-top: 5px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 8px;">
+                <div>
+                    <strong>FlinkGlobal Limited T/A FlinkTech</strong><br>
+                    23 Stewart Gibson Place, Manurewa, AUCKLAND 2105<br>
+                    Phone: (09) 393 0900 | Email: contact@flinkglobal.com
+                </div>
+                <div style="text-align: right;">
+                    Generated: {{ \Carbon\Carbon::now()->format('d/m/Y H:i') }}<br>
+                    Application ID: {{ $app->id }}<br>
+                    <span class="page-number" style="font-size: 9px;"><strong>Page 1</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>
