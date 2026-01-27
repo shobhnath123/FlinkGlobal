@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Post;
 use App\Http\Controllers\BusinessAccountController;
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\CashAccountApplicationController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,7 +25,7 @@ use App\Http\Controllers\AddressController;
 Route::get('/tc', function () {
     return view('business-credit-account-tc');
 });
-Route::get('/test', function () {
+Route::get('/cash', function () {
     return view('business-cash-account');
 });
 Route::get('/', function () {
@@ -32,11 +34,17 @@ Route::get('/', function () {
 Route::post('/business-account', [BusinessAccountController::class,'store'])
     ->name('business.account.store');
 
+Route::post('/cash-account', [CashAccountApplicationController::class,'store'])
+    ->name('cash.account.store');
+
 Route::get('/business-account/{id}/pdf', [BusinessAccountController::class,'pdf'])
     ->name('business.account.pdf');
 
 Route::get('/business-account/{id}/pdf-preview', [BusinessAccountController::class, 'pdfPreview'])
     ->name('business.account.pdf.preview');
+
+Route::get('/business-cash/{id}/pdf-preview', [CashAccountApplicationController::class, 'pdfPreview'])
+    ->name('business.cash.pdf.preview');
 
 // Route::post('/business-account', [BusinessAccountController::class, 'store'])->name('business.account.store');
 Route::get('/address/suggest', [AddressController::class, 'suggest'])->name('address.suggest');

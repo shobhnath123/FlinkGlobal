@@ -17,7 +17,7 @@ class BusinessCreditApplication extends Model
         'credit_limit','principal_place_of_business','to_whom',
         'po_required','accounts_email_opt','accounts_email','accounts_contact',
         'accounts_mobile','bank_branch','bank_account_no',
-        'signed_client_name','signed_position','signed_date'
+        'signed_client_name','signed_position','signed_date','application_type'
     ];
 
     public function directors() { return $this->hasMany(Director::class); }

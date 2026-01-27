@@ -51,6 +51,7 @@ return new class extends Migration
         // SIGNATURE
         $table->string('signed_client_name')->nullable();
         $table->string('signed_position')->nullable();
+        $table->string('application_type')->nullable();
         $table->date('signed_date')->nullable();
 
         $table->timestamps();

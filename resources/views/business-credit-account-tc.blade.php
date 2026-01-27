@@ -10,7 +10,7 @@
     }
     body {
         font-family: "Arial Narrow", "Helvetica Narrow", sans-serif; /* Narrow font saves horizontal space */
-        font-size: 4.6pt; /* "Fine print" size */
+        font-size: 4.4pt; /* "Fine print" size */
         line-height: 1.0; /* Tight line spacing */
         color: #000;
         margin: 0;
@@ -24,11 +24,12 @@
         text-transform: uppercase;
         margin: 0 0 5px 0;
         border-bottom: 1px solid #000;
+        border-top: 1px solid #000;
         padding-bottom: 2px;
     }
     .content {
         column-count: 3;
-        column-gap: 8px;
+        column-gap: 5px;
         column-rule: 0.5px solid #ccc;
     }
     .section {
@@ -90,9 +91,7 @@
 <body>
 
     <h1>FlinkGlobal Limited T/A FlinkTech - Terms & Conditions of Trade</h1>
-
     <div class="content">
-
         <div class="section">
             <h2>1. Definitions</h2>
             <p><span class="num">1.1</span><b>"Client"</b> means the person/s, entities or any person acting on behalf of and with the authority of the Client requesting the Supplier to provide the Services as specified in any proposal, quotation, order, invoice or other documentation, and:</p>
@@ -375,8 +374,7 @@
     </div>
 
     <div class="footer">
-        #35596 Copyright - EC Credit Control 1999-2022
-    </div>
+Please note that a larger print version of these terms and conditions is available from the Supplier on request. #35596 © Copyright – EC Credit Control 1999 - 2022    </div>
 
 </body>
 </html>
