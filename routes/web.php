@@ -91,6 +91,16 @@ Route::namespace('App\Http\Controllers\Admin')->name('admin.')->prefix('admin')
         Route::resource('users','UserController');
         Route::resource('posts','PostController');
         Route::delete('posts/bulk-delete', 'PostController@bulkDelete')->name('posts.bulk-delete');
+        
+        // Business Credit Applications routes - custom routes must be defined BEFORE resource route
+        Route::delete('business-credit-applications/bulk-delete', 'BusinessCreditApplicationController@bulkDelete')->name('business-credit-applications.bulk-delete');
+        Route::get('business-credit-applications/export/csv', 'BusinessCreditApplicationController@export')->name('business-credit-applications.export');
+        Route::resource('business-credit-applications','BusinessCreditApplicationController');
+
+        // Mail Logs routes
+        Route::delete('mail-logs/bulk-delete', 'MailLogController@bulkDelete')->name('mail-logs.bulk-delete');
+        Route::get('mail-logs/export/csv', 'MailLogController@export')->name('mail-logs.export');
+        Route::resource('mail-logs','MailLogController');
 
         Route::get('/profile',[ProfileController::class,'index'])->name('profile');
         Route::put('/profile-update',[ProfileController::class,'update'])->name('profile.update');

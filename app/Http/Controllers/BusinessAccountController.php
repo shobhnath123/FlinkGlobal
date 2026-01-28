@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use Spatie\Browsershot\Browsershot;
 
 use App\Models\BusinessCreditApplication;
+use App\Models\MailLog;
 use App\Mail\BusinessCreditPdfMail;
 
 class BusinessAccountController extends Controller
@@ -205,6 +206,8 @@ class BusinessAccountController extends Controller
                 'sing_client_name' => $request->sing_client_name,
                 'signed_position' => $request->signed_position,
                 'signed_date' => $request->signed_date,
+
+                'application_type'=>'creadit',
             ]);
 
             /* DIRECTORS */
@@ -272,9 +275,45 @@ class BusinessAccountController extends Controller
              | 4. SEND EMAIL
              ========================================================= */
 
-            Mail::to($app->email)
-                ->cc($app->accounts_email)
-                ->send(new BusinessCreditPdfMail($app, $pdfBinary));
+            try {
+                Mail::to($app->email)
+                    ->cc($app->accounts_email)
+                    ->send(new BusinessCreditPdfMail($app, $pdfBinary));
+
+                // Log successful email
+                MailLog::create([
+                    'type' => 'business_account',
+                    'business_account_id' => $app->id,
+                    'recipient_email' => $app->email,
+                    'subject' => 'Business Credit Application',
+                    'body' => 'Business credit application PDF sent',
+                    'status' => 'sent',
+                    'attachment_details' => json_encode([
+                        [
+                            'name' => 'business-credit-application.pdf',
+                            'mime' => 'application/pdf',
+                            'size' => strlen($pdfBinary)
+                        ]
+                    ]),
+                    'ip_address' => $request->ip(),
+                    'user_agent' => $request->userAgent()
+                ]);
+            } catch (\Exception $e) {
+                // Log failed email
+                MailLog::create([
+                    'type' => 'business_account',
+                    'business_account_id' => $app->id,
+                    'recipient_email' => $app->email,
+                    'subject' => 'Business Credit Application',
+                    'body' => 'Business credit application PDF failed to send',
+                    'status' => 'failed',
+                    'error_message' => $e->getMessage(),
+                    'ip_address' => $request->ip(),
+                    'user_agent' => $request->userAgent()
+                ]);
+                
+                throw $e;
+            }
 
             DB::commit();
 

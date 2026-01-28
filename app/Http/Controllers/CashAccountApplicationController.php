@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use Spatie\Browsershot\Browsershot;
 
 use App\Models\BusinessCreditApplication;
+use App\Models\MailLog;
 use App\Mail\BusinessCreditPdfMail;
 class CashAccountApplicationController extends Controller
 {
@@ -152,9 +153,45 @@ class CashAccountApplicationController extends Controller
              | 4. SEND EMAIL
              ========================================================= */
 
-            Mail::to($app->email)
-                ->cc($app->accounts_email)
-                ->send(new BusinessCreditPdfMail($app, $pdfBinary));
+            try {
+                Mail::to($app->email)
+                    ->cc($app->accounts_email)
+                    ->send(new BusinessCreditPdfMail($app, $pdfBinary));
+
+                // Log successful email
+                MailLog::create([
+                    'type' => 'cash_account',
+                    'business_account_id' => $app->id,
+                    'recipient_email' => $app->email,
+                    'subject' => 'Cash Account Application',
+                    'body' => 'Cash account application PDF sent',
+                    'status' => 'sent',
+                    'attachment_details' => json_encode([
+                        [
+                            'name' => 'cash-account-application.pdf',
+                            'mime' => 'application/pdf',
+                            'size' => strlen($pdfBinary)
+                        ]
+                    ]),
+                    'ip_address' => $request->ip(),
+                    'user_agent' => $request->userAgent()
+                ]);
+            } catch (\Exception $e) {
+                // Log failed email
+                MailLog::create([
+                    'type' => 'cash_account',
+                    'business_account_id' => $app->id,
+                    'recipient_email' => $app->email,
+                    'subject' => 'Cash Account Application',
+                    'body' => 'Cash account application PDF failed to send',
+                    'status' => 'failed',
+                    'error_message' => $e->getMessage(),
+                    'ip_address' => $request->ip(),
+                    'user_agent' => $request->userAgent()
+                ]);
+                
+                throw $e;
+            }
 
             DB::commit();
 
