@@ -139,12 +139,14 @@ class CashAccountApplicationController extends Controller
 
             $html = view('pdf.business-cash-pdf', compact('app'))->render();
 
-            $pdfBinary = Browsershot::html($html)
-                ->format('A4')
-                ->margins(15, 10, 15, 10)
-                ->showBackground()
-                ->waitForNavigation()
-                ->pdf();
+           $pdfBinary = Browsershot::html($html)
+            ->format('A4')
+            ->margins(15, 10, 15, 10)
+            ->showBackground()
+            ->scale(1)              // 🔑 prevents thick borders
+            ->waitUntilNetworkIdle() // better than waitForNavigation
+            ->pdf();
+
 
             /* =========================================================
              | 4. SEND EMAIL

@@ -93,7 +93,7 @@
         }
 
         td {
-            border: 1px solid #ccc;
+            border: 0.4pt solid #bfbfbf;
             padding: 2px 4px;
             height: 14px;
             font-size: 11px;

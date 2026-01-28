@@ -410,7 +410,7 @@
         {{ session('success') }}
     </div>
 @endif  
-    <h2 style="text-align: center; font-size: 24px;">Business - Cash Account Application</h2>
+    <h1 style="text-align: center; font-size: 24px;">Business - Cash Account Application</h1>
     <p style="text-align: center; font-size: 14px;">Please complete all sections and read the Terms and Conditions of Trade.</p>
     <form action="{{ route('cash.account.store') }}" method="POST">
         @csrf
