@@ -21,33 +21,22 @@
 
         .page-wrapper {
             position: relative;
-            page-break-after: auto;
-            margin: 0;
-            padding: 0;
-            min-height: 297mm; /* A4 Height */
+            min-height: 297mm;
         }
 
         .page-header {
-            position: relative;
-            margin-bottom: 10px;
-            padding-top: 0;
             padding-bottom: 10px;
-            display: block;
         }
 
         .page-content {
-            position: relative;
-            display: block;
-            min-height: calc(297mm - 140mm);
-            padding: 0;
+            padding-bottom: 45mm; /* reserve space for footer */
         }
 
         .page-footer {
-            position: relative;
-            margin-top: 20px;
-            padding-top: 10px;
-            /* border-top: 1px solid #ddd; */
-            display: block;
+            position: absolute;
+            bottom: 12mm;
+            left: 0;
+            right: 0;
             font-size: 8px;
         }
 
@@ -109,8 +98,12 @@
             text-align: center;
             font-family: "Times New Roman", serif;
             font-size: 22px;
-            margin: 10px 0 5px 0;
+            margin: 0px 0 5px 0;
             font-weight: normal;
+            border: none;
+            border-top: none;
+            border-bottom: none;
+            padding: 0;
         }
 
         .instruction {
@@ -163,6 +156,46 @@
             line-height: 1.2;
         }
 
+        /* FOOTER STYLES */
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .footer-left {
+            width: 65%;
+        }
+
+        .signed-line {
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .signature-row {
+            display: flex;
+            gap: 35px;
+            font-size: 10px;
+        }
+
+        .footer-right {
+            width: 35%;
+            text-align: right;
+            line-height: 1.2;
+        }
+
+        .ec-logo {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0099cc;
+        }
+
+        .ec-text {
+            display: inline-block;
+            margin-left: 6px;
+            vertical-align: top;
+        }
+
         .signature-section {
             margin-top: 15px;
             display: flex;
@@ -172,7 +205,7 @@
         }
         
         .footer-logo {
-            margin-top: 20px;
+            margin-bottom: 0px;
             text-align: right;
             font-size: 7px;
             color: #555;
@@ -192,25 +225,6 @@
         @page {
             size: A4;
             margin: 15mm 10mm;
-        }
-
-        @media print {
-            body { 
-                margin: 0; 
-                padding: 0;
-            }
-            .page-wrapper {
-                margin: 0;
-                padding: 0;
-            }
-            .page-header {
-                position: relative;
-                display: block;
-            }
-            .page-footer {
-                position: relative;
-                display: block;
-            }
         }
     </style>
 </head>
@@ -240,220 +254,225 @@
             </div>
         </div>
     </div>
-
     <!-- Page Content -->
     <div class="page-content">
-    <div class="container">
-    <h1>Business - Credit Account Application</h1>
-    <div class="instruction">
-        To Be Completed by Applicants - Please complete all sections and read the Terms and Conditions of Trade under mentioned.    
+        <div class="container">
+            <h1 style="border: none">Business - Credit Account Application</h1>
+            <div class="instruction">
+                To Be Completed by Applicants - Please complete all sections and read the Terms and Conditions of Trade under mentioned.    
+            </div>
+
+            <!-- Client Details -->
+            <table>
+                <tr class="section-header"><td colspan="4">Client Details:</td></tr>
+                <tr>
+                    <td class="label">Full Name (Contact Person):</td>
+                    <td colspan="3"></td>
+                </tr>
+                <tr>
+                    <td class="label">Physical Address:</td>
+                    <td colspan="1">{{ $app->physical_address }}</td>
+                    <td style="width: 122px;">Postcode:</td>
+                    <td style="width: 122px;">{{ $app->postcode_phy }} </div>
+                </tr>
+                <tr>
+                    <td class="label">Billing Address:</td>
+                    <td colspan="1">{{ $app->billing_address }}</td>
+                    <td>Postcode:</td>
+                    <td style="width: 122px;">{{ $app->postcode_bill }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Driver's Licence No:</td>
+                    <td>{{ $app->drivers_licence }}</td>
+                    <td class="label">D.O.B.</td>
+                    <td>{{ \Carbon\Carbon::parse($app->dob)->format('d/m/Y') }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Email Address:</td>
+                    <td>{{ $app->email }}</td>
+                    <td class="label">Mobile No:</td>
+                    <td>{{ $app->mobile }}</td>
+                </tr>
+            </table>
+
+            <!-- Business Details -->
+            <table style="margin-top: -1px;">
+                <tr> <td colspan="6"  style="height: 4px; padding: 0;"></td></tr>
+                <tr class="section-header"><td colspan="6">Business Details:</td></tr>
+                <tr>
+                    <td class="label">Legal Name:</td>
+                    <td colspan="5">{{ $app->legal_name }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Trading Name:</td>
+                    <td colspan="5">{{ $app->trading_name }}</td>
+                </tr>
+                <tr>
+                    <td class="label">GST No:</td>
+                    <td>{{ $app->gst_no }}</td>
+                    <td class="label">Company Number:</td>
+                    <td>{{ $app->company_no }}</td>
+                    <td class="label">NZBN Number:</td>
+                    <td>{{ $app->nzbn }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Nature of Business:</td>
+                    <td colspan="3">{{ $app->nature_business }}</td>
+                    <td class="label">Date Incorp.</td>
+                    <td>{{ \Carbon\Carbon::parse($app->date_incorp)->format('d/m/Y') }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Paid Up Capital: $</td>
+                    <td>{{ number_format($app->paid_capital, 2) }}</td>
+                    <td class="label">Est. Monthly Purchases: $</td>
+                    <td>{{ number_format($app->monthly_purchases, 2) }}</td>
+                    <td class="label">Credit Limit: $</td>
+                    <td>{{ number_format($app->credit_limit, 2) }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Principal Place of Business is:</td>
+                    <td colspan="3">{{ $app->principal_place_of_business }}</td>
+                    <td class="label">(to whom):</td>
+                    <td>{{ $app->to_whom }}</td>
+                </tr>
+            </table>
+
+            <!-- Directors Details -->
+            <table style="margin-top: -1px;">
+                <tr class="section-header"><td colspan="8">Directors Details:</td></tr>
+                @forelse($app->directors as $index => $director)
+                <tr>
+                    <td class="label">({{ $index + 1 }}) Full Name:</td>
+                    <td>{{ $director->full_name }}</td>
+                    <td class="label">D.O.B:</td>
+                    <td>{{ \Carbon\Carbon::parse($director->dob)->format('d/m/Y') }}</td>
+                    <td class="label">Mobile:</td>
+                    <td>{{ $director->mobile }}</td>
+                    <td class="label">Driver's Licence:</td>
+                    <td>{{ $director->drivers_licence }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Private Address:</td>
+                    <td colspan="5">{{ $director->address }}</td>
+                    <td class="label">Postcode:</td>
+                    <td>{{ $director->postcode }}</td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="8" style="text-align: center; color: #999;">No directors information provided</td>
+                </tr>
+                @endforelse
+            </table>
+
+            <!-- Account Payment Terms -->
+            <table style="margin-top: -1px;">
+                <tr> <td colspan="4"  style="height: 4px; padding: 0;"></td></tr>
+                <tr class="section-header"><td colspan="4">Account Payment Terms:</td></tr>
+                <tr>
+                    <td class="label">Purchase Order Required?</td>
+                    <td>{{ $app->po_required }}</td>
+                    <td class="label">Accounts to be emailed?</td>
+                    <td>{{ $app->accounts_email_opt }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Accounts Email Address:</td>
+                    <td colspan="3">{{ $app->accounts_email }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Accounts Contact:</td>
+                    <td>{{ $app->accounts_contact }}</td>
+                    <td class="label">Mobile No:</td>
+                    <td>{{ $app->accounts_mobile }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Bank and Branch:</td>
+                    <td>{{ $app->bank_branch }}</td>
+                    <td class="label">Account No:</td>
+                    <td>{{ $app->bank_account_no }}</td>
+                </tr>
+            </table>
+
+            <!-- Trade References -->
+            <table style="margin-top: -1px;">
+                <tr> <td colspan="3"  style="height: 4px; padding: 0;"></td></tr>
+                <tr class="section-header"><td colspan="3">Trade / Personal References:</td></tr>
+                <tr style="text-align: left;">
+                    <td style="width: 30%;"><strong>Name:</strong></td>
+                    <td style="width: 40%;"><strong>Company Name/ Address:</strong></td>
+                    <td style="width: 30%;"><strong>Mobile No/ Email:</strong></td>
+                </tr>
+                @forelse($app->references as $ref)
+                <tr>
+                    <td>{{ $ref->name }}</td>
+                    <td>{{ $ref->company }}</td>
+                    <td>{{ $ref->contact }}</td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="3" style="text-align: center; color: #999;">No references provided</td>
+                </tr>
+                @endforelse
+            </table>
+
+            <!-- Guarantors Section -->
+            <table style="margin-top: -1px;">
+                <tr class="section-header"><td colspan="4">Personal/Directors Guarantee and Indemnity:</td></tr>
+                @forelse($app->guarantors as $guarantor)
+                <tr>
+                    <td colspan="4" style="font-weight: bold;">Guarantor {{ $loop->iteration }} - {{ $guarantor->full_name }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Full Name:</td>
+                    <td>{{ $guarantor->full_name }}</td>
+                    <td class="label">D.O.B:</td>
+                    <td>{{ \Carbon\Carbon::parse($guarantor->dob)->format('d/m/Y') }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Home Address:</td>
+                    <td colspan="3">{{ $guarantor->address }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Witness Name:</td>
+                    <td>{{ $guarantor->witness_name }}</td>
+                    <td class="label">Occupation:</td>
+                    <td>{{ $guarantor->witness_occupation }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Witness Address:</td>
+                    <td colspan="3">{{ $guarantor->witness_address }}</td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="4" style="text-align: center; color: #999;">No guarantor information provided</td>
+                </tr>
+                @endforelse
+            </table>
+
+            <!-- Declaration -->
+            <div class="declaration">
+                <strong>Declaration:</strong> I certify that the above information is true and correct and that I accept the supply of credit by the Supplier (if applicable). I have read and understood the TERMS AND CONDITIONS OF TRADE of FlinkGlobal Limited T/A FlinkTech which form part of and are intended to be read in conjunction with this Credit account application and agree to be bound by these conditions. I authorise the use of my personal information as detailed in the Privacy Act clause therein.
+            </div>            
+        </div>
     </div>
-
-    <!-- Client Details -->
-    <table>
-        <tr class="section-header"><td colspan="4">Client Details:</td></tr>
-        <tr>
-            <td class="label">Full Name (Contact Person):</td>
-            <td colspan="3"></td>
-        </tr>
-        <tr>
-            <td class="label">Physical Address:</td>
-            <td colspan="1">{{ $app->physical_address }}</td>
-            <td style="width: 122px;">Postcode:</td>
-			<td style="width: 122px;">{{ $app->postcode_phy }} </div>
-        </tr>
-        <tr>
-            <td class="label">Billing Address:</td>
-            <td colspan="1">{{ $app->billing_address }}</td>
-            <td>Postcode:</td>
-			<td style="width: 122px;">{{ $app->postcode_bill }}</td>
-        </tr>
-        <tr>
-            <td class="label">Driver's Licence No:</td>
-            <td>{{ $app->drivers_licence }}</td>
-            <td class="label">D.O.B.</td>
-            <td>{{ \Carbon\Carbon::parse($app->dob)->format('d/m/Y') }}</td>
-        </tr>
-        <tr>
-            <td class="label">Email Address:</td>
-            <td>{{ $app->email }}</td>
-            <td class="label">Mobile No:</td>
-            <td>{{ $app->mobile }}</td>
-        </tr>
-    </table>
-
-    <!-- Business Details -->
-    <table style="margin-top: -1px;">
-        <tr> <td colspan="6"  style="height: 4px; padding: 0;"></td></tr>
-        <tr class="section-header"><td colspan="6">Business Details:</td></tr>
-        <tr>
-            <td class="label">Legal Name:</td>
-            <td colspan="5">{{ $app->legal_name }}</td>
-        </tr>
-        <tr>
-            <td class="label">Trading Name:</td>
-            <td colspan="5">{{ $app->trading_name }}</td>
-        </tr>
-        <tr>
-            <td class="label">GST No:</td>
-            <td>{{ $app->gst_no }}</td>
-            <td class="label">Company Number:</td>
-            <td>{{ $app->company_no }}</td>
-            <td class="label">NZBN Number:</td>
-            <td>{{ $app->nzbn }}</td>
-        </tr>
-        <tr>
-            <td class="label">Nature of Business:</td>
-            <td colspan="3">{{ $app->nature_business }}</td>
-            <td class="label">Date Incorp.</td>
-            <td>{{ \Carbon\Carbon::parse($app->date_incorp)->format('d/m/Y') }}</td>
-        </tr>
-        <tr>
-            <td class="label">Paid Up Capital: $</td>
-            <td>{{ number_format($app->paid_capital, 2) }}</td>
-            <td class="label">Est. Monthly Purchases: $</td>
-            <td>{{ number_format($app->monthly_purchases, 2) }}</td>
-            <td class="label">Credit Limit: $</td>
-            <td>{{ number_format($app->credit_limit, 2) }}</td>
-        </tr>
-        <tr>
-            <td class="label">Principal Place of Business is:</td>
-            <td colspan="3">{{ $app->principal_place_of_business }}</td>
-            <td class="label">(to whom):</td>
-            <td>{{ $app->to_whom }}</td>
-        </tr>
-    </table>
-
-    <!-- Directors Details -->
-    <table style="margin-top: -1px;">
-        <tr class="section-header"><td colspan="8">Directors Details:</td></tr>
-        @forelse($app->directors as $index => $director)
-        <tr>
-            <td class="label">({{ $index + 1 }}) Full Name:</td>
-            <td>{{ $director->full_name }}</td>
-            <td class="label">D.O.B:</td>
-            <td>{{ \Carbon\Carbon::parse($director->dob)->format('d/m/Y') }}</td>
-            <td class="label">Mobile:</td>
-            <td>{{ $director->mobile }}</td>
-            <td class="label">Driver's Licence:</td>
-            <td>{{ $director->drivers_licence }}</td>
-        </tr>
-        <tr>
-            <td class="label">Private Address:</td>
-            <td colspan="5">{{ $director->address }}</td>
-            <td class="label">Postcode:</td>
-            <td>{{ $director->postcode }}</td>
-        </tr>
-        @empty
-        <tr>
-            <td colspan="8" style="text-align: center; color: #999;">No directors information provided</td>
-        </tr>
-        @endforelse
-    </table>
-
-    <!-- Account Payment Terms -->
-    <table style="margin-top: -1px;">
-        <tr> <td colspan="4"  style="height: 4px; padding: 0;"></td></tr>
-        <tr class="section-header"><td colspan="4">Account Payment Terms:</td></tr>
-        <tr>
-            <td class="label">Purchase Order Required?</td>
-            <td>{{ $app->po_required }}</td>
-            <td class="label">Accounts to be emailed?</td>
-            <td>{{ $app->accounts_email_opt }}</td>
-        </tr>
-        <tr>
-            <td class="label">Accounts Email Address:</td>
-            <td colspan="3">{{ $app->accounts_email }}</td>
-        </tr>
-        <tr>
-            <td class="label">Accounts Contact:</td>
-            <td>{{ $app->accounts_contact }}</td>
-            <td class="label">Mobile No:</td>
-            <td>{{ $app->accounts_mobile }}</td>
-        </tr>
-        <tr>
-            <td class="label">Bank and Branch:</td>
-            <td>{{ $app->bank_branch }}</td>
-            <td class="label">Account No:</td>
-            <td>{{ $app->bank_account_no }}</td>
-        </tr>
-    </table>
-
-    <!-- Trade References -->
-    <table style="margin-top: -1px;">
-        <tr> <td colspan="3"  style="height: 4px; padding: 0;"></td></tr>
-        <tr class="section-header"><td colspan="3">Trade / Personal References:</td></tr>
-        <tr style="text-align: left;">
-            <td style="width: 30%;"><strong>Name:</strong></td>
-            <td style="width: 40%;"><strong>Company Name/ Address:</strong></td>
-            <td style="width: 30%;"><strong>Mobile No/ Email:</strong></td>
-        </tr>
-        @forelse($app->references as $ref)
-        <tr>
-            <td>{{ $ref->name }}</td>
-            <td>{{ $ref->company }}</td>
-            <td>{{ $ref->contact }}</td>
-        </tr>
-        @empty
-        <tr>
-            <td colspan="3" style="text-align: center; color: #999;">No references provided</td>
-        </tr>
-        @endforelse
-    </table>
-
-    <!-- Guarantors Section -->
-    <table style="margin-top: -1px;">
-        <tr class="section-header"><td colspan="4">Personal/Directors Guarantee and Indemnity:</td></tr>
-        @forelse($app->guarantors as $guarantor)
-        <tr>
-            <td colspan="4" style="font-weight: bold;">Guarantor {{ $loop->iteration }} - {{ $guarantor->full_name }}</td>
-        </tr>
-        <tr>
-            <td class="label">Full Name:</td>
-            <td>{{ $guarantor->full_name }}</td>
-            <td class="label">D.O.B:</td>
-            <td>{{ \Carbon\Carbon::parse($guarantor->dob)->format('d/m/Y') }}</td>
-        </tr>
-        <tr>
-            <td class="label">Home Address:</td>
-            <td colspan="3">{{ $guarantor->address }}</td>
-        </tr>
-        <tr>
-            <td class="label">Witness Name:</td>
-            <td>{{ $guarantor->witness_name }}</td>
-            <td class="label">Occupation:</td>
-            <td>{{ $guarantor->witness_occupation }}</td>
-        </tr>
-        <tr>
-            <td class="label">Witness Address:</td>
-            <td colspan="3">{{ $guarantor->witness_address }}</td>
-        </tr>
-        @empty
-        <tr>
-            <td colspan="4" style="text-align: center; color: #999;">No guarantor information provided</td>
-        </tr>
-        @endforelse
-    </table>
-
-    <!-- Declaration -->
-    <div class="declaration">
-        <strong>Declaration:</strong> I certify that the above information is true and correct and that I accept the supply of credit by the Supplier (if applicable). I have read and understood the TERMS AND CONDITIONS OF TRADE of FlinkGlobal Limited T/A FlinkTech which form part of and are intended to be read in conjunction with this Credit account application and agree to be bound by these conditions. I authorise the use of my personal information as detailed in the Privacy Act clause therein.
-    </div>
-
-    <!-- Signatures -->
-     <div class="signature-section">
-        <div>SIGNED (CLIENT):{{ $app->sing_client_name }}</div>
-    </div>
-    <div class="signature-section" style="margin-top: 30px; font-weight: normal;">
-        <div style="width: 40%;  padding-top: 2px;">Name:{{ $app->sing_client_name }}</div>
-        <div style="width: 30%;  padding-top: 2px;">Position:{{ $app->signed_position }}</div>
-        <div style="width: 20%;  padding-top: 2px;">Date:{{ \Carbon\Carbon::parse($app->signed_date)->format('d/m/Y') }}</div>
-    </div>
-    <!-- Footer Logo -->
-    <div class="footer-logo">
-        <span class="ec-logo">ec</span> <span style="color:#0099cc;">CREDIT CONTROL</span>
-        <span style="margin-left: 10px;">Protected by EC Credit Control – Credit Management Specialists</span>
-    </div>
+    <!-- FOOTER -->
+    <div class="page-footer">
+        <div class="container footer-inner">
+            <div class="footer-left">
+                <div class="signed-line">SIGNED (CLIENT):</div>
+                <div class="signature-row">
+                    <div>Name: {{ $app->contact_person }}</div>
+                    <div>Position: {{ $app->signed_position }}</div>
+                    <div>Date: {{ \Carbon\Carbon::parse($app->signed_date)->format('d/m/Y') }}</div>
+                </div>
+            </div>
+            <div class="footer-right">
+                <span class="ec-logo">ec</span>
+                <span class="ec-text">
+                    <strong>CREDIT CONTROL</strong><br>
+                    Protected by EC Credit Control – Credit Management Specialists<br>
+                    © Copyright 1999 – 2023 – 53596
+                </span>
+            </div>
         </div>
     </div>
 </div>

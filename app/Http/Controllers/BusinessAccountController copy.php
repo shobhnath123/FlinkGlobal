@@ -61,7 +61,7 @@ class BusinessAccountController extends Controller
             'bank_account_no' => 'required|string|max:50',
 
             /* SIGNATURE */
-            'signed_client_name' => 'required|string|max:255',
+            'sing_client_name' => 'required|string|max:255',
             'signed_position' => 'required|string|max:255',
             'signed_date' => 'required|date',
 
@@ -203,7 +203,7 @@ class BusinessAccountController extends Controller
                 'bank_branch' => $request->bank_branch,
                 'bank_account_no' => $request->bank_account_no,
 
-                'signed_client_name' => $request->signed_client_name,
+                'sing_client_name' => $request->sing_client_name,
                 'signed_position' => $request->signed_position,
                 'signed_date' => $request->signed_date,
 
@@ -299,7 +299,7 @@ class BusinessAccountController extends Controller
                     'user_agent' => $request->userAgent()
                 ]);
             } catch (\Exception $e) {
-                // Log failed email but don't throw - allow form submission to succeed
+                // Log failed email
                 MailLog::create([
                     'type' => 'business_account',
                     'business_account_id' => $app->id,
@@ -312,8 +312,7 @@ class BusinessAccountController extends Controller
                     'user_agent' => $request->userAgent()
                 ]);
                 
-                // Don't re-throw - let the form submission succeed
-                // The application was already saved successfully
+                throw $e;
             }
 
             DB::commit();

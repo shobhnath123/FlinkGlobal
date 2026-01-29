@@ -31,6 +31,7 @@ class BusinessCreditPdfMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            from: env('MAIL_FROM_ADDRESS', 'noreply@example.com'),
             subject: 'Business Credit Application PDF'
         );
     }

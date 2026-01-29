@@ -31,9 +31,9 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 30px;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 20px;
+            /* margin-bottom: 30px; */
+            /* border-bottom: 2px solid var(--border-color); */
+            /* padding-bottom: 20px; */
             flex-wrap: wrap;
         }
 
@@ -757,8 +757,8 @@
         <div class="form-row">
             <div class="form-group">
                 <label>SIGNED (CLIENT) Name:</label>
-                <input type="text" name="sing_client_name" value="{{ old("sing_client_name") }}" class="@error('sing_client_name') error @enderror">
-                 @error('sing_client_name') <span class="text-danger">{{ $message }}</span> @enderror   
+                <input type="text" name="signed_client_name" value="{{ old("signed_client_name") }}" class="@error('signed_client_name') error @enderror">
+                 @error('signed_client_name') <span class="text-danger">{{ $message }}</span> @enderror   
             </div>
             <div class="form-group">
                 <label>Position:</label>

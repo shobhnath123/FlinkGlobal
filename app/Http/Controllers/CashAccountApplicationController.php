@@ -177,7 +177,7 @@ class CashAccountApplicationController extends Controller
                     'user_agent' => $request->userAgent()
                 ]);
             } catch (\Exception $e) {
-                // Log failed email
+                // Log failed email but don't throw - allow form submission to succeed
                 MailLog::create([
                     'type' => 'cash_account',
                     'business_account_id' => $app->id,
@@ -190,7 +190,8 @@ class CashAccountApplicationController extends Controller
                     'user_agent' => $request->userAgent()
                 ]);
                 
-                throw $e;
+                // Don't re-throw - let the form submission succeed
+                // The application was already saved successfully
             }
 
             DB::commit();

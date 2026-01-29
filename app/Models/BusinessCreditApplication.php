@@ -10,8 +10,8 @@ class BusinessCreditApplication extends Model
     use HasFactory;
     
     protected $fillable = [
-        'contact_person','physical_address','postcode_phy','billing_address',
-        'postcode_bill','drivers_licence','dob','email','mobile',
+        'contact_person','physical_address','physical_address_dpid','postcode_phy','billing_address',
+        'billing_address_dpid','postcode_bill','drivers_licence','dob','email','mobile',
         'legal_name','trading_name','gst_no','company_no','nzbn',
         'nature_business','date_incorp','paid_capital','monthly_purchases',
         'credit_limit','principal_place_of_business','to_whom',
@@ -24,4 +24,9 @@ class BusinessCreditApplication extends Model
     public function guarantors() { return $this->hasMany(Guarantor::class); }
     public function references() { return $this->hasMany(Reference::class); }
     public function terms() { return $this->hasOne(TermsAcceptance::class); }
+    
+    public function latestMailLog()
+    {
+        return $this->hasOne(MailLog::class, 'business_account_id')->latestOfMany();
+    }
 }

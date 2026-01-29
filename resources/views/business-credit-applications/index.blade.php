@@ -61,7 +61,7 @@
                                     <th class="py-3 px-3 sm:py-4 sm:px-6 bg-grey-lightest font-bold text-xs sm:text-sm text-grey-dark border-b border-grey-light hidden md:table-cell">Contact Person</th>
                                     <th class="py-3 px-3 sm:py-4 sm:px-6 bg-grey-lightest font-bold text-xs sm:text-sm text-grey-dark border-b border-grey-light hidden lg:table-cell">Email</th>
                                     <th class="py-3 px-3 sm:py-4 sm:px-6 bg-grey-lightest font-bold text-xs sm:text-sm text-grey-dark border-b border-grey-light">Application Type</th>
-                                    <th class="py-3 px-3 sm:py-4 sm:px-6 bg-grey-lightest font-bold text-xs sm:text-sm text-grey-dark border-b border-grey-light">Status</th>
+                                    <th class="py-3 px-3 sm:py-4 sm:px-6 bg-grey-lightest font-bold text-xs sm:text-sm text-grey-dark border-b border-grey-light">Email Status</th>
                                     <th class="py-3 px-3 sm:py-4 sm:px-6 bg-grey-lightest font-bold text-xs sm:text-sm text-grey-dark border-b border-grey-light text-right">Actions</th>
                                 </tr>
                             </thead>
@@ -87,7 +87,17 @@
                                         </td>
                                         
                                         <td class="py-2 px-3 sm:py-2 sm:px-4 border-b border-grey-light">
-                                            <span class="text-white inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none bg-green-500 rounded-full">Applied</span>
+                                            @if($app->latestMailLog)
+                                                @if($app->latestMailLog->status === 'sent')
+                                                    <span class="text-white inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none bg-green-500 rounded-full">Email Sent</span>
+                                                @elseif($app->latestMailLog->status === 'failed')
+                                                    <span class="text-white inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none bg-red-500 rounded-full">Email Failed</span>
+                                                @else
+                                                    <span class="text-white inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none bg-yellow-500 rounded-full">{{ ucfirst($app->latestMailLog->status) }}</span>
+                                                @endif
+                                            @else
+                                                <span class="text-white inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none bg-gray-500 rounded-full">No Email</span>
+                                            @endif
                                         </td>
                                         <td class="py-3 px-3 sm:py-4 sm:px-6 border-b border-grey-light text-right">
                                             <div class="flex flex-col sm:flex-row gap-1 sm:gap-2 justify-end">

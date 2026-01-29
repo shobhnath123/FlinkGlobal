@@ -24,7 +24,8 @@ class BusinessCreditApplicationController extends Controller
             $query->where('application_type', $request->application_type);
         }
         
-        $applications = $query->paginate(10);
+        // Order by created_at DESC to show latest records first
+        $applications = $query->orderBy('created_at', 'desc')->paginate(10);
         
         // Get distinct application types for filter dropdown
         $applicationTypes = BusinessCreditApplication::distinct()
@@ -95,14 +96,15 @@ class BusinessCreditApplicationController extends Controller
      */
     public function export(Request $request)
     {
-        $query = BusinessCreditApplication::with(['directors', 'guarantors', 'references', 'terms']);
+        $query = BusinessCreditApplication::with(['directors', 'guarantors', 'references', 'terms', 'latestMailLog']);
         
         // Filter by application type if provided
         if ($request->has('application_type') && $request->application_type != '') {
             $query->where('application_type', $request->application_type);
         }
         
-        $applications = $query->get();
+        // Order by created_at DESC to show latest records first
+        $applications = $query->orderBy('created_at', 'desc')->get();
         
         // CSV export
         $filename = 'business-credit-applications-' . now()->format('Y-m-d-H-i-s') . '.csv';
@@ -137,11 +139,23 @@ class BusinessCreditApplicationController extends Controller
                 'Monthly Purchases',
                 'Physical Address',
                 'Billing Address',
+                'Email Status',
                 'Created At'
             ]);
             
             // Add data rows
             foreach ($applications as $app) {
+                $emailStatus = 'No Email';
+                if ($app->latestMailLog) {
+                    if ($app->latestMailLog->status === 'sent') {
+                        $emailStatus = 'Email Sent';
+                    } elseif ($app->latestMailLog->status === 'failed') {
+                        $emailStatus = 'Email Failed';
+                    } else {
+                        $emailStatus = ucfirst($app->latestMailLog->status);
+                    }
+                }
+                
                 fputcsv($file, [
                     $app->id,
                     $app->trading_name ?? '',
@@ -157,6 +171,7 @@ class BusinessCreditApplicationController extends Controller
                     $app->monthly_purchases ?? '',
                     $app->physical_address ?? '',
                     $app->billing_address ?? '',
+                    $emailStatus,
                     $app->created_at?->format('Y-m-d H:i:s') ?? ''
                 ]);
             }
