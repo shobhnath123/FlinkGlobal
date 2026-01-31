@@ -40,11 +40,11 @@ Route::post('/cash-account', [CashAccountApplicationController::class,'store'])
 Route::get('/business-account/{id}/pdf', [BusinessAccountController::class,'pdf'])
     ->name('business.account.pdf');
 
-Route::get('/business-account/{id}/pdf-preview', [BusinessAccountController::class, 'pdfPreview'])
-    ->name('business.account.pdf.preview');
+Route::get('/business-credit/{id}/preview', [BusinessAccountController::class, 'pdfPreview'])
+    ->name('business.credit.preview');
 
-Route::get('/business-cash/{id}/pdf-preview', [CashAccountApplicationController::class, 'pdfPreview'])
-    ->name('business.cash.pdf.preview');
+Route::get('/business-cash/{id}/preview', [CashAccountApplicationController::class, 'pdfPreview'])
+    ->name('business.cash.preview');
 
 // Route::post('/business-account', [BusinessAccountController::class, 'store'])->name('business.account.store');
 Route::get('/address/suggest', [AddressController::class, 'suggest'])->name('address.suggest');

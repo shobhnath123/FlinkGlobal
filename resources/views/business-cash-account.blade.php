@@ -405,7 +405,7 @@
             <strong>FlinkGlobal Limited T/A FlinkTech</strong><br>
             23 Stewart Gibson Place, Manurewa, AUCKLAND 2105<br>
             Phone: (09) 393 0900<br>
-            Email: contact@flinkglobal.com<br>
+            Email: office@flinkglobal.com<br>
             Web: www.flinkglobal.com
         </div>
     </header>

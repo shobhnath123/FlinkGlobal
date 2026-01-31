@@ -107,7 +107,7 @@ class CashAccountApplicationController extends Controller
                 // 'date_incorp' => $request->date_incorp,
                 // 'paid_capital' => $request->paid_capital,
                 // 'monthly_purchases' => $request->monthly_purchases,
-                'application_type'=>'cash',
+                'application_type'=>'Cash',
                 'sing_client_name' => $request->sing_client_name,
                 'signed_position' => $request->signed_position,
                 'signed_date' => $request->signed_date,

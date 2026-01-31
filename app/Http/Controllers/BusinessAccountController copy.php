@@ -207,7 +207,7 @@ class BusinessAccountController extends Controller
                 'signed_position' => $request->signed_position,
                 'signed_date' => $request->signed_date,
 
-                'application_type'=>'creadit',
+                'application_type'=>'Credit',
             ]);
 
             /* DIRECTORS */
@@ -355,7 +355,6 @@ class BusinessAccountController extends Controller
         $app = BusinessCreditApplication::with([
             'directors','guarantors','references','terms'
         ])->findOrFail($id);
-
         return response(
             Browsershot::html(
                 view('pdf.business-credit-filled', compact('app'))->render()

@@ -41,6 +41,7 @@
         font-weight: bold;
         margin: 3px 0 1px 0;
         text-transform: uppercase;
+        margin-left: 2px;
     }
     p {
         margin: 0 0 2px 0;
@@ -102,19 +103,19 @@
     <h1>FlinkGlobal Limited T/A FlinkTech - Terms & Conditions of Trade</h1>
     <div class="content">
         <div class="section">
-            <h2>1. Definitions</h2>
-            <p class="clause"><span class="num">1.1</span><b>"Client"</b> means the person/s, entities or any person acting on behalf of and with the authority of the Client requesting the Supplier to provide the Services as specified in any proposal, quotation, order, invoice or other documentation, and:</p>
+            <h2 >1. Definitions</h2>
+            <p class="clause"><span class="num">1.1</span>"Client" means the person/s, entities or any person acting on behalf of and with the authority of the Client requesting the Supplier to provide the Services as specified in any proposal, quotation, order, invoice or other documentation, and:</p>
             <ol class="sub-list">
                 <li>if there is more than one Client, is a reference to each Client jointly and severally; and</li>
                 <li>if the Client is a partnership, it shall bind each partner jointly and severally; and</li>
                 <li>if the Client is a part of a Trust, shall be bound in their capacity as a trustee; and</li>
                 <li>includes the Client's executors, administrators, successors and permitted assigns.</li>
             </ol>
-            <p class="clause"><span class="num">1.2</span><b>"Contract"</b> means the terms and conditions contained herein, together with any quotation, order, invoice or other document or amendments expressed to be supplemental to this Contract.</p>
-            <p class="clause"><span class="num">1.3</span><b>"Cookies"</b> means small files which are stored on a user's computer. They are designed to hold a modest amount of data (including Personal Information) specific to a particular client and website and can be accessed either by the web server or the client's computer. If the Client does not wish to allow Cookies to operate in the background when using the Supplier's website, then the Client shall have the right to enable/disable the Cookies first by selecting the option to enable/disable provided on the website, prior to making enquiries via the website.</p>
-            <p class="clause"><span class="num">1.4</span><b>"Goods"</b> means all Goods or Services supplied by the Supplier to the Client at the Client's request from time to time (where the context so permits the terms 'Goods' or 'Services' shall be interchangeable for the other).</p>
-            <p class="clause"><span class="num">1.5</span><b>"Price"</b> means the Price payable (plus any Goods and Services Tax (GST) where applicable) for the Goods as agreed between the Supplier and the Client in accordance with clause 5 below.</p>
-            <p class="clause"><span class="num">1.6</span><b>"Supplier"</b> means Flink Global Limited T/A FlinkTech, its successors and assigns.</p>
+            <p class="clause"><span class="num">1.2</span>"Contract" means the terms and conditions contained herein, together with any quotation, order, invoice or other document or amendments expressed to be supplemental to this Contract.</p>
+            <p class="clause"><span class="num">1.3</span>"Cookies" means small files which are stored on a user's computer. They are designed to hold a modest amount of data (including Personal Information) specific to a particular client and website and can be accessed either by the web server or the client's computer. If the Client does not wish to allow Cookies to operate in the background when using the Supplier's website, then the Client shall have the right to enable/disable the Cookies first by selecting the option to enable/disable provided on the website, prior to making enquiries via the website.</p>
+            <p class="clause"><span class="num">1.4</span>"Goods" means all Goods or Services supplied by the Supplier to the Client at the Client's request from time to time (where the context so permits the terms 'Goods' or 'Services' shall be interchangeable for the other).</p>
+            <p class="clause"><span class="num">1.5</span>"Price" means the Price payable (plus any Goods and Services Tax (GST) where applicable) for the Goods as agreed between the Supplier and the Client in accordance with clause 5 below.</p>
+            <p class="clause"><span class="num">1.6</span>"Supplier" means Flink Global Limited T/A FlinkTech, its successors and assigns.</p>
         </div>
 
         <div class="section">

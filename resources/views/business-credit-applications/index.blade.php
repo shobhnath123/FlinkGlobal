@@ -6,7 +6,6 @@
                     <h1 class="text-xl font-semibold text-gray-800">Business Credit Applications</h1>
                 </div>
             </div>
-
             <!-- Filter and Export Section -->
             <div class="bg-white shadow-md rounded mb-6 p-3 sm:p-4">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
@@ -101,8 +100,11 @@
                                         </td>
                                         <td class="py-3 px-3 sm:py-4 sm:px-6 border-b border-grey-light text-right">
                                             <div class="flex flex-col sm:flex-row gap-1 sm:gap-2 justify-end">
-                                                <a href="{{ route('admin.business-credit-applications.show', $app->id) }}" class="text-blue-600 hover:text-blue-800 font-medium py-1 px-2 sm:px-3 rounded text-xs sm:text-sm bg-blue-50 hover:bg-blue-100 transition-colors">View</a>
-
+                                                @if(strtolower($app->application_type ?? '') === 'credit')
+                                                    <a href="{{ route('business.credit.preview', $app->id) }}" class="text-blue-600 hover:text-blue-800 font-medium py-1 px-2 sm:px-3 rounded text-xs sm:text-sm bg-blue-50 hover:bg-blue-100 transition-colors">View</a>
+                                                @else
+                                                    <a href="{{ route('business.cash.preview', $app->id) }}" class="text-blue-600 hover:text-blue-800 font-medium py-1 px-2 sm:px-3 rounded text-xs sm:text-sm bg-blue-50 hover:bg-blue-100 transition-colors">View</a>
+                                                @endif
                                                 <form action="{{ route('admin.business-credit-applications.destroy', $app->id) }}" method="POST" class="inline">
                                                     @csrf
                                                     @method('delete')

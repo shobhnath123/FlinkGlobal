@@ -159,8 +159,12 @@
         /* FOOTER STYLES */
         .footer-inner {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    font-size: 11px;
+    border-top: 1px solid #000;
+    padding-top: 6px;
         }
 
         .footer-left {
@@ -174,36 +178,37 @@
 
         .signature-row {
             display: flex;
-            gap: 35px;
+            gap: 28px;
             font-size: 10px;
         }
 
         .footer-right {
-            width: 35%;
-            text-align: right;
-            line-height: 1.2;
+            width: 45%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-end;
+            /* gap: 5px; */
         }
-
-        .ec-logo {
-            font-size: 18px;
-            font-weight: bold;
-            color: #0099cc;
-        }
-
         .ec-text {
             display: inline-block;
-            margin-left: 6px;
+            margin-left: 0px;
             vertical-align: top;
+            font-size: 9px;
         }
-
+        .ec-tetx {
+            font-size: 10px;
+            line-height: 1.3;
+        }
+        .signature-row span {
+            display: inline-block;
+        }
         .signature-section {
             margin-top: 15px;
             display: flex;
             justify-content: space-between;
             font-weight: bold;
             font-size: 12px;
-        }
-        
+        }        
         .footer-logo {
             margin-bottom: 0px;
             text-align: right;
@@ -213,14 +218,6 @@
             justify-content: flex-end;
             align-items: center;
         }
-        
-        .ec-logo {
-            font-size: 14px;
-            font-weight: bold;
-            color: #0099cc;
-            margin-right: 10px;
-        }
-
         /* Print Settings */
         @page {
             size: A4;
@@ -446,32 +443,29 @@
                     <td colspan="4" style="text-align: center; color: #999;">No guarantor information provided</td>
                 </tr>
                 @endforelse
-            </table>
-
-            <!-- Declaration -->
-            <div class="declaration">
-                <strong>Declaration:</strong> I certify that the above information is true and correct and that I accept the supply of credit by the Supplier (if applicable). I have read and understood the TERMS AND CONDITIONS OF TRADE of FlinkGlobal Limited T/A FlinkTech which form part of and are intended to be read in conjunction with this Credit account application and agree to be bound by these conditions. I authorise the use of my personal information as detailed in the Privacy Act clause therein.
-            </div>            
+            </table>                     
         </div>
     </div>
     <!-- FOOTER -->
     <div class="page-footer">
-        <div class="container footer-inner">
+        <!-- Declaration -->
+        <div class="declaration">
+            <strong>Declaration:</strong> I certify that the above information is true and correct and that I accept the supply of credit by the Supplier (if applicable). I have read and understood the TERMS AND CONDITIONS OF TRADE of FlinkGlobal Limited T/A FlinkTech which form part of and are intended to be read in conjunction with this Credit account application and agree to be bound by these conditions. I authorise the use of my personal information as detailed in the Privacy Act clause therein.
+        </div>  
+        <div class="footer-inner">
             <div class="footer-left">
-                <div class="signed-line">SIGNED (CLIENT):</div>
-                <div class="signature-row">
-                    <div>Name: {{ $app->contact_person }}</div>
-                    <div>Position: {{ $app->signed_position }}</div>
-                    <div>Date: {{ \Carbon\Carbon::parse($app->signed_date)->format('d/m/Y') }}</div>
+                <div class="signature-row" >
+                    <span style="width: 200px;">Name: {{ $app->contact_person }}</span>
+                    <span style="width: 200px;">Position: {{ $app->signed_position }}</span>
+                    <span style="width: 150px;">Date: {{ \Carbon\Carbon::parse($app->signed_date)->format('d/m/Y') }}</span>
                 </div>
             </div>
             <div class="footer-right">
-                <span class="ec-logo">ec</span>
-                <span class="ec-text">
-                    <strong>CREDIT CONTROL</strong><br>
-                    Protected by EC Credit Control – Credit Management Specialists<br>
-                    © Copyright 1999 – 2023 – 53596
-                </span>
+                <img src="{{ asset('ec.webp') }}" class="ec-logo" style="height: 25px;margin-bottom:10px;">
+                <div class="ec-text">
+                    Protected by EC Credit Control – Credit Management Specialists
+                    © Copyright 1999 - 2023 – #35596
+                </div>
             </div>
         </div>
     </div>
