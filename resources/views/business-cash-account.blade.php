@@ -464,8 +464,10 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group address-wrapper">
-                <label>Billing Address:<span style="color: red;">*</span></label>
+            <div class="form-group address-wrapper" style="flex: 1;">
+                <label>Billing Address:<span style="color: red;">*</span>
+                <input type="checkbox" id="same_as_physical" name="same_as_physical" style="width: 15px; height: 15px; cursor: pointer; margin-right: 10px;"><span>Same as Physical Address</span>
+                 </label>
                 <input type="text" id="billing_address_input" name="billing_address" value="{{ old('billing_address') }}" autocomplete="off" data-postcode="postcode_bill">
                 <input type="hidden" id="billing_address_dpid" name="billing_address_dpid">
                 <ul id="billing_address_suggestions" class="suggestions"></ul>
@@ -486,6 +488,7 @@
                 @enderror
             </div>
         </div>
+        
         <div class="form-row">
             <div class="form-group">
                 <label>Driver’s Licence No:<span style="color: red;">*</span></label>
@@ -554,9 +557,6 @@
                  @error('date_incorp') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
         </div>
-       
-        
-
         <!-- SECTION 3: DIRECTORS DETAILS -->
         <h2>Directors Details</h2>
         <div class="form-row">
@@ -567,10 +567,8 @@
 
             </div>
         </div>
-
         <!-- Directors Container -->
         <div id="directors-container"></div>
-
         <!-- Director 1 (Template) -->
         <template id="director-template">
             <h3>Director (<span class="director-number"></span>)</h3>
@@ -1051,6 +1049,46 @@
             'billing_address_dpid',
             'postcode_bill'
         );
+
+        // Handle "Same as Physical Address" checkbox
+        const sameAsPhysicalCheckbox = document.getElementById('same_as_physical');
+        const physicalAddressInput = document.getElementById('address_input');
+        const physicalPostcodeInput = document.querySelector('input[name="postcode_phy"]');
+        const billingAddressInput = document.getElementById('billing_address_input');
+        const billingPostcodeInput = document.getElementById('postcode_bill');
+
+        sameAsPhysicalCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                // Copy physical address to billing address
+                billingAddressInput.value = physicalAddressInput.value;
+                billingPostcodeInput.value = physicalPostcodeInput.value;
+                // Also copy the DPID if available
+                const physicalDpid = document.getElementById('physical_address_dpid').value;
+                if (physicalDpid) {
+                    document.getElementById('billing_address_dpid').value = physicalDpid;
+                }
+                // Disable billing address inputs
+                billingAddressInput.disabled = true;
+                billingPostcodeInput.disabled = true;
+            } else {
+                // Re-enable billing address inputs
+                billingAddressInput.disabled = false;
+                billingPostcodeInput.disabled = false;
+            }
+        });
+
+        // Listen for changes in physical address to update billing if checkbox is checked
+        physicalAddressInput.addEventListener('change', function() {
+            if (sameAsPhysicalCheckbox.checked) {
+                billingAddressInput.value = this.value;
+            }
+        });
+
+        physicalPostcodeInput.addEventListener('change', function() {
+            if (sameAsPhysicalCheckbox.checked) {
+                billingPostcodeInput.value = this.value;
+            }
+        });
     </script>
 </div>
 

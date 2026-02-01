@@ -40,9 +40,9 @@ class BusinessAccountController extends Controller
             /* BUSINESS DETAILS */
             'legal_name' => 'required|string|max:255',
             'trading_name' => 'required|string|max:255',
-            'gst_no' => 'required|string|max:50',
-            'company_no' => 'required|string|max:50',
-            'nzbn' => 'required|string|max:50',
+            'gst_no' => 'required|string|max:50|unique:business_credit_applications,gst_no',
+            'company_no' => 'required|string|max:50|unique:business_credit_applications,company_no',
+            'nzbn' => 'required|string|max:50|unique:business_credit_applications,nzbn',
             'nature_business' => 'required|string|max:255',
             'date_incorp' => 'required|date',
             'paid_capital' => 'required|numeric|min:0',

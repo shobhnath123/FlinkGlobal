@@ -14,7 +14,7 @@
 
         body {
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px;
+            font-size: 15px;
             background-color: white;
             color: #000;
         }
@@ -159,12 +159,12 @@
         /* FOOTER STYLES */
         .footer-inner {
             display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-    font-size: 11px;
-    border-top: 1px solid #000;
-    padding-top: 6px;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            font-size: 11px;
+            border-top: 1px solid #000;
+            padding-top: 6px;
         }
 
         .footer-left {
@@ -219,6 +219,90 @@
             align-items: center;
         }
         /* Print Settings */
+        /* ===============================
+        GUARANTOR SECTION (ISOLATED)
+        ================================ */
+
+        .guarantor-section {
+            margin-top: 10px;
+            margin-bottom: 5px;
+            page-break-inside: avoid;
+        }
+
+        .guarantor-section .guarantee-signatures {
+            display: flex;
+            gap: 20px;
+            align-items: stretch;
+        }
+
+        .guarantor-section .guarantor-box {
+            flex: 1;
+            border: 2px solid #000;
+            /* padding: 10px; */
+            font-family: "Times New Roman", serif;
+            font-size: 11px;
+            min-height: 200px;
+            line-height: 1;
+        }
+
+        .guarantor-section .guarantor-title {
+            font-weight: bold;
+            font-size: 13px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 4px;
+        }
+
+        /* rows */
+        .guarantor-section .g-row {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 6px;
+        }
+
+        .guarantor-section .g-label {
+            min-width: 140px;
+            /* font-weight: bold; */
+            font-size: 10px;
+        }
+
+        /* input line */
+        .guarantor-section .g-line {
+            flex: 1;
+            border-bottom: 1px solid #000;
+            height: 12px;
+        }
+
+        /* deed row */
+        .guarantor-section .g-deed {
+            margin-top: 10px;
+            font-size: 10px;
+        }
+
+        .guarantor-section .g-short {
+            display: inline-block;
+            width: 45px;
+            border-bottom: 1px solid #000;
+            margin: 0 5px;
+        }
+        .clause-text {
+            font-size: 12px;          /* main paragraph size */
+            line-height: 1;
+        }
+        .clause-text .sub-list li {
+          line-height: 1;  
+        }
+        .clause-item {
+            display: flex;
+
+        }
+        .clause-num {
+            min-width: 15px;
+            font-weight: bold;
+        }
+
+        /* second page */
+
         @page {
             size: A4;
             margin: 15mm 10mm;
@@ -406,7 +490,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="3" style="text-align: center; color: #999;">No references provided</td>
+                    <td colspan="3" style="text-align: center; color: #999;"></td>
                 </tr>
                 @endforelse
             </table>
@@ -440,7 +524,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4" style="text-align: center; color: #999;">No guarantor information provided</td>
+                    <td colspan="4" style="text-align: center; color: #999;"></td>
                 </tr>
                 @endforelse
             </table>                     
@@ -470,6 +554,188 @@
         </div>
     </div>
 </div>
+<div class="second-page">
+     <!-- Page Header (repeats on every page) -->
+    <div class="page-header">
+        <div class="container">
+            <div class="header">
+                <div class="logo-section">
+                    <div class="main-logo">
+                        <img src="https://flinktech.nz/wp-content/uploads/2021/05/flinktech_logo-1536x293-removebg-preview.png" alt="flinktech" style="height: 35px; vertical-align: middle;">
+                    </div>
+                    <div class="sub-logos">
+                        <img src="https://www.fervour.info/wp-content/uploads/2024/03/fervour-logo.webp" alt="Fervour" style="height: 22px; vertical-align: middle;">
+                        <img src="https://flinkglobal.com/uvw/wp-content/uploads/2020/10/logo-small-1.png" alt="UvW" style="height: 22px; vertical-align: middle;">
+                    </div>
+                </div>
+                <div class="company-info">
+                    FlinkGlobal Limited T/A <strong>FlinkTech</strong><br>
+                    23 Stewart Gibson Place, Manurewa, AUCKLAND 2105<br>
+                    Phone: (09) 393 0900<br>
+                    Email: contact@flinkglobal.com<br>
+                    Web: www.flinkglobal.com
+                </div>
+            </div>
+        </div>
+    </div>
+      <!-- PAGE 2: GUARANTEE -->
+    <div class="guarantee-and-indemnity">
+        <h2 style="font-size: 15px;">Personal/Directors Guarantee and Indemnity</h2>
+        <p style="font-size: 15px;"><strong>IN CONSIDERATION</strong> of Flinkglobal Limited T/A FlinkTech and its successors and assigns (“the Supplier”) at the request of the Guarantor (as is now acknowledged) supplying and continuing to supply goods and/or services to:</p>
+        <input type="text" value="">&nbsp;&nbsp;&nbsp;&nbsp(“the Client”)
+        <p></p>   
+         <div class="document-container">
+            <h1 style="border: none">I/WE (also referred to as the “Guarantor/s”) UNCONDITIONALLY AND IRREVOCABLY:</h1>
+            <div class="legal-text">
+                <div class="clauses-list">
+                    <div class="clause-item">
+                        <div class="clause-num">1.</div>
+                        <div class="clause-text">
+                            <strong>GUARANTEE</strong> the due and punctual payment to the Supplier of all monies which are now owing to the Supplier by the Client and all further sums of money from time to time owing to the Supplier by the Client in respect of goods and services supplied or to be supplied by the Supplier to the Client or any other liability of the Client to the Supplier, and the due observance and performance by the Client of all its obligations contained or implied in any contract or agreement with the Supplier, including but not limited to the Terms & Conditions of Trade signed by the Client and annexed to this Guarantee and Indemnity.  If for any reason the Client does not pay any amount owing to the Supplier, the Guarantor will immediately on demand pay the relevant amount to the Supplier. In consideration of the Supplier agreeing to supply the goods and/or services to the Client, the Guarantor charges all of its right, title and interest (joint or several) in any land, realty or other assets capable of being charged, owned by the Guarantor now or in the future, to secure the performance by the Guarantor of its obligations under this Guarantee and Indemnity (including, but not limited to, the payment of any money) and the Guarantor acknowledges that this personal guarantee and indemnity constitutes a security agreement for the purposes of the Personal Property Securities Act 1999 (“PPSA”) and unequivocally consents to the Supplier registering any interest so charged. Furthermore, it is agreed by both parties that where the Guarantor is acting in the capacity as a trustee for a trust, then the Guarantor agrees to charge all its right title and interest in any land realty, or other assets capable of being charged in its own capacity and in its capacity as trustee and shall be subject to the PPSA Registration as stated above.  The Guarantor irrevocably appoints the Supplier and each director of the Supplier as the Guarantor’s true and lawful attorney/s to perform all necessary acts to give effect to this clause including, but not limited to, signing any document on the Guarantor’s behalf which the Supplier may reasonably require to:
+                            <ol class="sub-list" type="a">
+                                <li>register a financing statement or financing change statement in relation to a security interest on the Personal Property Securities Register;</li>
+                                <li>register any other document required to be registered by the PPSA or any other law; or</li>
+                                <li>correct a defect in a statement referred to in clause 1(a) or 1(b).</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="clause-item">
+                        <div class="clause-num">2.</div>
+                        <div class="clause-text">
+                            <strong>HOLD HARMLESS AND INDEMNIFY</strong>the Supplier on demand as a separate obligation against any liability (including but not limited to damages, costs, losses and legal fees calculated on a solicitor and own client basis) incurred by, or assessed against, the Supplier in connection with:
+                            <ol class="sub-list" type="a">
+                                <li>the supply of goods and/or services to the Client; or</li>
+                                <li>the recovery of monies owing to the Supplier by the Client including the enforcement of this Guarantee and Indemnity, and including but not limited to the Supplier’s nominees’ costs of collection and legal costs; or</li>
+                                <li>monies paid by the Supplier with the Client’s consent in settlement of a dispute that arises or results from a dispute between, the Supplier, the Client, and a third party or any combination thereof, over the supply of goods and/or services by the Supplier to the Client.</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="clause-item">
+                        <div class="clause-text"> <strong >I/WE FURTHER ACKNOWLEDGE AND AGREE THAT</strong></div>
+                    </div>
+                    <div class="clause-item">
+                        <div class="clause-num">3.</div>
+                        <div class="clause-text">
+                            I/We have received, read, and understood the Supplier’s Terms and Conditions prior to entering into this Guarantee and Indemnity and agree to be bound by those Terms and Conditions.
+                        </div>
+                    </div>
+                    <div class="clause-item">
+                        <div class="clause-num">4.</div>
+                        <div class="clause-text">
+                        This Guarantee and Indemnity shall constitute an unconditional and continuing Guarantee and Indemnity and accordingly shall be irrevocable and remain in full force and effect until all monies owing to the Supplier by the Client and all obligations herein have been fully paid satisfied and performed.
+                        </div>
+                    </div>
+                    <div class="clause-item">
+                        <div class="clause-num">5.</div>
+                        <div class="clause-text">
+                        No granting of credit, extension of further credit, or granting of time and no waiver, indulgence, or neglect to sue on the Supplier’s part (whether in respect of the Client or any one or more of any other Guarantor(s) or otherwise) and no failure by any named Guarantor to properly execute this Guarantee and Indemnity shall impair or limit the liability under this Guarantee and Indemnity of any Guarantor.  Without affecting the Client’s obligations to the Supplier, each Guarantor shall be a principal debtor and liable to the Supplier accordingly.
+                        </div>
+                    </div>
+                    <div class="clause-item">
+                        <div class="clause-num">6.</div>
+                        <div class="clause-text">
+                        The liability under this Guarantee and Indemnity shall not be discharged, abrogated, prejudiced, or affected by:
+                            <ol class="sub-list" type="a">
+                                <li>any alteration, modification, variation or addition to any contract or agreement in respect of the supply of goods and/or services;</li>
+                                <li>the liquidation, receivership, administration, bankruptcy, dissolution, compromise or scheme of arrangement in respect of the Client; </li>
+                                <li>any other act, omission, or event which, but for this provision, might operate to discharge, impair, or otherwise affect any obligations under this Guarantee and Indemnity of any of the rights, powers or remedies conferred by this Guarantee and Indemnity or by law.</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="clause-item">
+                        <div class="clause-num">7.</div>
+                        <div class="clause-text">
+                            The term "Guarantor" whenever used in this Guarantee and Indemnity shall, if there is more than one person named as Guarantor, mean, and refer to each of them individually and all of them together unless the context otherwise requires, the obligations and agreements on the part of the Guarantor, shall include the Guarantor's executors, administrators, successors and permitted assignments (where applicable) contained in this Guarantee and Indemnity shall bind them jointly and severally.
+                        </div>
+                    </div>
+                    <div class="clause-item">
+                        <div class="clause-num">8.</div>
+                        <div class="clause-text"><strong>I/We have been advised to obtain independent legal advice before executing this Guarantee and Indemnity.  I/we understand that I/we am/are liable for all amounts owing (both now and in the future) by the Client to the Supplier.</strong></div>
+                    </div>
+                    <div class="clause-item">
+                        <div class="clause-num">9.</div>
+                        <div class="clause-text">
+                        I/we irrevocably authorise the Supplier to obtain from any person or company any information which the Supplier may require for credit reference purposes.  I/We further irrevocably authorise the Supplier to provide to any third party, in response to credit references and enquiries about me/us or by way of information exchange with credit reference agencies, details of this Guarantee and Indemnity and any subsequent dealings that I/we may have with the Supplier as a result of this Guarantee and Indemnity being actioned by the Supplier.
+                        </div>
+                    </div>
+                    <div class="clause-item">
+                        <div class="clause-num">10.</div>
+                        <div class="clause-text">
+                        The above information is to be used by the Supplier for all purposes in connection with the Supplier considering this Guarantee and Indemnity and the subsequent enforcement of the same. For and on behalf of the Client I/We confirm I/We have read, understood, and accept the terms of this Guarantee and Indemnity, and I/We agree to be bound by this Guarantee and Indemnity.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <!-- Guarantor 1 -->
+            <div class="guarantor-section">
+                <div class="guarantee-signatures">
+                    @forelse($app->guarantors as $index => $guarantor)
+                        <div class="guarantor-box">
+                            <div class="guarantor-title">
+                                GUARANTOR-{{ $index + 1 }}
+                            </div>
+                            <div class="g-row">
+                                <span class="g-label">SIGNED:</span>
+                                <div class="g-line"></div>
+                            </div>
+                            <div class="g-row">
+                                <span class="g-label">FULL NAME:</span>
+                                <div class="g-line">{{ $guarantor->full_name }}</div>
+                            </div>
+                            <div class="g-row">
+                                <span class="g-label">HOME ADDRESS:</span>
+                                <div class="g-line">{{ $guarantor->address }}</div>
+                            </div>
+                            <div class="g-row">
+                                <span class="g-label">DATE OF BIRTH:</span>
+                                <div class="g-line">
+                                    {{ \Carbon\Carbon::parse($guarantor->dob)->format('d/m/Y') }}
+                                </div>
+                            </div>
+                            <div class="g-row">
+                                <span class="g-label">SIGNATURE OF WITNESS:</span>
+                                <div class="g-line"></div>
+                            </div>
+                            <div class="g-row">
+                                <span class="g-label">NAME OF WITNESS:</span>
+                                <div class="g-line">{{ $guarantor->witness_name }}</div>
+                            </div>
+                            <div class="g-row">
+                                <span class="g-label">OCCUPATION:</span>
+                                <div class="g-line">{{ $guarantor->witness_occupation }}</div>
+                            </div>
+                            <div class="g-row">
+                                <span class="g-label">PRESENT ADDRESS:</span>
+                                <div class="g-line">{{ $guarantor->witness_address }}</div>
+                            </div>
+                            <div class="g-deed">
+                                EXECUTED as a Deed this
+                                <span class="g-short"></span>
+                                day of
+                                <span class="g-short"></span>
+                                20__
+                            </div>
+                        </div>
+                    @empty
+                        <p>No guarantors found.</p>
+                    @endforelse
+
+                </div>
+            </div>
+        </div>
+        <div class="notes">
+            <strong>Notes:</strong><br>
+                1. If the Client is a proprietary limited company, the Guarantor(s) must be the director(s)of the company.<br>
+                2. If the Client is a limited partnership, the Guarantor(s) must be the general partners.<br>
+                3. If the Client is a sole trader or partnership the Guarantor(s) should be some other suitable person(s).<br>
+                3. If the Client is a club or incorporated society the Guarantor(s) should be the president and secretary or other committee member<br>
+        </div>
+        <p style="text-align:end; font-size:10px;">u ©Copyright - EC Credit Control 1999 - 2024 – #35596</p>
+    </div>
+</div>
+<div style="page-break-before: always;"></div>
 {{-- Terms and Conditions on new page --}}
 @include('business-credit-account-tc')  
 </body>

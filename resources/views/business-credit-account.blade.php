@@ -203,6 +203,14 @@
         button.submit-btn:hover {
             background-color: #a01925;
         }
+        .submit-btn {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .submit-btn.enabled {
+            opacity: 1;
+            cursor: pointer;
+        }
         .legal-text { font-size: 12px; text-align: justify; margin-bottom: 20px; }
         .legal-text ol { padding-left: 20px; }
         /* .legal-text li { margin-bottom: 10px; } */
@@ -455,13 +463,7 @@
                 <input type="text" id="address_input" name="physical_address" value="{{ old('physical_address')}}" class="@error('physical_address') error @enderror" autocomplete="off">
                 <input type="hidden" id="physical_address_dpid" name="physical_address_dpid">
                 <ul id="address_suggestions" class="suggestions"></ul>
-                {{-- @error('postcode_phy') <span class="text-danger">{{ $message }}</span> @enderror --}}
             </div>
-            {{-- <div class="form-group">
-                <label>Physical Address:<span style="color: red;">*</span></label>
-                <input type="text" name="physical_address" value="{{ old('physical_address')}}" class="@error('physical_address') error @enderror">
-                 @error('physical_address') <span class="text-danger">{{ $message }}</span> @enderror
-            </div> --}}
             <div class="form-group" style="flex: 0 0 100px;">
                 <label>Postcode:<span style="color: red;">*</span></label>
                 <input type="text" name="postcode_phy" value="{{old('postcode_phy')}}" class="@error('postcode_phy') error @enderror">
@@ -470,7 +472,8 @@
         </div>
         <div class="form-row">
             <div class="form-group address-wrapper">
-                <label>Billing Address:<span style="color: red;">*</span></label>
+                <label>Billing Address:<span style="color: red;">*</span>                <input type="checkbox" id="same_as_physical" name="same_as_physical" style="width: 15px; height: 15px; cursor: pointer; margin-right: 10px;"><span>Same as Physical Address</span>
+                </label>
                 <input type="text" id="billing_address_input" name="billing_address" value="{{ old('billing_address') }}" autocomplete="off" data-postcode="postcode_bill">
                 <input type="hidden" id="billing_address_dpid" name="billing_address_dpid">
                 <ul id="billing_address_suggestions" class="suggestions"></ul>
@@ -491,19 +494,6 @@
                 @enderror
             </div>
         </div>
-
-        {{-- <div class="form-row">
-            <div class="form-group">
-                <label>Billing Address:<span style="color: red;">*</span></label>
-                <input type="text" name="billing_address" value="{{old('billing_address')}}" class="@error('billing_address') error @enderror">
-                 @error('billing_address') <span class="text-danger">{{ $message }}</span> @enderror
-            </div>
-            <div class="form-group" style="flex: 0 0 100px;">
-                <label>Postcode:<span style="color: red;">*</span></label>
-                <input type="text" name="postcode_bill" value="{{old('postcode_bill')}}" class="@error('postcode_bill') error @enderror">
-                @error('contact_person') <span class="text-danger">{{ $message }}</span> @enderror
-            </div>
-        </div> --}}
         <div class="form-row">
             <div class="form-group">
                 <label>Driver’s Licence No:<span style="color: red;">*</span></label>
@@ -980,12 +970,15 @@
         </div>
         <div class="notes">
             <strong>Notes:</strong><br>
-                1. If the Client is a proprietary limited company, the Guarantor(s) must be the director(s).<br>
+                1. If the Client is a proprietary limited company, the Guarantor(s) must be the director(s)of the company.<br>
+                2. If the Client is a limited partnership, the Guarantor(s) must be the general partners.<br>
+                3. If the Client is a sole trader or partnership the Guarantor(s) should be some other suitable person(s).<br>
+                3. If the Client is a club or incorporated society the Guarantor(s) should be the president and secretary or other committee member<br>
         </div>
         <!-- PAGE 2: TERMS AND CONDITIONS -->
         <h2>Terms & Conditions of Trade</h2>
         <p>Please scroll to read the full Terms and Conditions.</p>
-        <div class="terms-box">
+        <div class="terms-box" id="termsBox">
             <div class="content">
                 <div class="term-section">
                     <strong>1. Definitions</strong>
@@ -1248,17 +1241,15 @@
                 </div>
             </div>
         </div>
-        
         <div class="form-row">
-        <input type="checkbox" id="accept_terms" name="accept_terms" value="1" {{ old('accept_terms') ? 'checked' : '' }} required>
+        <input type="checkbox" id="accept_terms" name="accept_terms" disabled value="1" {{ old('accept_terms') ? 'checked' : '' }} required>
             @error('accept_terms')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
              <label for="accept_terms" style="display:inline; margin-left: 10px;">I/We confirm I/We have read, understood, and accept the terms of this Guarantee and Indemnity, and I/We agree to be bound by this Guarantee and Indemnity.</label>
         </div>
-        <button type="submit" class="submit-btn">Submit Application</button>
+        <button type="submit" class="submit-btn" id="submitBtn" disabled>Submit Application</button>
     </form>
-
     <script>
         document.getElementById('num_directors').addEventListener('change', function () {
             const container = document.getElementById('directors-container');
@@ -1434,81 +1425,76 @@
             'g2_witness_addr_suggestions',
             'g2_witness_addr_dpid',
             null
-        );  
+        );
+
+        // Handle "Same as Physical Address" checkbox
+        const sameAsPhysicalCheckbox = document.getElementById('same_as_physical');
+        const physicalAddressInput = document.getElementById('address_input');
+        const physicalPostcodeInput = document.querySelector('input[name="postcode_phy"]');
+        const billingAddressInput = document.getElementById('billing_address_input');
+        const billingPostcodeInput = document.getElementById('postcode_bill');
+
+        sameAsPhysicalCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                // Copy physical address to billing address
+                billingAddressInput.value = physicalAddressInput.value;
+                billingPostcodeInput.value = physicalPostcodeInput.value;
+                // Also copy the DPID if available
+                const physicalDpid = document.getElementById('physical_address_dpid').value;
+                if (physicalDpid) {
+                    document.getElementById('billing_address_dpid').value = physicalDpid;
+                }
+                // Disable billing address inputs
+                billingAddressInput.disabled = true;
+                billingPostcodeInput.disabled = true;
+            } else {
+                // Re-enable billing address inputs
+                billingAddressInput.disabled = false;
+                billingPostcodeInput.disabled = false;
+            }
+        });
+        // Listen for changes in physical address to update billing if checkbox is checked
+        physicalAddressInput.addEventListener('change', function() {
+            if (sameAsPhysicalCheckbox.checked) {
+                billingAddressInput.value = this.value;
+            }
+        });
+        physicalPostcodeInput.addEventListener('change', function() {
+            if (sameAsPhysicalCheckbox.checked) {
+                billingPostcodeInput.value = this.value;
+            }
+        }); 
     </script>
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
 
-    {{-- <script>
-        let timer = null;
-        let activeIndex = -1;
+    const termsBox = document.getElementById("termsBox");
+    const checkbox = document.getElementById("accept_terms");
+    const submitBtn = document.getElementById("submitBtn");
 
-        const input = document.getElementById('address_input');
-        const list  = document.getElementById('address_suggestions');
-        input.addEventListener('keyup', function (e) {
-            const query = this.value.trim();
-            clearTimeout(timer);
-            // Keyboard navigation
-            const items = list.querySelectorAll('li');
-            if (items.length) {
-                if (e.key === 'ArrowDown') {
-                    activeIndex = (activeIndex + 1) % items.length;
-                    updateActive(items);
-                    return;
-                }
-                if (e.key === 'ArrowUp') {
-                    activeIndex = (activeIndex - 1 + items.length) % items.length;
-                    updateActive(items);
-                    return;
-                }
-                if (e.key === 'Enter' && activeIndex >= 0) {
-                    items[activeIndex].click();
-                    return;
-                }
-            }
-            if (query.length < 3) {
-                list.innerHTML = '';
-                return;
-            }
-            timer = setTimeout(() => {
-                fetch(`{{ route('address.suggest') }}?q=${encodeURIComponent(query)}`)
-                    .then(res => res.json())
-                    .then(data => {
-                        list.innerHTML = '';
-                        activeIndex = -1;
-                        if (!data.success || !data.addresses?.length) return;
-                        data.addresses.forEach(addr => {
-                            const li = document.createElement('li');
-                            li.textContent = addr.FullAddress;
-                            li.onclick = () => {
-                                input.value = addr.FullAddress;
-                                document.getElementById('physical_address').value = addr.DPID;
-                                // 🔥 Auto-fill postcode (NZ = 4 digits)
-                                const postcode = addr.FullAddress.match(/\b\d{4}\b/);
-                                if (postcode) {
-                                    document.querySelector('input[name="postcode_phy"]').value = postcode[0];
-                                }
-                                list.innerHTML = '';
-                            };
-                            list.appendChild(li);
-                        });
-                    })
-                    .catch(() => list.innerHTML = '');
-            }, 400);
-        });
-        // Highlight active item
-        function updateActive(items) {
-            items.forEach(i => i.classList.remove('active'));
-            if (items[activeIndex]) {
-                items[activeIndex].classList.add('active');
-                items[activeIndex].scrollIntoView({ block: 'nearest' });
-            }
+    // STEP 1: Enable checkbox after full scroll
+    termsBox.addEventListener("scroll", function () {
+        const isAtBottom =
+            termsBox.scrollTop + termsBox.clientHeight >= termsBox.scrollHeight - 5;
+
+        if (isAtBottom) {
+            checkbox.disabled = false;
         }
-        // Close dropdown on outside click
-        document.addEventListener('click', function (e) {
-            if (!e.target.closest('.address-wrapper')) {
-                list.innerHTML = '';
-            }
-        });
-    </script> --}}
+    });
+
+    // STEP 2: Enable submit after checkbox checked
+    checkbox.addEventListener("change", function () {
+        if (this.checked) {
+            submitBtn.disabled = false;
+            submitBtn.classList.add("enabled");
+        } else {
+            submitBtn.disabled = true;
+            submitBtn.classList.remove("enabled");
+        }
+    });
+
+});
+</script>
 
 </div>
 
