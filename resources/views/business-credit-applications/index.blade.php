@@ -4,6 +4,14 @@
             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4">
                 <div class="mb-4 sm:mb-0">
                     <h1 class="text-xl font-semibold text-gray-800">Business Credit Applications</h1>
+                    <div class="mt-2 flex space-x-3">
+                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                            Total Credit: {{ $creditCount ?? 0 }}
+                        </span>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                            Total Cash: {{ $cashCount ?? 0 }}
+                        </span>
+                    </div>
                 </div>
             </div>
             <!-- Filter and Export Section -->

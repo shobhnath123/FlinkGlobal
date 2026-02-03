@@ -71,7 +71,7 @@ class BusinessAccountController extends Controller
             /* DIRECTORS */
             'num_directors' => 'required|integer|min:1|max:10',
 
-            
+
         ];
 
         /* DIRECTOR DYNAMIC RULES */
@@ -207,7 +207,7 @@ class BusinessAccountController extends Controller
                 'signed_position' => $request->signed_position,
                 'signed_date' => $request->signed_date,
 
-                'application_type'=>'creadit',
+                'application_type' => 'credit',
             ]);
 
             /* DIRECTORS */
@@ -311,7 +311,7 @@ class BusinessAccountController extends Controller
                     'ip_address' => $request->ip(),
                     'user_agent' => $request->userAgent()
                 ]);
-                
+
                 // Don't re-throw - let the form submission succeed
                 // The application was already saved successfully
             }
@@ -331,22 +331,25 @@ class BusinessAccountController extends Controller
 
 
     /*
-    * VIEW PDF (OPTIONAL)
+     * VIEW PDF (OPTIONAL)
      */
     public function pdf($id)
     {
         $app = BusinessCreditApplication::with([
-            'directors','guarantors','references','terms'
+            'directors',
+            'guarantors',
+            'references',
+            'terms'
         ])->findOrFail($id);
 
         return response(
             Browsershot::html(
                 view('pdf.business-credit', compact('app'))->render()
             )
-            ->format('A4')
-            ->margins(15, 10, 15, 10)
-            ->showBackground()
-            ->pdf(),
+                ->format('A4')
+                ->margins(15, 10, 15, 10)
+                ->showBackground()
+                ->pdf(),
             200,
             ['Content-Type' => 'application/pdf']
         );
@@ -354,20 +357,23 @@ class BusinessAccountController extends Controller
     public function pdfPreview($id)
     {
         $app = BusinessCreditApplication::with([
-            'directors','guarantors','references','terms'
+            'directors',
+            'guarantors',
+            'references',
+            'terms'
         ])->findOrFail($id);
 
         return response(
             Browsershot::html(
                 view('pdf.business-credit-filled', compact('app'))->render()
             )
-            ->format('A4')
-            ->margins(15, 10, 15, 10)
-            ->showBackground()
-            ->pdf(),
+                ->format('A4')
+                ->margins(15, 10, 15, 10)
+                ->showBackground()
+                ->pdf(),
             200,
             ['Content-Type' => 'application/pdf']
         );
     }
-    
+
 }
