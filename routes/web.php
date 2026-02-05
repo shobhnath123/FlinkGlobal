@@ -25,17 +25,25 @@ use App\Http\Controllers\CashAccountApplicationController;
 Route::get('/tc', function () {
     return view('business-credit-account-tc');
 });
-Route::get('/cash', function () {
+Route::get('/cash-application', function () {
     return view('business-cash-account');
 });
-Route::get('/', function () {
+Route::get('/credit-application', function () {
     return view('business-credit-account');
 });
 Route::post('/business-account', [BusinessAccountController::class, 'store'])
     ->name('business.account.store');
 
+Route::get('/business-account', function () {
+    return view('business-credit-account');
+})->name('business.account.create');
+
 Route::post('/cash-account', [CashAccountApplicationController::class, 'store'])
     ->name('cash.account.store');
+
+Route::get('/cash-account', function () {
+    return view('business-cash-account');
+})->name('cash.account.create');
 
 Route::get('/business-account/{id}/pdf', [BusinessAccountController::class, 'pdf'])
     ->name('business.account.pdf');

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Spatie\Browsershot\Browsershot;
-
+use Carbon\Carbon;
 use App\Models\BusinessCreditApplication;
 use App\Models\MailLog;
 use App\Mail\BusinessCreditPdfMail;
@@ -32,7 +32,7 @@ class CashAccountApplicationController extends Controller
             'postcode_bill' => 'required|digits_between:4,8',
 
             'drivers_licence' => 'required|string|max:50',
-            'dob' => 'required|date',
+            'dob' => 'required|date|before_or_equal:' . Carbon::now()->subYears(18)->toDateString(),
             'email' => 'required|email|max:255',
             'mobile' => 'required|digits_between:7,10',
 
@@ -64,7 +64,7 @@ class CashAccountApplicationController extends Controller
         /* DIRECTOR DYNAMIC RULES */
         for ($i = 1; $i <= $request->num_directors; $i++) {
             $rules["dir{$i}_name"] = 'required|string|max:255';
-            $rules["dir{$i}_dob"] = 'required|date';
+            $rules["dir{$i}_dob"] = 'required|date|before_or_equal:' . Carbon::now()->subYears(18)->toDateString();
             $rules["dir{$i}_mobile"] = 'required|string|max:20';
             $rules["dir{$i}_address"] = 'required|string|max:500';
             $rules["dir{$i}_dl"] = 'required|string|max:50';
@@ -107,7 +107,7 @@ class CashAccountApplicationController extends Controller
                 // 'date_incorp' => $request->date_incorp,
                 // 'paid_capital' => $request->paid_capital,
                 // 'monthly_purchases' => $request->monthly_purchases,
-                'application_type'=>'Cash',
+                'application_type' => 'Cash',
                 'sing_client_name' => $request->sing_client_name,
                 'signed_position' => $request->signed_position,
                 'signed_date' => $request->signed_date,
@@ -133,66 +133,14 @@ class CashAccountApplicationController extends Controller
             ]);
 
             /* =========================================================
-             | 3. GENERATE PDF
+             | 3. QUEUE PDF GENERATION & EMAIL
              ========================================================= */
 
-            $app->load(['directors', 'guarantors', 'references', 'terms']);
-
-            $html = view('pdf.business-cash-pdf', compact('app'))->render();
-
-           $pdfBinary = Browsershot::html($html)
-            ->format('A4')
-            ->margins(15, 10, 15, 10)
-            ->showBackground()
-            ->scale(1)              // 🔑 prevents thick borders
-            ->waitUntilNetworkIdle() // better than waitForNavigation
-            ->pdf();
-
-
-            /* =========================================================
-             | 4. SEND EMAIL
-             ========================================================= */
-
-            try {
-                Mail::to($app->email)
-                    ->cc($app->accounts_email)
-                    ->send(new BusinessCreditPdfMail($app, $pdfBinary));
-
-                // Log successful email
-                MailLog::create([
-                    'type' => 'cash_account',
-                    'business_account_id' => $app->id,
-                    'recipient_email' => $app->email,
-                    'subject' => 'Cash Account Application',
-                    'body' => 'Cash account application PDF sent',
-                    'status' => 'sent',
-                    'attachment_details' => json_encode([
-                        [
-                            'name' => 'cash-account-application.pdf',
-                            'mime' => 'application/pdf',
-                            'size' => strlen($pdfBinary)
-                        ]
-                    ]),
-                    'ip_address' => $request->ip(),
-                    'user_agent' => $request->userAgent()
-                ]);
-            } catch (\Exception $e) {
-                // Log failed email but don't throw - allow form submission to succeed
-                MailLog::create([
-                    'type' => 'cash_account',
-                    'business_account_id' => $app->id,
-                    'recipient_email' => $app->email,
-                    'subject' => 'Cash Account Application',
-                    'body' => 'Cash account application PDF failed to send',
-                    'status' => 'failed',
-                    'error_message' => $e->getMessage(),
-                    'ip_address' => $request->ip(),
-                    'user_agent' => $request->userAgent()
-                ]);
-                
-                // Don't re-throw - let the form submission succeed
-                // The application was already saved successfully
-            }
+            \App\Jobs\ProcessCashApplication::dispatch(
+                $app,
+                $request->ip(),
+                $request->userAgent()
+            );
 
             DB::commit();
 
@@ -215,17 +163,20 @@ class CashAccountApplicationController extends Controller
     {
 
         $app = BusinessCreditApplication::with([
-            'directors','guarantors','references','terms'
+            'directors',
+            'guarantors',
+            'references',
+            'terms'
         ])->findOrFail($id);
 
         return response(
             Browsershot::html(
                 view('pdf.business-cash-pdf', compact('app'))->render()
             )
-            ->format('A4')
-            ->margins(15, 10, 15, 10)
-            ->showBackground()
-            ->pdf(),
+                ->format('A4')
+                ->margins(15, 10, 15, 10)
+                ->showBackground()
+                ->pdf(),
             200,
             ['Content-Type' => 'application/pdf']
         );

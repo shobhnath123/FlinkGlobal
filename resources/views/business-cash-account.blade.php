@@ -208,6 +208,12 @@
             background-color: #a01925;
         }
 
+        button.submit-btn:disabled,
+        button.submit-btn:disabled:hover {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
         .legal-text {
             font-size: 12px;
             text-align: justify;
@@ -482,14 +488,14 @@
 
 
         {{-- @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
         @endif --}}
 
         @if(session('success'))
             <script>
-                document.addEventListener('DOMContentLoaded', function() {
+                document.addEventListener('DOMContentLoaded', function () {
                     showSuccessPopup();
                 });
             </script>
@@ -560,7 +566,9 @@
                 </div>
                 <div class="form-group">
                     <label>D.O.B:<span style="color: red;">*</span></label>
-                    <input type="date" name="dob" value="{{old('dob')}}" class="@error('dob') error @enderror">
+                    <input type="date" name="dob" value="{{old('dob')}}"
+                        max="{{ \Carbon\Carbon::now()->subYears(18)->format('Y-m-d') }}"
+                        class="@error('dob') error @enderror">
                     @error('dob') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="form-group">
@@ -649,7 +657,8 @@
                     </div>
                     <div class="form-group">
                         <label>D.O.B:<span style="color: red;">*</span></label>
-                        <input type="date" class="dir_dob" name="" required>
+                        <input type="date" class="dir_dob" name=""
+                            max="{{ \Carbon\Carbon::now()->subYears(18)->format('Y-m-d') }}" required>
                     </div>
                     <div class="form-group">
                         <label>Mobile No:<span style="color: red;">*</span></label>
@@ -1307,18 +1316,30 @@
         </form>
 
         <script>
-            document.getElementById('num_directors').addEventListener('change', function () {
+            const oldInput = @json(session()->getOldInput());
+            const numDirectorsInput = document.getElementById('num_directors');
+
+            function renderDirectors(count) {
                 const container = document.getElementById('directors-container');
                 const template = document.getElementById('director-template').content;
                 container.innerHTML = '';
-                const count = parseInt(this.value);
+
                 for (let i = 1; i <= count; i++) {
                     const clone = document.importNode(template, true);
                     clone.querySelector('.director-number').innerText = i;
 
-                    clone.querySelector('.dir_name').name = `dir${i}_name`;
-                    clone.querySelector('.dir_dob').name = `dir${i}_dob`;
-                    clone.querySelector('.dir_mobile').name = `dir${i}_mobile`;
+                    // Names
+                    const nameInput = clone.querySelector('.dir_name');
+                    const dobInput = clone.querySelector('.dir_dob');
+                    const mobileInput = clone.querySelector('.dir_mobile');
+                    const dlInput = clone.querySelector('.dir_dl');
+                    const pcInput = clone.querySelector('.dir_pc');
+
+                    nameInput.name = `dir${i}_name`;
+                    dobInput.name = `dir${i}_dob`;
+                    mobileInput.name = `dir${i}_mobile`;
+                    dlInput.name = `dir${i}_dl`;
+                    pcInput.name = `dir${i}_pc`;
 
                     // Address fields setup
                     const addrInput = clone.querySelector('.dir_address');
@@ -1337,8 +1358,16 @@
                     suggList.id = listId;
                     dpidInput.id = dpidId;
 
-                    clone.querySelector('.dir_dl').name = `dir${i}_dl`;
-                    clone.querySelector('.dir_pc').name = `dir${i}_pc`;
+                    // Repopulate with old input if available
+                    if (oldInput) {
+                        if (oldInput[`dir${i}_name`]) nameInput.value = oldInput[`dir${i}_name`];
+                        if (oldInput[`dir${i}_dob`]) dobInput.value = oldInput[`dir${i}_dob`];
+                        if (oldInput[`dir${i}_mobile`]) mobileInput.value = oldInput[`dir${i}_mobile`];
+                        if (oldInput[`dir${i}_dl`]) dlInput.value = oldInput[`dir${i}_dl`];
+                        if (oldInput[`dir${i}_pc`]) pcInput.value = oldInput[`dir${i}_pc`];
+                        if (oldInput[`dir${i}_address`]) addrInput.value = oldInput[`dir${i}_address`];
+                        if (oldInput[`dir${i}_dpid`]) dpidInput.value = oldInput[`dir${i}_dpid`];
+                    }
 
                     container.appendChild(clone);
 
@@ -1346,6 +1375,17 @@
                     if (typeof initAddressAutocomplete === 'function') {
                         initAddressAutocomplete(addrId, listId, dpidId, `dir${i}_pc`);
                     }
+                }
+            }
+
+            numDirectorsInput.addEventListener('change', function () {
+                renderDirectors(parseInt(this.value));
+            });
+
+            // Trigger on page load if there's a value (e.g. from old input)
+            document.addEventListener('DOMContentLoaded', function () {
+                if (numDirectorsInput.value) {
+                    renderDirectors(parseInt(numDirectorsInput.value));
                 }
             });
 
@@ -1537,5 +1577,44 @@
             });
         </script>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const termsBox = document.querySelector('.terms-box');
+            const acceptCheckbox = document.getElementById('accept_terms');
+            const submitBtn = document.querySelector('.submit-btn');
+
+            // Function to update submit button state
+            function updateSubmitButton() {
+                submitBtn.disabled = !acceptCheckbox.checked;
+            }
+
+            // Initial state check
+            if (!acceptCheckbox.checked) {
+                acceptCheckbox.disabled = true; // Disable checkbox until scrolled
+                submitBtn.disabled = true;
+            } else {
+                // If already checked (e.g. from old input), ensure valid state
+                acceptCheckbox.disabled = false;
+                updateSubmitButton();
+            }
+
+            // If terms box content fits without scrolling, enable immediately
+            if (termsBox.scrollHeight <= termsBox.clientHeight) {
+                acceptCheckbox.disabled = false;
+            }
+
+            // Scroll listener
+            termsBox.addEventListener('scroll', function () {
+                // Check if scrolled to bottom with 20px tolerance
+                if (this.scrollTop + this.clientHeight >= this.scrollHeight - 20) {
+                    acceptCheckbox.disabled = false;
+                }
+            });
+
+            // Checkbox listener
+            acceptCheckbox.addEventListener('change', updateSubmitButton);
+        });
+    </script>
 
 </x-front-guest-layout>

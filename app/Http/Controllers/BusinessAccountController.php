@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Spatie\Browsershot\Browsershot;
-
+use Carbon\Carbon;
 use App\Models\BusinessCreditApplication;
 use App\Models\MailLog;
 use App\Mail\BusinessCreditPdfMail;
@@ -33,7 +33,7 @@ class BusinessAccountController extends Controller
             'postcode_bill' => 'required|string|max:10',
 
             'drivers_licence' => 'required|string|max:50',
-            'dob' => 'required|date',
+            'dob' => 'required|date|before_or_equal:' . Carbon::now()->subYears(18)->toDateString(),
             'email' => 'required|email|max:255',
             'mobile' => 'required|digits_between:7,10',
 
@@ -77,7 +77,7 @@ class BusinessAccountController extends Controller
         /* DIRECTOR DYNAMIC RULES */
         for ($i = 1; $i <= $request->num_directors; $i++) {
             $rules["dir{$i}_name"] = 'required|string|max:255';
-            $rules["dir{$i}_dob"] = 'required|date';
+            $rules["dir{$i}_dob"] = 'required|date|before_or_equal:' . Carbon::now()->subYears(18)->toDateString();
             $rules["dir{$i}_mobile"] = 'required|string|max:20';
             $rules["dir{$i}_address"] = 'required|string|max:500';
             $rules["dir{$i}_dl"] = 'required|string|max:50';
@@ -153,6 +153,9 @@ class BusinessAccountController extends Controller
             'g2_witness_name.required' => 'Witness name for Guarantor 2 is required.',
             'g2_witness_occ.required' => 'Witness occupation for Guarantor 2 is required.',
             'g2_witness_addr.required' => 'Witness address for Guarantor 2 is required.'
+        ];
+        $messages += [
+            'dob.before_or_equal' => 'Applicant must be at least 18 years old.'
         ];
 
         $validated = $request->validate($rules, $messages);
@@ -257,64 +260,14 @@ class BusinessAccountController extends Controller
             ]);
 
             /* =========================================================
-             | 3. GENERATE PDF
+             | 3. QUEUE PDF GENERATION & EMAIL
              ========================================================= */
 
-            $app->load(['directors', 'guarantors', 'references', 'terms']);
-
-            $html = view('pdf.business-credit-filled', compact('app'))->render();
-
-            $pdfBinary = Browsershot::html($html)
-                ->format('A4')
-                ->margins(15, 10, 15, 10)
-                ->showBackground()
-                ->waitForNavigation()
-                ->pdf();
-
-            /* =========================================================
-             | 4. SEND EMAIL
-             ========================================================= */
-
-            try {
-                Mail::to($app->email)
-                    ->cc($app->accounts_email)
-                    ->send(new BusinessCreditPdfMail($app, $pdfBinary));
-
-                // Log successful email
-                MailLog::create([
-                    'type' => 'business_account',
-                    'business_account_id' => $app->id,
-                    'recipient_email' => $app->email,
-                    'subject' => 'Business Credit Application',
-                    'body' => 'Business credit application PDF sent',
-                    'status' => 'sent',
-                    'attachment_details' => json_encode([
-                        [
-                            'name' => 'business-credit-application.pdf',
-                            'mime' => 'application/pdf',
-                            'size' => strlen($pdfBinary)
-                        ]
-                    ]),
-                    'ip_address' => $request->ip(),
-                    'user_agent' => $request->userAgent()
-                ]);
-            } catch (\Exception $e) {
-                // Log failed email but don't throw - allow form submission to succeed
-                MailLog::create([
-                    'type' => 'business_account',
-                    'business_account_id' => $app->id,
-                    'recipient_email' => $app->email,
-                    'subject' => 'Business Credit Application',
-                    'body' => 'Business credit application PDF failed to send',
-                    'status' => 'failed',
-                    'error_message' => $e->getMessage(),
-                    'ip_address' => $request->ip(),
-                    'user_agent' => $request->userAgent()
-                ]);
-
-                // Don't re-throw - let the form submission succeed
-                // The application was already saved successfully
-            }
+            \App\Jobs\ProcessCreditApplication::dispatch(
+                $app,
+                $request->ip(),
+                $request->userAgent()
+            );
 
             DB::commit();
 
