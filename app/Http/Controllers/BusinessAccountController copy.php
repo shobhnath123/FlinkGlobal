@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Spatie\Browsershot\Browsershot;
-
+use App\Services\PdfService;
 use App\Models\BusinessCreditApplication;
 use App\Models\MailLog;
 use App\Mail\BusinessCreditPdfMail;
@@ -71,7 +71,7 @@ class BusinessAccountController extends Controller
             /* DIRECTORS */
             'num_directors' => 'required|integer|min:1|max:10',
 
-            
+
         ];
 
         /* DIRECTOR DYNAMIC RULES */
@@ -207,7 +207,7 @@ class BusinessAccountController extends Controller
                 'signed_position' => $request->signed_position,
                 'signed_date' => $request->signed_date,
 
-                'application_type'=>'Credit',
+                'application_type' => 'Credit',
             ]);
 
             /* DIRECTORS */
@@ -311,7 +311,7 @@ class BusinessAccountController extends Controller
                     'ip_address' => $request->ip(),
                     'user_agent' => $request->userAgent()
                 ]);
-                
+
                 throw $e;
             }
 
@@ -330,42 +330,28 @@ class BusinessAccountController extends Controller
 
 
     /*
-    * VIEW PDF (OPTIONAL)
+     * VIEW PDF (OPTIONAL)
      */
-    public function pdf($id)
-    {
-        $app = BusinessCreditApplication::with([
-            'directors','guarantors','references','terms'
-        ])->findOrFail($id);
 
-        return response(
-            Browsershot::html(
-                view('pdf.business-credit', compact('app'))->render()
-            )
-            ->format('A4')
-            ->margins(15, 10, 15, 10)
-            ->showBackground()
-            ->pdf(),
-            200,
-            ['Content-Type' => 'application/pdf']
-        );
-    }
     public function pdfPreview($id)
     {
         $app = BusinessCreditApplication::with([
-            'directors','guarantors','references','terms'
+            'directors',
+            'guarantors',
+            'references',
+            'terms'
         ])->findOrFail($id);
-        return response(
-            Browsershot::html(
-                view('pdf.business-credit-filled', compact('app'))->render()
-            )
-            ->format('A4')
-            ->margins(15, 10, 15, 10)
-            ->showBackground()
-            ->pdf(),
-            200,
-            ['Content-Type' => 'application/pdf']
-        );
+        $html = view('pdf.business-credit-filled', compact('app'))->render();
+        $pdfBinary = PdfService::generateFromHtml($html);
+        // 🔹 HTML Preview Mode (for debugging)
+        // if (request()->has('html')) {
+        //     return response($html, 200)
+        //         ->header('Content-Type', 'text/html');
+        // }
+        return response($pdfBinary, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="application.pdf"'
+        ]);
     }
-    
+
 }

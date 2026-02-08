@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use Spatie\Browsershot\Browsershot;
+use App\Services\PdfService;
 use Carbon\Carbon;
 use App\Models\BusinessCreditApplication;
 use App\Models\MailLog;
@@ -43,7 +43,7 @@ class CashAccountApplicationController extends Controller
             'company_no' => 'required|string|max:50',
             'nzbn' => 'required|string|max:50',
             'nature_business' => 'required|string|max:255',
-            // 'date_incorp' => 'required|date',
+            'date_incorp' => 'required|date',
             // 'paid_capital' => 'required|numeric|min:0',
             // 'monthly_purchases' => 'required|numeric|min:0',
 
@@ -104,7 +104,7 @@ class CashAccountApplicationController extends Controller
                 'company_no' => $request->company_no,
                 'nzbn' => $request->nzbn,
                 'nature_business' => $request->nature_business,
-                // 'date_incorp' => $request->date_incorp,
+                'date_incorp' => $request->date_incorp,
                 // 'paid_capital' => $request->paid_capital,
                 // 'monthly_purchases' => $request->monthly_purchases,
                 'application_type' => 'Cash',
@@ -161,24 +161,22 @@ class CashAccountApplicationController extends Controller
     }
     public function pdfPreview($id)
     {
-
         $app = BusinessCreditApplication::with([
             'directors',
             'guarantors',
             'references',
             'terms'
         ])->findOrFail($id);
-
-        return response(
-            Browsershot::html(
-                view('pdf.business-cash-pdf', compact('app'))->render()
-            )
-                ->format('A4')
-                ->margins(15, 10, 15, 10)
-                ->showBackground()
-                ->pdf(),
-            200,
-            ['Content-Type' => 'application/pdf']
-        );
+        $html = view('pdf.business-cash-pdf', compact('app'))->render();
+        $pdfBinary = PdfService::generateFromHtml($html);
+        // 🔹 HTML Preview Mode (for debugging)
+        // if (request()->has('html')) {
+        //     return response($html, 200)
+        //         ->header('Content-Type', 'text/html');
+        // }
+        return response($pdfBinary, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="application.pdf"'
+        ]);
     }
 }

@@ -12,7 +12,7 @@ use App\Models\BusinessCreditApplication;
 use App\Models\MailLog;
 use App\Mail\BusinessCreditPdfMail;
 use Illuminate\Support\Facades\Mail;
-use Spatie\Browsershot\Browsershot;
+use App\Services\PdfService;
 
 class ProcessCashApplication implements ShouldQueue
 {
@@ -44,13 +44,7 @@ class ProcessCashApplication implements ShouldQueue
 
         $html = view('pdf.business-cash-pdf', ['app' => $this->app])->render();
 
-        $pdfBinary = Browsershot::html($html)
-            ->format('A4')
-            ->margins(15, 10, 15, 10)
-            ->showBackground()
-            ->scale(1)
-            ->waitUntilNetworkIdle()
-            ->pdf();
+        $pdfBinary = PdfService::generateFromHtml($html);
 
         try {
             Mail::to($this->app->email)
