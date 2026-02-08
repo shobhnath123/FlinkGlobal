@@ -1,4 +1,5 @@
 <x-front-guest-layout>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         :root {
             --primary-color: #be1e2d;
@@ -464,7 +465,7 @@
                 <strong>FlinkGlobal Limited T/A FlinkTech</strong><br>
                 23 Stewart Gibson Place, Manurewa, AUCKLAND 2105<br>
                 Phone: (09) 393 0900<br>
-                Email: office@flinkglobal.com<br>
+                Email: contact@flinkglobal.com<br>
                 Web: www.flinkglobal.com
             </div>
         </header>
@@ -1756,6 +1757,14 @@
                     understood, and accept the terms of this Guarantee and Indemnity, and I/We agree to be bound by this
                     Guarantee and Indemnity.</label>
             </div>
+
+            <div class="form-row" style="justify-content: center; margin-top: 20px;">
+                <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
+            </div>
+            @error('g-recaptcha-response')
+                <div class="text-danger" style="text-align: center;">{{ $message }}</div>
+            @enderror
+
             <button type="submit" class="submit-btn" id="submitBtn" disabled>Submit Application</button>
         </form>
         <script>

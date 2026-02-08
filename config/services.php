@@ -35,5 +35,10 @@ return [
         'client_secret' => env('NZPOST_CLIENT_SECRET'),
     ],
 
+    'recaptcha' => [
+        'site_key' => env('GOOGLE_RECAPTCHA_SITE_KEY'),
+        'secret_key' => env('GOOGLE_RECAPTCHA_SECRET_KEY'),
+    ],
+
 
 ];

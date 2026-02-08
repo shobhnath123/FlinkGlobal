@@ -1,4 +1,5 @@
 <x-front-guest-layout>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         :root {
             --primary-color: #be1e2d;
@@ -283,7 +284,7 @@
             top: 100%;
             left: 0;
             right: 0;
-            /* z-index: 10000; */
+            z-index: 10000;
 
             background: #ffffff;
             border: 1px solid #dcdcdc;
@@ -1312,7 +1313,15 @@
                     understood, and accept the terms of this Guarantee and Indemnity, and I/We agree to be bound by this
                     Guarantee and Indemnity.</label>
             </div>
-            <button type="submit" class="submit-btn">Submit Application</button>
+
+            <div class="form-row" style="justify-content: center; margin-top: 20px;">
+                <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
+            </div>
+            @error('g-recaptcha-response')
+                <div class="text-danger" style="text-align: center;">{{ $message }}</div>
+            @enderror
+
+            <button type="submit" id="submitBtn" class="submit-btn" disabled>Submit Application</button>
         </form>
 
         <script>
@@ -1582,7 +1591,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             const termsBox = document.querySelector('.terms-box');
             const acceptCheckbox = document.getElementById('accept_terms');
-            const submitBtn = document.querySelector('.submit-btn');
+            const submitBtn = document.getElementById('submitBtn');
 
             // Function to update submit button state
             function updateSubmitButton() {

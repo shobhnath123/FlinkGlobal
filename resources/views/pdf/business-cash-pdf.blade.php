@@ -251,27 +251,32 @@
                             </tr>
                             <tr style="font-size: 11px;">
                                 <td style="width: 120px;">Full Name (Contact Person):</td>
-                                <td colspan="2">{{ $app->contact_person }}</td>
-                                <td style="width: 60px; border-left: none;">Postcode:{{ $app->postcode_phy }}</td>
+                                <td colspan="3">{{ $app->contact_person }}</td>
+
                             </tr>
                             <tr style="font-size: 11px;">
                                 <td>Physical Address:</td>
-                                <td colspan="3">{{ $app->physical_address }}</td>
+                                <td colspan="">{{ $app->physical_address }}</td>
+                                <td style="width: 60px; border-left: none; text-align: right;">Postcode:</td>
+                                <td>{{ $app->postcode_phy }}</td>
                             </tr>
                             <tr style="font-size: 11px;">
                                 <td>Billing Address:</td>
-                                <td colspan="3">{{ $app->billing_address }}</td>
+                                <td colspan="">{{ $app->billing_address }}</td>
+                                <td style="width: 60px; border-left: none; text-align: right;">Postcode:</td>
+                                <td>{{ $app->postcode_bill }}</td>
                             </tr>
                             <tr style="font-size: 11px;">
-                                <td style="width: 60px;">Postcode: {{ $app->postcode_phy }}</td>
-                                <td colspan="2">Driver's Licence No:{{ $app->drivers_licence }}</td>
-                                <td style="width: 60px;">D.O.B. {{ \Carbon\Carbon::parse($app->dob)->format('d/m/Y') }}
-                                </td>
+                                <td style="width: 60px;">Driver's Licence No:</td>
+                                <td colspan="">{{ $app->drivers_licence }}</td>
+                                <td style="width: 60px; text-align: right;">D.O.B. </td>
+                                <td>{{ \Carbon\Carbon::parse($app->dob)->format('d/m/Y') }}</td>
                             </tr>
                             <tr style="font-size: 11px;">
                                 <td>Email Address:</td>
-                                <td colspan="2">{{ $app->email }}</td>
-                                <td>Mobile No: {{ $app->mobile }}</td>
+                                <td colspan="">{{ $app->email }}</td>
+                                <td style="text-align: right;">Mobile No:</td>
+                                <td>{{ $app->mobile }}</td>
                             </tr>
                             <!-- Business Details -->
                             <tr class="spacer">
@@ -290,8 +295,9 @@
                             </tr>
                             <tr style="font-size: 11px;">
                                 <td>GST No:</td>
-                                <td colspan="2" style="width: 180px;">{{ $app->gst_no }}</td>
-                                <td>Company Number: {{ $app->company_no }}</td>
+                                <td>{{ $app->gst_no }}</td>
+                                <td style="width: 100px; text-align: right;">Company Number:</td>
+                                <td>{{ $app->company_no }}</td>
                             </tr>
                             <tr style="font-size: 11px;">
                                 <td>NZBN Number:</td>
@@ -299,8 +305,9 @@
                             </tr>
                             <tr style="font-size: 11px;">
                                 <td>Nature of Business:</td>
-                                <td colspan="2">{{ $app->nature_business }}</td>
-                                <td>Date Incorp:
+                                <td colspan="">{{ $app->nature_business }}</td>
+                                <td style="text-align: right;">Date Incorp:</td>
+                                <td>
                                     {{ $app->date_incorp ? \Carbon\Carbon::parse($app->date_incorp)->format('d/m/Y') : '' }}
                                 </td>
                             </tr>
@@ -322,19 +329,23 @@
                             @foreach($app->directors as $index => $director)
                                 <tr style="font-size: 11px;">
                                     <td style="width: 120px;">({{ $index + 1 }}) Full Name:</td>
-                                    <td colspan="2">{{ $director->full_name }}</td>
-                                    <td style="width: 60px;">
-                                        D.O.B.: {{ \Carbon\Carbon::parse($director->dob)->format('d/m/Y') }}</td>
+                                    <td colspan="">{{ $director->full_name }}</td>
+                                    <td style="width: 60px; text-align: right;">
+                                        D.O.B.: </td>
+                                    <td style="width: 60px; text-align: left;">
+                                        {{ \Carbon\Carbon::parse($director->dob)->format('d/m/Y') }}</td>
                                 </tr>
                                 <tr style="font-size: 11px;">
                                     <td>Driver's Licence No:</td>
                                     <td>{{ $director->drivers_licence }}</td>
-                                    <td>Mobile No: {{ $director->mobile }}</td>
-                                    <td>Postcode: {{ $director->postcode }}</td>
+                                    <td style="width: 100px; text-align: right;">Mobile No: </td>
+                                    <td style="width: 100px; text-align: left;">{{ $director->mobile }}</td>
                                 </tr>
                                 <tr style="font-size: 11px;">
                                     <td>Private Address:</td>
-                                    <td colspan="3">{{ $director->address }}</td>
+                                    <td colspan="">{{ $director->address }}</td>
+                                    <td style="width: 5%; text-align: right;">Postcode: </td>
+                                    <td style="width: 5%; text-align: left;">{{ $director->postcode }}</td>
                                 </tr>
                                 @if(!$loop->last)
                                     <tr style="font-size: 11px;" class="spacer">
