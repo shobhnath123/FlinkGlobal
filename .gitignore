@@ -13,7 +13,8 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-.dompdf.zip
+*.zip
+/.dompdf.zip
 .Final-dom-cash.zip
 .final-pdf-dom.zip
 .flinktech-change-dom.zip
