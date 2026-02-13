@@ -15,14 +15,18 @@ class BusinessCreditPdfMail extends Mailable
 
     public $app;
     public $pdf;
+    public $recipientName;
+    public $appNo;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($app, $pdf)
+    public function __construct($app, $pdf, $recipientName)
     {
         $this->app = $app;
         $this->pdf = $pdf;
+        $this->recipientName = $recipientName;
+        $this->appNo = 'FG-' . str_pad($app->id, 6, '0', STR_PAD_LEFT);
     }
 
     /**
@@ -30,9 +34,10 @@ class BusinessCreditPdfMail extends Mailable
      */
     public function envelope(): Envelope
     {
+        $type = ucfirst($this->app->application_type) ?? 'Credit';
         return new Envelope(
             from: env('MAIL_FROM_ADDRESS', 'noreply@example.com'),
-            subject: 'Business Credit Application PDF'
+            subject: 'FlinkGlobal Limited - ' . $type . ' Application No.-' . $this->appNo . ' Signature Required | Action Needed'
         );
     }
 
@@ -44,6 +49,8 @@ class BusinessCreditPdfMail extends Mailable
         return new Content(
             view: 'pdf.business-credit',
             with: [
+            'recipientName' => $this->recipientName,
+            'appNo' => $this->appNo,
             'app' => $this->app,
         ]
         );
@@ -53,10 +60,13 @@ class BusinessCreditPdfMail extends Mailable
      */
     public function attachments(): array
     {
+        $type = ucfirst($this->app->application_type) ?? 'Credit';
+        $fileName = "Business-{$type}-Application-{$this->appNo}.pdf";
+
         return [
             Attachment::fromData(
                 fn () => $this->pdf,
-                'business-credit-application.pdf'
+                $fileName
             )->withMime('application/pdf'),
         ];
     }

@@ -49,7 +49,7 @@ class ProcessCashApplication implements ShouldQueue
         try {
             Mail::to($this->app->email)
                 ->cc($this->app->accounts_email)
-                ->send(new BusinessCreditPdfMail($this->app, $pdfBinary));
+                ->send(new BusinessCreditPdfMail($this->app, $pdfBinary, $this->app->contact_person));
 
             // Log successful email
             MailLog::create([

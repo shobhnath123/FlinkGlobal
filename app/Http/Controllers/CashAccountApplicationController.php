@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\Models\BusinessCreditApplication;
 use App\Models\MailLog;
 use App\Mail\BusinessCreditPdfMail;
+use Http;
 class CashAccountApplicationController extends Controller
 {
     public function store(Request $request)

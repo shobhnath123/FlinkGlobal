@@ -375,8 +375,10 @@
                                     <div class="sub-logos">
                                         <img src="https://www.fervour.info/wp-content/uploads/2024/03/fervour-logo.webp"
                                             alt="Fervour">
-                                        <img src="https://flinkglobal.com/uvw/wp-content/uploads/2020/10/logo-small-1.png"
-                                            alt="UvW">
+                                        {{-- <img src="https://flinkglobal.com/uvw/wp-content/uploads/2020/10/logo-small-1.png"
+                                            alt="UvW"><br> --}}
+                                        <div style="font-weight: bold; font-size: 9px; margin-top: 8px;">Application No.: FG-{{ str_pad($app->id, 6, '0', STR_PAD_LEFT) }}</div>
+
                                     </div>
                                 </td>
                                 <td width="40%" class="company-info">
@@ -402,27 +404,32 @@
                             </tr>
                             <tr style="font-size: 11px;">
                                 <td style="width: 120px;">Full Name (Contact Person):</td>
-                                <td colspan="2">{{ $app->contact_person }}</td>
-                                <td style="width: 60px; border-left: none;">Postcode:{{ $app->postcode_phy }}</td>
+                                <td colspan="3">{{ $app->contact_person }}</td>
                             </tr>
                             <tr style="font-size: 11px;">
                                 <td>Physical Address:</td>
-                                <td colspan="3">{{ $app->physical_address }}</td>
+                                <td colspan="">{{ $app->physical_address }}</td>
+                                <td style="width: 60px; border-left: none; text-align:right;">Postcode:</td>
+                                <td style="width: 60px;">{{ $app->postcode_phy }}</td>
                             </tr>
                             <tr style="font-size: 11px;">
                                 <td>Billing Address:</td>
-                                <td colspan="3">{{ $app->billing_address }}</td>
+                                <td colspan="">{{ $app->billing_address }}</td>
+                                <td style="width: 60px; text-align:right;">Postcode: </td>
+                                <td style="width: 60px;">{{ $app->postcode_bill }}</td>
+
                             </tr>
                             <tr style="font-size: 11px;">
-                                <td style="width: 60px;">Postcode: {{ $app->postcode_phy }}</td>
-                                <td colspan="2">Driver's Licence No:{{ $app->drivers_licence }}</td>
-                                <td style="width: 60px;">D.O.B. {{ \Carbon\Carbon::parse($app->dob)->format('d/m/Y') }}
-                                </td>
+                                <td colspan="">Driver's Licence No:</td>
+                                <td>{{ $app->drivers_licence }}</td>
+                                <td style="width: 60px; text-align:right;">D.O.B.:</td>
+                                <td>{{ \Carbon\Carbon::parse($app->dob)->format('d/m/Y') }}</td>
                             </tr>
                             <tr style="font-size: 11px;">
                                 <td>Email Address:</td>
-                                <td colspan="2">{{ $app->email }}</td>
-                                <td>Mobile No: {{ $app->mobile }}</td>
+                                <td colspan="">{{ $app->email }}</td>
+                                <td style="width: 60px; text-align:right;">Mobile No:</td>
+                                <td style="width: 60px;">{{ $app->mobile }}</td>
                             </tr>
                             <!-- Business Details -->
                             <tr class="spacer">
@@ -441,32 +448,33 @@
                             </tr>
                             <tr style="font-size: 11px;">
                                 <td>GST No:</td>
-                                <td colspan="2" style="width: 180px;">{{ $app->gst_no }}</td>
-                                <td>Company Number: {{ $app->company_no }}</td>
+                                <td colspan="" style="width: 180px;">{{ $app->gst_no }}</td>
+                                <td style="width: 60px; text-align:right;">Company Number: </td>
+                                <td style="width: 60px;">{{ $app->company_no }}</td>
                             </tr>
                             <tr style="font-size: 11px;">
                                 <td>NZBN Number:</td>
-                                <td colspan="3">{{ $app->nzbn }}</td>
+                                <td colspan="">{{ $app->nzbn }}</td>
+                                <td style="text-align:right;">Nature of Business:</td>
+                                <td colspan="">{{ $app->nature_business }}</td>
                             </tr>
                             <tr style="font-size: 11px;">
-                                <td>Nature of Business:</td>
-                                <td colspan="2">{{ $app->nature_business }}</td>
-                                <td>Date Incorp:
-                                    {{ $app->date_incorp ? \Carbon\Carbon::parse($app->date_incorp)->format('d/m/Y') : '' }}
+                                <td>Date Incorp:</td>
+                                <td>{{ $app->date_incorp ? \Carbon\Carbon::parse($app->date_incorp)->format('d/m/Y') : '' }}
                                 </td>
-                            </tr>
-                            <tr style="font-size: 11px;">
-                                <td>Paid Up Capital:$</td>
+                                <td style="text-align:right;">Paid Up Capital:$</td>
                                 <td>{{ $app->paid_capital }}</td>
-                                <td>Estimated Monthly Purchases:$
-                                    {{ $app->monthly_purchases }}
-                                </td>
-                                <td>Credit Required:$ {{ $app->credit_required}}</td>
+                            <tr style="font-size: 11px;">
+                                <td>Estimated Monthly Purchases:$</td>
+                                <td>{{ $app->monthly_purchases }}</td>
+                                <td style="text-align:right;">Credit Required:$ </td>
+                                <td>{{ $app->credit_required}}</td>
                             </tr>
                             <tr style="font-size: 11px;">
                                 <td>Principal Place of Business:$</td>
-                                <td colspan="2">{{ $app->principal_place_of_business }}</td>
-                                <td>(to whome):{{ $app->to_whom }}</td>
+                                <td colspan="">{{ $app->principal_place_of_business }}</td>
+                                <td style="text-align:right;">(to whome):</td>
+                                <td>{{ $app->to_whom }}</td>
                             </tr>
                             <!-- Account Payment Terms -->
                             <tr style="font-size: 11px;" class="spacer">
@@ -484,19 +492,23 @@
                             @foreach($app->directors as $index => $director)
                                 <tr style="font-size: 11px;">
                                     <td style="width: 120px;">({{ $index + 1 }}) Full Name:</td>
-                                    <td colspan="2">{{ $director->full_name }}</td>
-                                    <td style="width: 60px;">
-                                        D.O.B.: {{ \Carbon\Carbon::parse($director->dob)->format('d/m/Y') }}</td>
+                                    <td colspan="">{{ $director->full_name }}</td>
+                                    <td style="width: 60px; text-align:right;">D.O.B.: </td>
+                                    <td style="width: 60px;">{{ \Carbon\Carbon::parse($director->dob)->format('d/m/Y') }}
+                                    </td>
                                 </tr>
                                 <tr style="font-size: 11px;">
                                     <td>Driver's Licence No:</td>
                                     <td>{{ $director->drivers_licence }}</td>
-                                    <td>Mobile No: {{ $director->mobile }}</td>
-                                    <td>Postcode: {{ $director->postcode }}</td>
+                                    <td style="width: 60px; text-align:right;"> Mobile No:</td>
+                                    <td style="width: 60px;">{{ $director->mobile }}</td>
+
                                 </tr>
                                 <tr style="font-size: 11px;">
                                     <td>Private Address:</td>
-                                    <td colspan="3">{{ $director->address }}</td>
+                                    <td colspan="">{{ $director->address }}</td>
+                                    <td style="width: 60px; text-align:right;">Postcode:</td>
+                                    <td style="width: 60px;">{{ $director->postcode }}</td>
                                 </tr>
                                 @if(!$loop->last)
                                     <tr style="font-size: 11px;" class="spacer">
@@ -519,7 +531,7 @@
                             <tr style="font-size: 11px;">
                                 <td>Purchases Order Required?:</td>
                                 <td colspan="">{{ $app->po_required }}</td>
-                                <td>Account to be emailed: </td>
+                                <td style="text-align:right;">Account to be emailed: </td>
                                 <td>{{ $app->accounts_email_opt }}</td>
                             </tr>
 
@@ -530,13 +542,13 @@
                             <tr style="font-size: 11px;">
                                 <td>Mobile No:</td>
                                 <td>{{ $app->accounts_mobile }}</td>
-                                <td>Account Contact: </td>
+                                <td style="text-align:right;">Account Contact: </td>
                                 <td>{{ $app->accounts_contact }}</td>
                             </tr>
                             <tr style="font-size: 11px;">
                                 <td>Bank and Branch:</td>
                                 <td>{{ $app->bank_branch }}</td>
-                                <td>Account No: </td>
+                                <td style="text-align:right;">Account No: </td>
                                 <td>{{ $app->bank_account_no }}</td>
                             </tr>
                             <!-- Account Payment Terms -->

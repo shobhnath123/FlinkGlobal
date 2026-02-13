@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use App\Models\BusinessCreditApplication;
 use App\Models\MailLog;
 use App\Mail\BusinessCreditPdfMail;
-
+use Http;
 class BusinessAccountController extends Controller
 {
     public function store(Request $request)
@@ -318,10 +318,10 @@ class BusinessAccountController extends Controller
         $html = view('pdf.business-credit-filled', compact('app'))->render();
         $pdfBinary = PdfService::generateFromHtml($html);
         // 🔹 HTML Preview Mode (for debugging)
-        if (request()->has('html')) {
-            return response($html, 200)
-                ->header('Content-Type', 'text/html');
-        }
+        // if (request()->has('html')) {
+        //     return response($html, 200)
+        //         ->header('Content-Type', 'text/html');
+        // }
         return response($pdfBinary, 200, [
             'Content-Type' => 'application/pdf',
             'Content-Disposition' => 'inline; filename="application.pdf"'
