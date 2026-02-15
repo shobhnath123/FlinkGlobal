@@ -369,16 +369,8 @@
                             <tr>
                                 <td width="60%">
                                     <div class="main-logo">
-                                        <img src="https://flinktech.nz/wp-content/uploads/2021/05/flinktech_logo-1536x293-removebg-preview.png"
-                                            alt="flinktech">
-                                    </div>
-                                    <div class="sub-logos">
-                                        <img src="https://www.fervour.info/wp-content/uploads/2024/03/fervour-logo.webp"
-                                            alt="Fervour">
-                                        {{-- <img src="https://flinkglobal.com/uvw/wp-content/uploads/2020/10/logo-small-1.png"
-                                            alt="UvW"><br> --}}
-                                        <div style="font-weight: bold; font-size: 9px; margin-top: 8px;">Application No.: FG-{{ str_pad($app->id, 6, '0', STR_PAD_LEFT) }}</div>
-
+                                        <img src="{{ asset('images/FG-Combine.webp') }}"
+                                         width="200px" alt="flinktech">                                        <div style="font-weight: bold; font-size: 9px; margin-top: 8px;">Application No.: FG-{{ str_pad($app->id, 6, '0', STR_PAD_LEFT) }}</div>
                                     </div>
                                 </td>
                                 <td width="40%" class="company-info">

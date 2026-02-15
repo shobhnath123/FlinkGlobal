@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <body style="margin:0; padding:0; background-color:#f4f6f8; font-family: Arial, Helvetica, sans-serif;">
-    <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f6f8; padding:20px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0">
+    {{-- <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f6f8; padding:20px 0;"> --}}
         <tr>
             <td align="center">
                 <table width="" cellpadding="0" cellspacing="0"
