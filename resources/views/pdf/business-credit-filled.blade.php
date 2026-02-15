@@ -370,7 +370,8 @@
                                 <td width="60%">
                                     <div class="main-logo">
                                         <img src="{{ asset('images/FG-Combine.webp') }}"
-                                         width="200px" alt="flinktech">                                        <div style="font-weight: bold; font-size: 9px; margin-top: 8px;">Application No.: FG-{{ str_pad($app->id, 6, '0', STR_PAD_LEFT) }}</div>
+                                         width="200px" alt="flinktech">
+                                        <div style="font-size: 9px; margin-top: 8px;">Application No.: FG-{{ str_pad($app->id, 6, '0', STR_PAD_LEFT) }}</div>
                                     </div>
                                 </td>
                                 <td width="40%" class="company-info">
