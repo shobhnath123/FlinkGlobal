@@ -55,7 +55,7 @@
         }
 
         .main-logo img {
-            height: 32px;
+            height: 50px;
             display: block;
         }
 
