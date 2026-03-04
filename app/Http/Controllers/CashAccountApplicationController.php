@@ -70,7 +70,7 @@ class CashAccountApplicationController extends Controller
                         'response' => $value,
                         'remoteip' => request()->ip(),
                     ]);
-
+                    dd($response->json());
                     if (!$response->json('success')) {
                         $fail('The reCAPTCHA verification failed.');
                     }
