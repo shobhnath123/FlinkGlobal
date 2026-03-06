@@ -325,16 +325,16 @@
                                 <tr style="font-size: 11px;">
                                     <td style="width: 120px;">({{ $index + 1 }}) Full Name:</td>
                                     <td colspan="">{{ $director->full_name }}</td>
-                                    <td style="width: 60px; text-align: right;">
+                                    <td style="width: 100px; text-align: right;">
                                         D.O.B.: </td>
-                                    <td style="width: 60px; text-align: left;">
+                                    <td style="width: 120px; text-align: left;">
                                         {{ \Carbon\Carbon::parse($director->dob)->format('d/m/Y') }}</td>
                                 </tr>
                                 <tr style="font-size: 11px;">
                                     <td>Driver's Licence No:</td>
                                     <td>{{ $director->drivers_licence }}</td>
-                                    <td style="width: 100px; text-align: right;">Mobile No: </td>
-                                    <td style="width: 100px; text-align: left;">{{ $director->mobile }}</td>
+                                    <td style="width: 120px; text-align: right;">Mobile No: </td>
+                                    <td style="width: 120px; text-align: left;">{{ $director->mobile }}</td>
                                 </tr>
                                 <tr style="font-size: 11px;">
                                     <td>Private Address:</td>
@@ -401,11 +401,11 @@
                                         <table style="width: 100%; border-collapse: collapse;border:none;">
                                             <tr>
                                                 <td
-                                                    style="width: 30px; vertical-align: right; padding-right: 0px;border:none;">
+                                                    style="width: 30px; vertical-align: right; border:none;">
                                                     <img src="{{ asset('ec.webp') }}"
                                                         style="height: 20px; display: block;" alt="EC">
                                                 </td>
-                                                <td style="vertical-align: left;border:none;">
+                                                <td style="vertical-align: left;border:none;padding-left:15px;">
                                                     <div style="font-size: 7px; color: #444; line-height: 1.1;">
                                                         Protected by EC Credit Control – Credit Management
                                                         Specialists<br>

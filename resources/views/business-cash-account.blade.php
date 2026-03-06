@@ -1,5 +1,4 @@
 <x-front-guest-layout>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         :root {
             --primary-color: #be1e2d;
@@ -1323,7 +1322,7 @@
 
             <button type="submit" id="submitBtn" class="submit-btn" disabled>Submit Application</button>
         </form>
-
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         <script>
             const oldInput = @json(session()->getOldInput());
             const numDirectorsInput = document.getElementById('num_directors');

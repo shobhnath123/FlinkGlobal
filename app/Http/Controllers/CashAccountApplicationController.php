@@ -57,25 +57,25 @@ class CashAccountApplicationController extends Controller
             'accept_terms' => 'accepted',
 
             /* RECAPTCHA */
-            'g-recaptcha-response' => [
-                'required',
-                function ($attribute, $value, $fail) {
-                    $secretKey = config('services.recaptcha.secret_key');
-                    if (!$secretKey) {
-                        // If secret key is not set, skip validation (optional, depends on environment)
-                        return;
-                    }
-                    $response = \Illuminate\Support\Facades\Http::asForm()->post("https://www.google.com/recaptcha/api/siteverify", [
-                        'secret' => $secretKey,
-                        'response' => $value,
-                        'remoteip' => request()->ip(),
-                    ]);
-                    dd($response->json());
-                    if (!$response->json('success')) {
-                        $fail('The reCAPTCHA verification failed.');
-                    }
-                },
-            ],
+            // 'g-recaptcha-response' => [
+            //     'required',
+            //     function ($attribute, $value, $fail) {
+            //         $secretKey = config('services.recaptcha.secret_key');
+            //         if (!$secretKey) {
+            //             // If secret key is not set, skip validation (optional, depends on environment)
+            //             return;
+            //         }
+            //         $response = \Illuminate\Support\Facades\Http::asForm()->post("https://www.google.com/recaptcha/api/siteverify", [
+            //             'secret' => $secretKey,
+            //             'response' => $value,
+            //             'remoteip' => request()->ip(),
+            //         ]);
+
+            //         if (!$response->json('success')) {
+            //             $fail('The reCAPTCHA verification failed.');
+            //         }
+            //     },
+            // ],
 
             /* DIRECTORS */
             'num_directors' => 'required|integer|min:1|max:10',
@@ -192,10 +192,10 @@ class CashAccountApplicationController extends Controller
         $html = view('pdf.business-cash-pdf', compact('app'))->render();
         $pdfBinary = PdfService::generateFromHtml($html);
         // 🔹 HTML Preview Mode (for debugging)
-        // if (request()->has('html')) {
-        //     return response($html, 200)
-        //         ->header('Content-Type', 'text/html');
-        // }
+        if (request()->has('html')) {
+            return response($html, 200)
+                ->header('Content-Type', 'text/html');
+        }
         return response($pdfBinary, 200, [
             'Content-Type' => 'application/pdf',
             'Content-Disposition' => 'inline; filename="application.pdf"'

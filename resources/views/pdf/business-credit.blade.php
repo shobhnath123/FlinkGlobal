@@ -4,7 +4,7 @@
     <table width="100%" cellpadding="0" cellspacing="0">
     {{-- <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f6f8; padding:20px 0;"> --}}
         <tr>
-            <td align="center">
+            <td >
                 <table width="" cellpadding="0" cellspacing="0"
                     style="background:#ffffff; border-radius:6px; padding:30px;">
                     <tr>
@@ -50,7 +50,7 @@
                             <p style="margin-top:25px;">
                                 Best regards,<br>
                                 <strong>Team FlinkGlobal</strong>
-                                <img src="https://fervour.info/forms/public/images/Flinkglobal-Email-banner-Email.webp" alt="FlinkGlobal Logo" style="display:block; margin-top:10px; width:120px;">  
+                                <img src="https://fervour.info/forms/public/images/FG-Combine.webp" alt="FlinkGlobal Logo" style="display:block; margin-top:10px; width:120px;">  
                             </p>
                         </td>
                     </tr>

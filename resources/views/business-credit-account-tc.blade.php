@@ -9,13 +9,13 @@
         @page {
             size: A4;
             /* ADJUST THESE VALUES TO CONTROL MARGINS */
-            margin-top: 50mm;
+            /* margin-top: 50mm; */
             /* Space from the top edge */
-            margin-left: 50mm;
+            /* margin-left: 50mm; */
             /* Space from the left edge */
-            margin-right: 50mm;
+            /* margin-right: 50mm; */
             /* Space from the right edge */
-            margin-bottom: 50mm;
+            /* margin-bottom: 50mm; */
             /* Space from the bottom edge */
         }
 
