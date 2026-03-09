@@ -1,0 +1,169 @@
+.widget-about ul {
+    margin-top: 30px;
+}
+
+.widget-about ul li {
+    line-height: 33px;
+}
+
+.widget-title {
+    font-size: 20px;
+    color: #ffffff;
+    background: #96b8ba;
+    padding: 8px 5px;
+    border-left: 5px solid #f2a100;
+}
+
+.brand-logo {
+    background-color: #fafafa;
+    padding: 50px 0;
+}
+
+.brand-logo .single-brand-02 img {
+    opacity: 1;
+}
+
+.brand-logo .single-brand-02 img {
+    opacity: 1;
+    border-radius: 50%;
+    border: 2px solid #f2a100 !important;
+    padding: 5px;
+}
+
+.brand-logo .swiper-slide {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px 10px;
+}
+
+.footer-link-m {
+    columns: 2;
+    list-style-type: none;
+}
+
+.footer-link-m li {
+    break-inside: avoid;
+}
+
+/* page header fluid */
+
+.shop_smoke_effect_wrapper {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.shop_smoke_effect_wrapper canvas {
+    height: 100px !important;
+    background: #000;
+}
+
+.shop_smoke_effect_wrapper canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.shop_smoke_effect_wrapper h1.shop_smoke_effect_heading_wrapper {
+    /* font-family: 'Outfit'; */
+    text-transform: capitalize;
+    /* font-size: 40px; */
+    text-align: center;
+}
+
+h1.shop_smoke_effect_heading_wrapper [class^="letter"] {
+    -webkit-transition: opacity 3s ease;
+    -moz-transition: opacity 3s ease;
+    transition: opacity 3s ease;
+}
+
+h1.shop_smoke_effect_heading_wrapper .letter-0 {
+    transition-delay: 0.2s;
+}
+
+h1.shop_smoke_effect_heading_wrapper .letter-1 {
+    transition-delay: 0.4s;
+}
+
+h1.shop_smoke_effect_heading_wrapper .letter-2 {
+    transition-delay: 0.6s;
+}
+
+h1.shop_smoke_effect_heading_wrapper .letter-3 {
+    transition-delay: 0.8s;
+}
+
+h1.shop_smoke_effect_heading_wrapper .letter-4 {
+    transition-delay: 1.0s;
+}
+
+h1.shop_smoke_effect_heading_wrapper .letter-5 {
+    transition-delay: 1.2s;
+}
+
+h1.shop_smoke_effect_heading_wrapper .letter-6 {
+    transition-delay: 1.4s;
+}
+
+h1.shop_smoke_effect_heading_wrapper .letter-7 {
+    transition-delay: 1.6s;
+}
+
+h1.shop_smoke_effect_heading_wrapper .letter-8 {
+    transition-delay: 1.8s;
+}
+
+h1.shop_smoke_effect_heading_wrapper .letter-9 {
+    transition-delay: 2.0s;
+}
+
+h1.shop_smoke_effect_heading_wrapper .letter-10 {
+    transition-delay: 2.2s;
+}
+
+h1.shop_smoke_effect_heading_wrapper .letter-11 {
+    transition-delay: 2.4s;
+}
+
+h1.shop_smoke_effect_heading_wrapper .letter-12 {
+    transition-delay: 2.6s;
+}
+
+h1.shop_smoke_effect_heading_wrapper .letter-13 {
+    transition-delay: 2.8s;
+}
+
+h1.shop_smoke_effect_heading_wrapper .letter-14 {
+    transition-delay: 3.0s;
+}
+
+h1.shop_smoke_effect_heading_wrapper .letter-15 {
+    transition-delay: 3.2s;
+}
+
+h1.shop_smoke_effect_heading_wrapper {
+    visibility: visible;
+    position: absolute;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
+
+h1.shop_smoke_effect_heading_wrapper.transition-in {
+    visibility: visible;
+}
+
+h1.shop_smoke_effect_heading_wrapper [class^="letter"] {
+    opacity: 0;
+}
+
+h1.shop_smoke_effect_heading_wrapper.transition-in [class^="letter"] {
+    opacity: 1;
+}
+
+@media screen and (max-width: 600px) {
+    .copyright .col-md-6 {
+        text-align: center !important;
+    }
+}

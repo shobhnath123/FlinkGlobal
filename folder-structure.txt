@@ -1,0 +1,149 @@
+laravel-ecommerce/
+│
+├── app/
+│   ├── Console/
+│   │
+│   ├── Helpers/
+│   │   ├── Helper.php
+│   │   └── PriceHelper.php
+│   │
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │
+│   │   │   ├── Admin/
+│   │   │   │   ├── DashboardController.php
+│   │   │   │   ├── ProductController.php
+│   │   │   │   ├── CategoryController.php
+│   │   │   │   ├── BrandController.php
+│   │   │   │   ├── OrderController.php
+│   │   │   │   ├── CustomerController.php
+│   │   │   │   ├── CouponController.php
+│   │   │   │   └── SettingController.php
+│   │   │
+│   │   │   ├── Frontend/
+│   │   │   │   ├── HomeController.php
+│   │   │   │   ├── ShopController.php
+│   │   │   │   ├── ProductController.php
+│   │   │   │   ├── CartController.php
+│   │   │   │   ├── CheckoutController.php
+│   │   │   │   ├── AccountController.php
+│   │   │   │   └── WishlistController.php
+│   │   │
+│   │   │   └── Auth/
+│   │   │       ├── LoginController.php
+│   │   │       ├── RegisterController.php
+│   │   │       └── ForgotPasswordController.php
+│   │
+│   │   ├── Middleware/
+│   │   │   ├── AdminMiddleware.php
+│   │   │   └── CustomerMiddleware.php
+│   │
+│   │   └── Requests/
+│   │       ├── ProductRequest.php
+│   │       ├── OrderRequest.php
+│   │       └── CheckoutRequest.php
+│
+│   ├── Models/
+│   │   ├── Product.php
+│   │   ├── Category.php
+│   │   ├── Brand.php
+│   │   ├── Order.php
+│   │   ├── OrderItem.php
+│   │   ├── Cart.php
+│   │   ├── CartItem.php
+│   │   ├── Coupon.php
+│   │   ├── Wishlist.php
+│   │   ├── Review.php
+│   │   ├── Address.php
+│   │   └── Payment.php
+│
+│   ├── Services/
+│   │   ├── ProductService.php
+│   │   ├── CartService.php
+│   │   ├── OrderService.php
+│   │   ├── PaymentService.php
+│   │   └── CouponService.php
+│
+│   ├── Repositories/
+│   │   ├── ProductRepository.php
+│   │   ├── CategoryRepository.php
+│   │   ├── OrderRepository.php
+│   │   └── CartRepository.php
+│
+│   ├── Traits/
+│   │   ├── ImageUploadTrait.php
+│   │   └── ApiResponseTrait.php
+│
+│   └── Providers/
+│
+│
+├── bootstrap/
+│
+├── config/
+│
+├── database/
+│   ├── migrations/
+│   ├── seeders/
+│   └── factories/
+│
+├── public/
+│   ├── assets/
+│   │   ├── css/
+│   │   ├── js/
+│   │   ├── images/
+│   │   └── admin/
+│   │
+│   └── uploads/
+│       ├── products/
+│       ├── categories/
+│       └── banners/
+│
+├── resources/
+│   ├── views/
+│   │
+│   │   ├── layouts/
+│   │   │   ├── app.blade.php
+│   │   │   ├── admin.blade.php
+│   │   │   └── auth.blade.php
+│   │   │
+│   │   ├── admin/
+│   │   │   ├── dashboard/
+│   │   │   ├── products/
+│   │   │   │   ├── index.blade.php
+│   │   │   │   ├── create.blade.php
+│   │   │   │   └── edit.blade.php
+│   │   │   │
+│   │   │   ├── categories/
+│   │   │   ├── brands/
+│   │   │   ├── orders/
+│   │   │   ├── customers/
+│   │   │   └── settings/
+│   │
+│   │   ├── front/
+│   │   │   ├── home/
+│   │   │   ├── shop/
+│   │   │   ├── product/
+│   │   │   ├── cart/
+│   │   │   ├── checkout/
+│   │   │   └── account/
+│   │
+│   │   └── components/
+│   │       ├── header.blade.php
+│   │       ├── footer.blade.php
+│   │       ├── product-card.blade.php
+│   │       └── sidebar.blade.php
+│
+│   ├── js/
+│   │   └── app.js
+│
+│   └── css/
+│       └── app.css
+│
+├── routes/
+│   ├── web.php
+│   ├── admin.php
+│   └── auth.php
+│
+├── storage/
+│
+└── tests/
