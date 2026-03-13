@@ -79,7 +79,8 @@
                 <div class="col-lg-8">
                     <!-- Contact Form Start  -->
                     <div class="contact-form">
-                        <form id="contact-form" action="#" method="post">
+                        <form id="contact-form" action="" method="post">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="single-form">
