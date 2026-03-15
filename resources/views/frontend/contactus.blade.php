@@ -3,7 +3,7 @@
 <div class="section">
     <div class="shop_smoke_effect_wrapper">
         <canvas width="1265" height="200"></canvas>
-        <h1 class="shop_smoke_effect_heading_wrapper" id="smoke-heading">About Us</h1>
+        <h1 class="shop_smoke_effect_heading_wrapper" id="smoke-heading">Contact Us</h1>
     </div>
 </div>
 <!-- Page Banner Section End -->

@@ -23,6 +23,9 @@
 </head>
 
 <body class="crm_body_bg">
+        {{-- Sidebar --}}
+    @include('layouts.admin-sidebar')
+
     @yield('content')
 
     <div class="footer_part">

@@ -1,7 +1,13 @@
 @extends('layouts.app')
 @section('content')
-<div class="section page-banner-section" style="background-image: url(assets/images/page-banner.jpg)">
-     <div class="container">
+<div class="section">
+    <div class="shop_smoke_effect_wrapper">
+        <canvas width="1265" height="200"></canvas>
+        <h1 class="shop_smoke_effect_heading_wrapper" id="smoke-heading">Product Details</h1>
+    </div>
+</div>
+{{-- <div class="section page-banner-section" style="background-image: url(assets/images/page-banner.jpg)">
+    <div class="container">
          <!-- Page Banner Content End -->
          <div class="page-banner-content">
              <h2 class="title">Product Details</h2>
@@ -11,8 +17,8 @@
              </ul>
          </div>
          <!-- Page Banner Content End -->
-     </div>
- </div>
+    </div>
+ </div> --}}
  <!-- Page Banner Section End -->
 
  <!-- Product Details Section Start -->
@@ -624,7 +630,7 @@
                                      <div class="swiper-slide">
                                          <!-- Single Product Start -->
                                          <div class="single-product">
-                                             <a href="#"><img src="assets/images/product/product-01.jpg"
+                                             <a href="#"><img src="assets/images/product/1.webp"
                                                      width="270" height="303" alt="product" /></a>
                                              <div class="product-content">
                                                  <h4 class="title">
@@ -655,7 +661,7 @@
                                      <div class="swiper-slide">
                                          <!-- Single Product Start -->
                                          <div class="single-product">
-                                             <a href="#"><img src="assets/images/product/product-02.jpg"
+                                             <a href="#"><img src="assets/images/product/1.webp"
                                                      width="270" height="303" alt="product" /></a>
                                              <div class="product-content">
                                                  <h4 class="title">
@@ -685,7 +691,7 @@
                                      <div class="swiper-slide">
                                          <!-- Single Product Start -->
                                          <div class="single-product">
-                                             <a href="#"><img src="assets/images/product/product-03.jpg"
+                                             <a href="#"><img src="assets/images/product/3.webp"
                                                      width="270" height="303" alt="product" /></a>
                                              <div class="product-content">
                                                  <h4 class="title">
@@ -716,7 +722,7 @@
                                      <div class="swiper-slide">
                                          <!-- Single Product Start -->
                                          <div class="single-product">
-                                             <a href="#"><img src="assets/images/product/product-04.jpg"
+                                             <a href="#"><img src="assets/images/product/1.webp"
                                                      width="270" height="303" alt="product" /></a>
                                              <div class="product-content">
                                                  <h4 class="title">
@@ -753,7 +759,7 @@
                                      <div class="swiper-slide">
                                          <!-- Single Product Start -->
                                          <div class="single-product">
-                                             <a href="#"><img src="assets/images/product/product-04.jpg"
+                                             <a href="#"><img src="assets/images/product/1.webp"
                                                      width="270" height="303" alt="product" /></a>
                                              <div class="product-content">
                                                  <h4 class="title">
@@ -784,7 +790,7 @@
                                      <div class="swiper-slide">
                                          <!-- Single Product Start -->
                                          <div class="single-product">
-                                             <a href="#"><img src="assets/images/product/product-03.jpg"
+                                             <a href="#"><img src="assets/images/product/3.webp"
                                                      width="270" height="303" alt="product" /></a>
                                              <div class="product-content">
                                                  <h4 class="title">
@@ -815,7 +821,7 @@
                                      <div class="swiper-slide">
                                          <!-- Single Product Start -->
                                          <div class="single-product">
-                                             <a href="#"><img src="assets/images/product/product-01.jpg"
+                                             <a href="#"><img src="assets/images/product/1.webp"
                                                      width="270" height="303" alt="product" /></a>
                                              <div class="product-content">
                                                  <h4 class="title">

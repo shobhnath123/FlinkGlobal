@@ -48,7 +48,134 @@
                     <div class="header-menu">
                         <ul class="nav-menu">
                             <li><a href="/">Home</a></li>
-                            <li><a href="{{ route('shop.index') }}">Shop</a></li>
+                               <li class="has-mega-menu"><a href="{{ route('shop.index') }}">Products <i class="pe-7s-angle-down"></i></a>
+                                <div class="mega-menu">
+                                    <div class="mega-menu-inner">
+                                        <div class="mega-menu-sidebar">
+                                            <ul class="mega-sidebar-nav nav nav-tabs" id="mega-menu-tab" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link active" id="shop-pages-tab" data-bs-toggle="tab"
+                                                        data-bs-target="#shop-pages" type="button" role="tab"
+                                                        aria-controls="shop-pages" aria-selected="true" href="#">Controller
+                                                         <i class="pe-7s-angle-right"></i></a>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link" id="product-loop-tab" data-bs-toggle="tab"
+                                                        data-bs-target="#product-loop" type="button" role="tab"
+                                                        aria-controls="product-loop" aria-selected="false"
+                                                        href="#">Down Lights <i class="pe-7s-angle-right"></i></a>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link" id="single-product-tab" data-bs-toggle="tab"
+                                                        data-bs-target="#single-product" type="button" role="tab"
+                                                        aria-controls="single-product" aria-selected="false"
+                                                        href="#">Down Lights Modular <i class="pe-7s-angle-right"></i></a>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link" id="features-tab" data-bs-toggle="tab"
+                                                        data-bs-target="#features" type="button" role="tab"
+                                                        aria-controls="features" aria-selected="false" href="#">LED Sheet
+                                                        <i class="pe-7s-angle-right"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="mega-menu-content tab-content" id="mega-menu-tabContent">
+                                            <div class="tab-pane fade show active" id="shop-pages" role="tabpanel"
+                                                aria-labelledby="shop-pages-tab">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <h4 class="menu-title">HOVER DESIGN <span
+                                                                class="mega-badge effect-badge">EFFECTS</span></h4>
+                                                        <ul class="mega-menu-list">
+                                                            <li><a href="#">All info on hover</a></li>
+                                                            <li><a href="#">Icons & Add to cart</a></li>
+                                                            <li><a href="#">Icons on hover</a></li>
+                                                            <li><a href="#">Quick shop</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h4 class="menu-title">PRODUCTS STYLES</h4>
+                                                        <ul class="mega-menu-list">
+                                                            <li><a href="#">Even product grid</a></li>
+                                                            <li><a href="#">Products color scheme</a></li>
+                                                            <li><a href="#">Bordered grid style outside</a></li>
+                                                            <li><a href="#">Products shadow</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h4 class="menu-title">CATEGORIES DESIGN</h4>
+                                                        <ul class="mega-menu-list">
+                                                            <li><a href="#">Categories hover #1</a></li>
+                                                            <li><a href="#">Categories hover #2</a></li>
+                                                            <li><a href="#">Categories hover #3</a></li>
+                                                            <li><a href="#">Categories hover #4</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane fade" id="product-loop" role="tabpanel"
+                                                aria-labelledby="product-loop-tab">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <h4 class="menu-title">PRODUCT LOOP HOVER</h4>
+                                                        <ul class="mega-menu-list">
+                                                            <li><a href="#">Loop hover #1</a></li>
+                                                            <li><a href="#">Loop hover #2</a></li>
+                                                            <li><a href="#">Loop hover #3</a></li>
+                                                            <li><a href="#">Loop hover #4</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h4 class="menu-title">PRODUCT LOOP STYLES</h4>
+                                                        <ul class="mega-menu-list">
+                                                            <li><a href="#">Standard loop</a></li>
+                                                            <li><a href="#">Grid loop</a></li>
+                                                            <li><a href="#">List loop</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h4 class="menu-title">PRODUCT LOOP EFFECTS</h4>
+                                                        <ul class="mega-menu-list">
+                                                            <li><a href="#">Zoom effect</a></li>
+                                                            <li><a href="#">Fade effect</a></li>
+                                                            <li><a href="#">Slide effect</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane fade" id="single-product" role="tabpanel"
+                                                aria-labelledby="single-product-tab">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <h4 class="menu-title">SINGLE PRODUCT</h4>
+                                                        <ul class="mega-menu-list">
+                                                            <li><a href="#">Standard product</a></li>
+                                                            <li><a href="#">Sticky product</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="tab-pane fade" id="features" role="tabpanel"
+                                                aria-labelledby="features-tab">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <h4 class="menu-title">FEATURES</h4>
+                                                        <ul class="mega-menu-list">
+                                                            <li><a href="#">Feature element 1</a></li>
+                                                            <li><a href="#">Feature element 2</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            {{-- <li><a href="{{ route('shop.index') }}">Shop</a></li> --}}
                             <li><a href="{{ route('cart.index') }}">Cart</a></li>
                             <li><a href="{{ route('wishlist.index') }}">Wishlist</a></li>
                             <li><a href="{{ route('contact.index') }}">Contact</a></li>
@@ -76,17 +203,33 @@
                                 <!-- Header Search End -->
                             </div>
                         </div>
-
+                        @guest
                         <div class="dropdown">
                             <a class="action" href="#" role="button" data-bs-toggle="dropdown"><i
                                     class="pe-7s-user"></i></a>
 
                             <ul class="dropdown-menu dropdown-profile">
-                                <li><a href="my-account.html">My Account</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
-                                <li><a href="login.html">Sign In</a></li>
+                                <li><a href="{{ route('user.index')}}">My Account</a></li>
+                                <li><a href="{{ route('checkout.index') }}">Checkout</a></li>
+                                <li>
+                                    <a href="{{route('login')}}">Sign In</a>
+                                </li>
                             </ul>
                         </div>
+                        @else
+                        <div class="dropdown">
+                            <a class="action" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="pe-7s-user"></i></a>
+
+                            <ul class="dropdown-menu dropdown-profile">
+                                <li><a href="{{ route('user.index') }}">My Account</a></li>
+                                <li><a href="{{ route('checkout.index') }}">Checkout</a></li>
+                                <li>
+                                    <a href="{{ Auth::User()->utype ==='ADM' ? route('admin.index'):route('user.index')}}">Sign In</a>
+                                </li>
+                            </ul>
+                        </div>
+                           @endguest
                         <a class="action" href="{{ route('wishlist.index') }}"><i class="pe-7s-like"></i></a>
 
                         <div class="dropdown">
@@ -193,8 +336,56 @@
             </div>
             <!-- Canvas Close bar End -->
         </div>
-
         <div class="offcanvas-body">
+            <!-- Canvas Menu Start -->
+            <div class="canvas-menu">
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="{{ route('shop.index') }}">Products</a>
+                            <ul class="sub-menu">
+                                <li><a href="#">Categories 1</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="#">All info on hover</a></li>
+                                        <li><a href="#">Icons & Add to cart</a></li>
+                                        <li><a href="#">Icons on hover</a></li>
+                                        <li><a href="#">Quick shop</a></li>
+                                        <li><a href="#">Standard button</a></li>
+                                        <li><a href="#">Tiled hover</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">category 2</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="#">Standard loop</a></li>
+                                        <li><a href="#">Masonry loop</a></li>
+                                        <li><a href="#">Grid loop</a></li>
+                                        <li><a href="#">Zoom effect</a></li>
+                                        <li><a href="#">Hover effect</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">category 3</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="#">Standard product</a></li>
+                                        <li><a href="#">Sticky product</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">category 4</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="#">Feature element 1</a></li>
+                                        <li><a href="#">Feature element 2</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ route('cart.index') }}">Cart</a></li>
+                        <li><a href="{{ route('wishlist.index') }}">Wishlist</a></li>
+                        <li><a href="{{ route('contact.index') }}">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- Canvas Menu End -->
+        </div>
+        {{-- <div class="offcanvas-body">
             <!-- Canvas Menu Start -->
             <div class="canvas-menu">
                 <nav>
@@ -208,7 +399,7 @@
                 </nav>
             </div>
             <!-- Canvas Menu End -->
-        </div>
+        </div> --}}
     </div>
     <!-- off Canvas End -->
     @yield('content')

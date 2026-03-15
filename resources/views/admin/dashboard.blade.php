@@ -1,128 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-<!-- main content part here -->
-<!-- sidebar  -->
-<nav class="sidebar">
-    <div class="logo d-flex justify-content-between">
-        <a class="large_logo" href="dashboard.html"><img src="{{ asset('assets/images/fervour-logo.webp')}}" alt=""></a>
-        <a class="small_logo" href="dashboard.html"><img src="{{ asset('admin/img/mini-logo.webp') }}" alt=""></a>
-        <div class="sidebar_close_icon d-lg-none">
-            <i class="ti-close"></i>
-        </div>
-    </div>
-    <ul id="sidebar_menu">
-        <li class="">
-            <a href="dashboard.html" aria-expanded="false">
-                <div class="nav_icon_small">
-                    <img src="{{ asset('admin/img/menu-icon/dashboard.svg') }}" alt="">
-                </div>
-                <div class="nav_title">
-                    <span>Dashboard </span>
-                </div>
-            </a>
-        </li>
-        <li class="">
-            <a class="has-arrow" href="#" aria-expanded="false">
-                <div class="nav_icon_small">
-                    <img src="{{ asset('admin/img/menu-icon/17.svg') }}" alt="">
-                </div>
-                <div class="nav_title">
-                    <span>Brand </span>
-                </div>
-            </a>
-            <ul>
-                <li><a href="brand-add.html">Add Brand</a></li>
-                <li><a href="brands.html">Brands</a></li>
-            </ul>
-        </li>
-        <li class="">
-            <a class="has-arrow" href="#" aria-expanded="false">
-                <div class="nav_icon_small">
-                    <img src="{{ asset('admin/img/menu-icon/13.svg') }}" alt="">
-                </div>
-                <div class="nav_title">
-                    <span>Category </span>
-                </div>
-            </a>
-            <ul>
-                <li><a href="category-add.html">Add Category</a></li>
-                <li><a href="categories.html">Categories</a></li>
-            </ul>
-        </li>
-        <li class="">
-            <a class="has-arrow" href="#" aria-expanded="false">
-                <div class="nav_icon_small">
-                    <img src="{{ asset('admin/img/menu-icon/9.svg') }}" alt="">
-                </div>
-                <div class="nav_title">
-                    <span>Product </span>
-                </div>
-            </a>
-            <ul>
-                <li><a href="product-add.html">Add Product</a></li>
-                <li><a href="products.html">Products</a></li>
-            </ul>
-        </li>
-
-        <li class="">
-            <a href="orders.html" aria-expanded="false">
-                <div class="nav_icon_small">
-                    <img src="{{ asset('admin/img/menu-icon/11.svg') }}" alt="">
-                </div>
-                <div class="nav_title">
-                    <span>Orders </span>
-                </div>
-            </a>
-        </li>
-
-        <li class="">
-            <a href="slider.html" aria-expanded="false">
-                <div class="nav_icon_small">
-                    <img src="{{ asset('admin/img/menu-icon/6.svg') }}" alt="">
-                </div>
-                <div class="nav_title">
-                    <span>Sliders </span>
-                </div>
-            </a>
-        </li>
-
-        <li class="">
-            <a href="coupons.html" aria-expanded="false">
-                <div class="nav_icon_small">
-                    <img src="{{ asset('admin/img/menu-icon/20.svg') }}" alt="">
-                </div>
-                <div class="nav_title">
-                    <span>Coupons </span>
-                </div>
-            </a>
-        </li>
-
-        <li class="">
-            <a href="users.html" aria-expanded="false">
-                <div class="nav_icon_small">
-                    <img src="{{ asset('admin/img/menu-icon/4.svg') }}" alt="">
-                </div>
-                <div class="nav_title">
-                    <span>Users </span>
-                </div>
-            </a>
-        </li>
-
-        <li class="">
-            <a href="settings.html" aria-expanded="false">
-                <div class="nav_icon_small">
-                    <img src="{{ asset('admin/img/menu-icon/10.svg') }}" alt="">
-                </div>
-                <div class="nav_title">
-                    <span>Settings </span>
-                </div>
-            </a>
-        </li>
-    </ul>
-</nav>
-<!--/ sidebar  -->
 <section class="main_content dashboard_part large_header_bg">
-
     <!-- menu  -->
     <div class="container-fluid g-0">
         <div class="row">
@@ -140,15 +18,16 @@
                                 <div class="search_field">
                                     <input type="text" placeholder="Search">
                                 </div>
-                                <button type="submit"> <img src="{{ asset('admin/img/icon/icon_search.svg') }}" alt=""> </button>
+                                <button type="submit"> <img src="{{ asset('admin/img/icon/icon_search.svg') }}"
+                                        alt=""> </button>
                             </form>
                         </div>
                     </div>
                     <div class="header_right d-flex justify-content-between align-items-center">
                         <div class="header_notification_warp d-flex align-items-center">
                             <li>
-                                <a class="bell_notification_clicker" href="#"> <img src="{{asset('admin/img/icon/bell.svg')}}"
-                                        alt="">
+                                <a class="bell_notification_clicker" href="#"> <img
+                                        src="{{ asset('admin/img/icon/bell.svg') }}" alt="">
                                     <span>2</span>
                                 </a>
                                 <!-- Menu_NOtification_Wrap  -->
@@ -160,7 +39,8 @@
                                         <!-- single_notify  -->
                                         <div class="single_notify d-flex align-items-center">
                                             <div class="notify_thumb">
-                                                <a href="#"><img src="img/staf/2.png" alt=""></a>
+                                                <a href="#"><img src="{{ asset('admin/img/staf/2.png') }}"
+                                                        alt=""></a>
                                             </div>
                                             <div class="notify_content">
                                                 <a href="#">
@@ -172,7 +52,8 @@
                                         <!-- single_notify  -->
                                         <div class="single_notify d-flex align-items-center">
                                             <div class="notify_thumb">
-                                                <a href="#"><img src="img/staf/4.png" alt=""></a>
+                                                <a href="#"><img src="{{ asset('admin/img/staf/4.png') }}"
+                                                        alt=""></a>
                                             </div>
                                             <div class="notify_content">
                                                 <a href="#">
@@ -192,14 +73,21 @@
                             </li>
                         </div>
                         <div class="profile_info">
-                            <img src="img/client_img.png" alt="#">
+                            <img src="{{ asset('admin/img/client_img.png') }}" alt="#">
                             <div class="profile_info_iner">
                                 <div class="profile_author_name">
                                     <p>Admin </p>
                                 </div>
                                 <div class="profile_info_details">
                                     <a href="profile.html">My Profile </a>
-                                    <a href="#">Log Out </a>
+                                     <form method="POST" action="{{ route('logout') }}"  id="logout-form">
+                                        @csrf
+                                        <a href="{{ route('logout') }}" class="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <div class="icon"><i class="icon-settings"></i></div>
+                                            <div class="text">Log Out</div>
+                                        </a>
+                                    </form>
+                                    {{-- <a href="#">Log Out </a> --}}
                                 </div>
                             </div>
                         </div>
@@ -259,8 +147,7 @@
                                 </div>
                                 <div class="header_more_tool" bis_skin_checked="1">
                                     <div class="dropdown" bis_skin_checked="1">
-                                        <span class="dropdown-toggle" id="dropdownMenuButton"
-                                            data-bs-toggle="dropdown">
+                                        <span class="dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown">
                                             <i class="ti-more-alt"></i>
                                         </span>
                                         <div class="dropdown-menu dropdown-menu-right"

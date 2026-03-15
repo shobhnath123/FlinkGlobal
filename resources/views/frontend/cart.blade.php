@@ -1,6 +1,12 @@
 @extends('layouts.app')
 @section('content')
-<div class="section page-banner-section" style="background-image: url(assets/images/page-banner.jpg)">
+<div class="section">
+    <div class="shop_smoke_effect_wrapper">
+        <canvas width="1265" height="200"></canvas>
+        <h1 class="shop_smoke_effect_heading_wrapper" id="smoke-heading">Cart</h1>
+    </div>
+</div>
+{{-- <div class="section page-banner-section" style="background-image: url(assets/images/page-banner.jpg)">
     <div class="container">
         <!-- Page Banner Content End -->
         <div class="page-banner-content">
@@ -13,7 +19,7 @@
         </div>
         <!-- Page Banner Content End -->
     </div>
-</div>
+</div> --}}
 <!-- Page Banner Section End -->
 
 <!-- Shopping Cart Section Start -->
@@ -29,7 +35,7 @@
                     <img src="assets/images/cart.png" alt="Cart">
                 </div>
                 <p>No item found in your cart</p>
-                <a href="%7b%7broute(%27shop.html" class="btn btn-info btn-hover-dark">Continue browsing</a>
+                <a href="{{ route('shop.index') }}" class="btn btn-info btn-hover-dark">Continue browsing</a>
             </div>
             <!-- empty cart End -->
         </div>
@@ -53,7 +59,7 @@
                     <tbody>
                         <tr>
                             <td class="product-thumb">
-                                <img src="assets/images/product/product-03.jpg" alt="" />
+                                <img src="assets/images/product/3.webp" alt="" />
                             </td>
                             <td class="product-info">
                                 <h6 class="name">
@@ -90,7 +96,7 @@
                         </tr>
                         <tr>
                             <td class="product-thumb">
-                                <img src="assets/images/product/product-04.jpg" alt="" />
+                                <img src="assets/images/product/1.webp" alt="" />
                             </td>
                             <td class="product-info">
                                 <h6 class="name">

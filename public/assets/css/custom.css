@@ -9,9 +9,9 @@
 .widget-title {
     font-size: 20px;
     color: #ffffff;
-    background: #96b8ba;
+    background: #1C2434;
     padding: 8px 5px;
-    border-left: 5px solid #f2a100;
+    border-left: 5px solid #D4AF37;
 }
 
 .brand-logo {
@@ -26,7 +26,7 @@
 .brand-logo .single-brand-02 img {
     opacity: 1;
     border-radius: 50%;
-    border: 2px solid #f2a100 !important;
+    border: 2px solid #D4AF37 !important;
     padding: 5px;
 }
 
@@ -165,5 +165,219 @@ h1.shop_smoke_effect_heading_wrapper.transition-in [class^="letter"] {
 @media screen and (max-width: 600px) {
     .copyright .col-md-6 {
         text-align: center !important;
+    }
+}
+
+/* Desktop mega menu only */
+@media (min-width: 992px) {
+    .header-menu .nav-menu li.has-mega-menu {
+        position: relative;
+    }
+
+    .header-menu .nav-menu li.has-mega-menu>a {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .header-menu .mega-menu {
+        position: absolute;
+        top: 100%;
+        left: -300px;
+        width: 1000px;
+        max-width: calc(100vw - 40px);
+        background: #fff;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: all 0.3s ease;
+        z-index: 999;
+        border-radius: 8px;
+        overflow: visible;
+        transform: translateY(15px);
+        border: 1px solid #eaeaea;
+    }
+
+    /* Use reliable child selector and hover rules */
+    .header-menu ul li.has-mega-menu:hover>.mega-menu,
+    .has-mega-menu:hover>.mega-menu {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .header-menu .mega-menu {
+        left: -80px;
+        width: 800px;
+    }
+
+    .mega-menu-sidebar {
+        width: 200px;
+    }
+}
+
+/* Base styles for mega menu internal parts (apply everywhere if needed, or hide on mobile for simplicity) */
+.mega-menu-inner {
+    display: flex;
+    flex-wrap: nowrap;
+    min-height: 300px;
+}
+
+.mega-menu-sidebar {
+    width: 250px;
+    background: #1C2434;
+    padding: 20px 0;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.mega-sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: none;
+}
+
+.mega-sidebar-nav li {
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+}
+
+.mega-sidebar-nav li a {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 16px 30px !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    text-decoration: none !important;
+    transition: all 0.2s !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.mega-sidebar-nav li:hover a {
+    background-color: transparent !important;
+}
+
+.mega-sidebar-nav li a:hover,
+.mega-sidebar-nav li a.active,
+.mega-sidebar-nav li.active a {
+    background-color: #fff !important;
+    color: #D4AF37 !important;
+}
+
+.mega-menu-content {
+    flex: 1;
+    padding: 40px 30px;
+    background: #fff;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.mega-menu-content .menu-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    letter-spacing: 0.5px;
+}
+
+.mega-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mega-menu-list li {
+    margin-bottom: 14px;
+    line-height: normal;
+}
+
+.mega-menu-list li a {
+    color: #777 !important;
+    font-size: 14px !important;
+    text-decoration: none !important;
+    transition: color 0.2s !important;
+    display: inline-block !important;
+    position: relative !important;
+    padding: 0 !important;
+    background: none !important;
+}
+
+.mega-menu-list li a:hover {
+    color: #D4AF37 !important;
+}
+
+/* Badges */
+.mega-badge {
+    padding: 2px 6px;
+    border-radius: 12px;
+    font-size: 9px;
+    font-weight: 700;
+    margin-left: 6px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    line-height: 1;
+    display: inline-block;
+}
+
+.effect-badge {
+    background-color: #ffb800;
+    color: #fff;
+    position: absolute;
+    top: -16px;
+    right: -55px;
+    padding: 3px 8px;
+    font-size: 10px;
+}
+
+.effect-badge::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 10px;
+    border-width: 4px 4px 0 0;
+    border-style: solid;
+    border-color: #ffb800 transparent transparent transparent;
+}
+
+.new-badge {
+    background-color: #e51d2e;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.new-badge.orange {
+    background-color: #ffb800;
+}
+
+.sticky-sidebar {
+    position: sticky;
+    top: 0;
+    color: white;
+}
+.widget-socialfa a{
+    color: #cccc !important;
+} 
+.ec-footer-link{
+    color: #cccc !important;
+}
+
+/* Hide mega menu correctly on mobile if we included it */
+@media (max-width: 991px) {
+    .canvas-menu .mega-menu {
+        display: none;
     }
 }

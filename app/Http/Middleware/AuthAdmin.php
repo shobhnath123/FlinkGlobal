@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AuthAdmin
 {
@@ -16,12 +17,12 @@ class AuthAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-         if(Auth::check())
+        if(Auth::check())
         {
             if(Auth::user()->utype==='ADM'){
                 return $next($request);
             }else{
-                Session::flash();
+                Session::flash('error', 'Access denied. Admin only.');
                 return redirect()->route('login');
             }
         }else{

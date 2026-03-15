@@ -1,6 +1,12 @@
 @extends('layouts.app')
 @section('content')
-    <div class="section page-banner-section" style="background-image: url(assets/images/page-banner.jpg)">
+<div class="section">
+    <div class="shop_smoke_effect_wrapper">
+        <canvas width="1265" height="200"></canvas>
+        <h1 class="shop_smoke_effect_heading_wrapper" id="smoke-heading">Accoun</h1>
+    </div>
+</div>
+    {{-- <div class="section page-banner-section" style="background-image: url(assets/images/page-banner.jpg)">
         <div class="container">
             <!-- Page Banner Content End -->
             <div class="page-banner-content">
@@ -13,7 +19,7 @@
             </div>
             <!-- Page Banner Content End -->
         </div>
-    </div>
+    </div> --}}
     <!-- Page Banner Section End -->
 
     <!-- My Account Section Start -->

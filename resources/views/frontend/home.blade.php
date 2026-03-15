@@ -270,7 +270,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-product-02">
                                         <div class="product-images">
-                                            <a href="details.html"><img src="assets/images/product/product-01.jpg" width="270" height="303" alt="product" /></a>
+                                            <a href="details.html"><img src="assets/images/product/1.webp" width="270" height="303" alt="product" /></a>
 
                                             <ul class="product-meta">
                                                 <li>
@@ -307,7 +307,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-product-02">
                                         <div class="product-images">
-                                            <a href="details.html"><img src="assets/images/product/product-02.jpg" width="270" height="303" alt="product" /></a>
+                                            <a href="details.html"><img src="assets/images/product/2.webp" width="270" height="303" alt="product" /></a>
 
                                             <ul class="product-meta">
                                                 <li>
@@ -332,7 +332,7 @@
                                         </div>
                                         <div class="product-content">
                                             <h4 class="title">
-                                                <a href="details.html">Simple minimal Chair</a>
+                                                <a href="details.html">Simple minimal Light</a>
                                             </h4>
                                             <div class="price">
                                                 <span class="sale-price"
@@ -348,7 +348,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-product-02">
                                         <div class="product-images">
-                                            <a href="details.html"><img src="assets/images/product/product-03.jpg" width="270" height="303" alt="product" /></a>
+                                            <a href="details.html"><img src="assets/images/product/3.webp" width="270" height="303" alt="product" /></a>
 
                                             <ul class="product-meta">
                                                 <li>
@@ -385,7 +385,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-product-02">
                                         <div class="product-images">
-                                            <a href="details.html"><img src="assets/images/product/product-04.jpg" width="270" height="303" alt="product" /></a>
+                                            <a href="details.html"><img src="assets/images/product/4.webp" width="270" height="303" alt="product" /></a>
 
                                             <ul class="product-meta">
                                                 <li>
@@ -427,7 +427,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-product-02">
                                         <div class="product-images">
-                                            <a href="details.html"><img src="assets/images/product/product-05.jpg" width="270" height="303" alt="product" /></a>
+                                            <a href="details.html"><img src="assets/images/product/5.webp" width="270" height="303" alt="product" /></a>
 
                                             <ul class="product-meta">
                                                 <li>
@@ -453,7 +453,7 @@
                                         <div class="product-content">
                                             <h4 class="title">
                                                 <a href="details.html">Living & Bedroom
-                                                    Chair</a>
+                                                    Light</a>
                                             </h4>
                                             <div class="price">
                                                 <span class="sale-price"
@@ -469,7 +469,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-product-02">
                                         <div class="product-images">
-                                            <a href="details.html"><img src="assets/images/product/product-06.jpg" width="270" height="303" alt="product" /></a>
+                                            <a href="details.html"><img src="assets/images/product/1.webp" width="270" height="303" alt="product" /></a>
 
                                             <ul class="product-meta">
                                                 <li>
@@ -492,7 +492,7 @@
                                         <div class="product-content">
                                             <h4 class="title">
                                                 <a href="details.html">Herman Arm Grey
-                                                    Chair</a>
+                                                    Light</a>
                                             </h4>
                                             <div class="price">
                                                 <span class="sale-price"
@@ -506,7 +506,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-product-02">
                                         <div class="product-images">
-                                            <a href="details.html"><img src="assets/images/product/product-11.jpg" width="270" height="303" alt="product" /></a>
+                                            <a href="details.html"><img src="assets/images/product/3.webp" width="270" height="303" alt="product" /></a>
 
                                             <ul class="product-meta">
                                                 <li>
@@ -547,7 +547,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-product-02">
                                         <div class="product-images">
-                                            <a href="details.html"><img src="assets/images/product/product-08.jpg" width="270" height="303" alt="product" /></a>
+                                            <a href="details.html"><img src="assets/images/product/2.webp" width="270" height="303" alt="product" /></a>
 
                                             <ul class="product-meta">
                                                 <li>
@@ -597,7 +597,7 @@
                 <div class="col-lg-6">
                     <!-- Single Banner Start -->
                     <div class="single-banner-03">
-                        <img src="assets/images/banner/banner-05.jpg" width="570" height="299" alt="Banner" />
+                        <img src="https://placehold.co/570x299" width="570" height="299" alt="Banner" />
 
                         <div class="banner-content">
                             <h6 class="sub-title">High-Quality</h6>
@@ -613,7 +613,7 @@
                 <div class="col-lg-6">
                     <!-- Single Banner Start -->
                     <div class="single-banner-03">
-                        <img src="assets/images/banner/banner-06.jpg" width="570" height="299" alt="Banner" />
+                        <img src="https://placehold.co/570x299" width="570" height="299" alt="Banner" />
 
                         <div class="banner-content">
                             <h6 class="sub-title">Best-Quality</h6>
@@ -640,7 +640,7 @@
                         <!-- Countdown Content Start -->
                         <div class="countdown-content">
                             <h2 class="title">
-                                Chair Collection <span>50%</span> Off
+                                Light Collection <span>50%</span> Off
                             </h2>
                             <p>
                                 Lorem ipsum dolor sit amet, consectetur
@@ -701,7 +701,7 @@
                             <div class="shape-3"></div>
 
                             <div class="image-box">
-                                <img src="assets/images/countdown.png" width="480" height="383" alt="Countdown" />
+                                <img src="https://placehold.co/480x383" width="480" height="383" alt="Countdown" />
                             </div>
                         </div>
                         <!-- Countdown Images End -->
@@ -750,12 +750,12 @@
                                             <!-- Single Product Start -->
                                             <div class="single-product-02">
                                                 <div class="product-images">
-                                                    <a href="details.html"><img src="assets/images/product/product-12.jpg" width="270" height="303" alt="product" /></a>                                                   
+                                                    <a href="details.html"><img src="assets/images/product/4.webp" width="270" height="303" alt="product" /></a>                                                   
                                                 </div>
                                                 <div class="product-content">
                                                     <h4 class="title">
                                                         <a href="details.html">Modern Accent
-                                                            Chair</a>
+                                                            Light</a>
                                                     </h4>
                                                     <div class="price">
                                                         <span
@@ -770,7 +770,7 @@
                                             <!-- Single Product Start -->
                                             <div class="single-product-02">
                                                 <div class="product-images">
-                                                    <a href="details.html"><img src="assets/images/product/product-08.jpg" width="270" height="303" alt="product" /></a>
+                                                    <a href="details.html"><img src="assets/images/product/2.webp" width="270" height="303" alt="product" /></a>
                                                 </div>
                                                 <div class="product-content">
                                                     <h4 class="title">
@@ -790,7 +790,7 @@
                                             <!-- Single Product Start -->
                                             <div class="single-product-02">
                                                 <div class="product-images">
-                                                    <a href="details.html"><img src="assets/images/product/product-09.jpg" width="270" height="303" alt="product" /></a>                                                    
+                                                    <a href="details.html"><img src="assets/images/product/5.webp" width="270" height="303" alt="product" /></a>                                                    
                                                 </div>
                                                 <div class="product-content">
                                                     <h4 class="title">
@@ -810,12 +810,12 @@
                                             <!-- Single Product Start -->
                                             <div class="single-product-02">
                                                 <div class="product-images">
-                                                    <a href="details.html"><img src="assets/images/product/product-10.jpg" width="270" height="303" alt="product" /></a>                                                   
+                                                    <a href="details.html"><img src="assets/images/product/1.webp" width="270" height="303" alt="product" /></a>                                                   
                                                 </div>
                                                 <div class="product-content">
                                                     <h4 class="title">
                                                         <a href="details.html">Round Swivel
-                                                            Chair</a>
+                                                            Light</a>
                                                     </h4>
                                                     <div class="price">
                                                         <span
@@ -878,12 +878,12 @@
                                             <!-- Single Product Start -->
                                             <div class="single-product-02">
                                                 <div class="product-images">
-                                                    <a href="details.html"><img src="assets/images/product/product-12.jpg" width="270" height="303" alt="product" /></a>                                                    
+                                                    <a href="details.html"><img src="assets/images/product/4.webp" width="270" height="303" alt="product" /></a>                                                    
                                                 </div>
                                                 <div class="product-content">
                                                     <h4 class="title">
                                                         <a href="details.html">Modern Accent
-                                                            Chair</a>
+                                                            Light</a>
                                                     </h4>
                                                     <div class="price">
                                                         <span
@@ -898,7 +898,7 @@
                                             <!-- Single Product Start -->
                                             <div class="single-product-02">
                                                 <div class="product-images">
-                                                    <a href="details.html"><img src="assets/images/product/product-08.jpg" width="270" height="303" alt="product" /></a>                                                    
+                                                    <a href="details.html"><img src="assets/images/product/2.webp" width="270" height="303" alt="product" /></a>                                                    
                                                 </div>
                                                 <div class="product-content">
                                                     <h4 class="title">
@@ -918,7 +918,7 @@
                                             <!-- Single Product Start -->
                                             <div class="single-product-02">
                                                 <div class="product-images">
-                                                    <a href="details.html"><img src="assets/images/product/product-09.jpg" width="270" height="303" alt="product" /></a>                                                    
+                                                    <a href="details.html"><img src="assets/images/product/5.webp" width="270" height="303" alt="product" /></a>                                                    
                                                 </div>
                                                 <div class="product-content">
                                                     <h4 class="title">
@@ -938,12 +938,12 @@
                                             <!-- Single Product Start -->
                                             <div class="single-product-02">
                                                 <div class="product-images">
-                                                    <a href="details.html"><img src="assets/images/product/product-10.jpg" width="270" height="303" alt="product" /></a>                                                    
+                                                    <a href="details.html"><img src="assets/images/product/1.webp" width="270" height="303" alt="product" /></a>                                                    
                                                 </div>
                                                 <div class="product-content">
                                                     <h4 class="title">
                                                         <a href="details.html">Round Swivel
-                                                            Chair</a>
+                                                            Light</a>
                                                     </h4>
                                                     <div class="price">
                                                         <span

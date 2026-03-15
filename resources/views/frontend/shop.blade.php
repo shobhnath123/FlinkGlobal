@@ -1,7 +1,13 @@
 @extends('layouts.app')
 @section('content')
     <!-- Page Banner Section Start -->
-    <div class="section page-banner-section" style="background-image: url(assets/images/page-banner.jpg)">
+    <div class="section">
+    <div class="shop_smoke_effect_wrapper">
+        <canvas width="1265" height="200"></canvas>
+        <h1 class="shop_smoke_effect_heading_wrapper" id="smoke-heading">Product</h1>
+    </div>
+</div>
+    {{-- <div class="section page-banner-section" style="background-image: url(assets/images/page-banner.jpg)">
         <div class="container">
             <!-- Page Banner Content End -->
             <div class="page-banner-content">
@@ -13,7 +19,7 @@
             </div>
             <!-- Page Banner Content End -->
         </div>
-    </div>
+    </div> --}}
     <div class="section section-padding">
         <div class="container">
             <!-- Product Section Wrapper Start -->
@@ -63,7 +69,7 @@
                                         <div class="col-lg-4 col-sm-6">
                                             <!-- Single Product Start -->
                                             <div class="single-product">
-                                                <a href="#"><img src="assets/images/product/product-01.jpg"
+                                                <a href="#"><img src="assets/images/product/1.webp"
                                                         width="270" height="303" alt="product" /></a>
                                                 <div class="product-content">
                                                     <h4 class="title">
@@ -84,7 +90,7 @@
                                         <div class="col-lg-4 col-sm-6">
                                             <!-- Single Product Start -->
                                             <div class="single-product">
-                                                <a href="#"><img src="assets/images/product/product-02.jpg"
+                                                <a href="#"><img src="assets/images/product/2.webp"
                                                         width="270" height="303" alt="product" /></a>
                                                 <div class="product-content">
                                                     <h4 class="title">
@@ -105,7 +111,7 @@
                                         <div class="col-lg-4 col-sm-6">
                                             <!-- Single Product Start -->
                                             <div class="single-product">
-                                                <a href="#"><img src="assets/images/product/product-03.jpg"
+                                                <a href="#"><img src="assets/images/product/3.webp"
                                                         width="270" height="303" alt="product" /></a>
                                                 <div class="product-content">
                                                     <h4 class="title">
@@ -126,7 +132,7 @@
                                         <div class="col-lg-4 col-sm-6">
                                             <!-- Single Product Start -->
                                             <div class="single-product">
-                                                <a href="#"><img src="assets/images/product/product-04.jpg"
+                                                <a href="#"><img src="assets/images/product/4.webp"
                                                         width="270" height="303" alt="product" /></a>
                                                 <div class="product-content">
                                                     <h4 class="title">
@@ -147,7 +153,7 @@
                                         <div class="col-lg-4 col-sm-6">
                                             <!-- Single Product Start -->
                                             <div class="single-product">
-                                                <a href="#"><img src="assets/images/product/product-05.jpg"
+                                                <a href="#"><img src="assets/images/product/5.webp"
                                                         width="270" height="303" alt="product" /></a>
                                                 <div class="product-content">
                                                     <h4 class="title">
@@ -168,7 +174,7 @@
                                         <div class="col-lg-4 col-sm-6">
                                             <!-- Single Product Start -->
                                             <div class="single-product">
-                                                <a href="#"><img src="assets/images/product/product-06.jpg"
+                                                <a href="#"><img src="assets/images/product/1.webp"
                                                         width="270" height="303" alt="product" /></a>
                                                 <div class="product-content">
                                                     <h4 class="title">
@@ -189,7 +195,7 @@
                                         <div class="col-lg-4 col-sm-6">
                                             <!-- Single Product Start -->
                                             <div class="single-product">
-                                                <a href="#"><img src="assets/images/product/product-07.jpg"
+                                                <a href="#"><img src="assets/images/product/2.webp"
                                                         width="270" height="303" alt="product" /></a>
                                                 <div class="product-content">
                                                     <h4 class="title">
@@ -210,7 +216,7 @@
                                         <div class="col-lg-4 col-sm-6">
                                             <!-- Single Product Start -->
                                             <div class="single-product">
-                                                <a href="#"><img src="assets/images/product/product-08.jpg"
+                                                <a href="#"><img src="assets/images/product/3.webp"
                                                         width="270" height="303" alt="product" /></a>
                                                 <div class="product-content">
                                                     <h4 class="title">
@@ -231,7 +237,7 @@
                                         <div class="col-lg-4 col-sm-6">
                                             <!-- Single Product Start -->
                                             <div class="single-product">
-                                                <a href="#"><img src="assets/images/product/product-09.jpg"
+                                                <a href="#"><img src="assets/images/product/4.webp"
                                                         width="270" height="303" alt="product" /></a>
                                                 <div class="product-content">
                                                     <h4 class="title">
@@ -252,7 +258,7 @@
                                         <div class="col-lg-4 col-sm-6">
                                             <!-- Single Product Start -->
                                             <div class="single-product">
-                                                <a href="#"><img src="assets/images/product/product-10.jpg"
+                                                <a href="#"><img src="assets/images/product/5.webp"
                                                         width="270" height="303" alt="product" /></a>
                                                 <div class="product-content">
                                                     <h4 class="title">
@@ -273,7 +279,7 @@
                                         <div class="col-lg-4 col-sm-6">
                                             <!-- Single Product Start -->
                                             <div class="single-product">
-                                                <a href="#"><img src="assets/images/product/product-12.jpg"
+                                                <a href="#"><img src="assets/images/product/2.webp"
                                                         width="270" height="303" alt="product" /></a>
                                                 <div class="product-content">
                                                     <h4 class="title">
@@ -294,11 +300,11 @@
                                         <div class="col-lg-4 col-sm-6">
                                             <!-- Single Product Start -->
                                             <div class="single-product">
-                                                <a href="#"><img src="assets/images/product/product-13.jpg"
+                                                <a href="#"><img src="assets/images/product/1.webp"
                                                         width="270" height="303" alt="product" /></a>
                                                 <div class="product-content">
                                                     <h4 class="title">
-                                                        <a href="details.html">Wood Dining Table</a>
+                                                        <a href="details.html">Wood LED Sheet</a>
                                                     </h4>
                                                     <div class="price">
                                                         <span class="sale-price">$240.00</span>
@@ -323,7 +329,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-product-02 product-list">
                                         <div class="product-images">
-                                            <a href="#"><img src="assets/images/product/product-01.jpg"
+                                            <a href="#"><img src="assets/images/product/1.webp"
                                                     width="270" height="303" alt="product" /></a>
 
                                             <ul class="product-meta">
@@ -359,7 +365,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-product-02 product-list">
                                         <div class="product-images">
-                                            <a href="#"><img src="assets/images/product/product-02.jpg"
+                                            <a href="#"><img src="assets/images/product/2.webp"
                                                     width="270" height="303" alt="product" /></a>
 
                                             <ul class="product-meta">
@@ -395,7 +401,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-product-02 product-list">
                                         <div class="product-images">
-                                            <a href="#"><img src="assets/images/product/product-03.jpg"
+                                            <a href="#"><img src="assets/images/product/3.webp"
                                                     width="270" height="303" alt="product" /></a>
 
                                             <ul class="product-meta">
@@ -431,7 +437,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-product-02 product-list">
                                         <div class="product-images">
-                                            <a href="#"><img src="assets/images/product/product-04.jpg"
+                                            <a href="#"><img src="assets/images/product/4.webp"
                                                     width="270" height="303" alt="product" /></a>
 
                                             <ul class="product-meta">
@@ -467,7 +473,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-product-02 product-list">
                                         <div class="product-images">
-                                            <a href="#"><img src="assets/images/product/product-05.jpg"
+                                            <a href="#"><img src="assets/images/product/5.webp"
                                                     width="270" height="303" alt="product" /></a>
 
                                             <ul class="product-meta">
@@ -503,7 +509,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-product-02 product-list">
                                         <div class="product-images">
-                                            <a href="#"><img src="assets/images/product/product-06.jpg"
+                                            <a href="#"><img src="assets/images/product/1.webp"
                                                     width="270" height="303" alt="product" /></a>
 
                                             <ul class="product-meta">
@@ -539,7 +545,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-product-02 product-list">
                                         <div class="product-images">
-                                            <a href="#"><img src="assets/images/product/product-07.jpg"
+                                            <a href="#"><img src="assets/images/product/2.webp"
                                                     width="270" height="303" alt="product" /></a>
 
                                             <ul class="product-meta">
@@ -575,7 +581,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-product-02 product-list">
                                         <div class="product-images">
-                                            <a href="#"><img src="assets/images/product/product-08.jpg"
+                                            <a href="#"><img src="assets/images/product/3.webp"
                                                     width="270" height="303" alt="product" /></a>
 
                                             <ul class="product-meta">
@@ -611,7 +617,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-product-02 product-list">
                                         <div class="product-images">
-                                            <a href="#"><img src="assets/images/product/product-09.jpg"
+                                            <a href="#"><img src="assets/images/product/4.webp"
                                                     width="270" height="303" alt="product" /></a>
 
                                             <ul class="product-meta">
@@ -665,7 +671,7 @@
                     </div>
                     <div class="col-lg-3">
                         <!-- Sidebar Start -->
-                        <div class="sidebar">
+                        <div class="sidebar sticky-sidebar">
                             <!-- Sidebar Widget Start -->
                             <div class="sidebar-widget">
                                 <div class="widget-search">
@@ -685,31 +691,35 @@
                                     <ul class="checkbox-items">
                                         <li>
                                             <input type="checkbox" id="checkbox1">
-                                            <label for="checkbox1"> <span></span>Office Chair</label>
+                                            <label for="checkbox1"> <span></span>Controller</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" id="checkbox2">
-                                            <label for="checkbox2"> <span></span>Dining Chair</label>
+                                            <label for="checkbox2"> <span></span>Down Lights</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" id="checkbox3">
-                                            <label for="checkbox3"> <span></span>Office Table</label>
+                                            <label for="checkbox3"> <span></span>Down Lights Modular</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" id="checkbox4">
-                                            <label for="checkbox4"> <span></span>Dining Table</label>
+                                            <label for="checkbox4"> <span></span>LED Sheet</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" id="checkbox5">
-                                            <label for="checkbox5"> <span></span>Bed Light</label>
+                                            <label for="checkbox5"> <span></span>LED Strip</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" id="checkbox6">
-                                            <label for="checkbox6"> <span></span>Sofa Set</label>
+                                            <label for="checkbox6"> <span></span>Mirror</label>
                                         </li>
                                         <li>
                                             <input type="checkbox" id="checkbox7">
-                                            <label for="checkbox7"> <span></span>Office Chair</label>
+                                            <label for="checkbox7"> <span></span>Outdoor Lights</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="checkbox8">
+                                            <label for="checkbox8"> <span></span>Power Supply</label>
                                         </li>
                                     </ul>
                                 </div>
@@ -739,17 +749,17 @@
                             </div>
                             <!-- Sidebar Widget End -->
                             <!-- Sidebar Widget Start -->
-                            <div class="sidebar-widget">
+                            {{-- <div class="sidebar-widget">
 
                                 <h4 class="widget-title">Filter By Price</h4>
 
                                 <div class="widget-price">
                                     <input id="price-range" type="text">
                                 </div>
-                            </div>
+                            </div> --}}
                             <!-- Sidebar Widget End -->
                             <!-- Sidebar Widget Start -->
-                            <div class="sidebar-widget">
+                            {{-- <div class="sidebar-widget">
 
                                 <h4 class="widget-title">Filter By Color</h4>
 
@@ -784,10 +794,10 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> --}}
                             <!-- Sidebar Widget End -->
                             <!-- Sidebar Widget Start -->
-                            <div class="sidebar-widget">
+                            {{-- <div class="sidebar-widget">
 
                                 <h4 class="widget-title">Size</h4>
 
@@ -811,10 +821,10 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> --}}
                             <!-- Sidebar Widget End -->
                             <!-- Sidebar Widget Start -->
-                            <div class="sidebar-widget">
+                            {{-- <div class="sidebar-widget">
 
                                 <h4 class="widget-title">Tags</h4>
 
@@ -827,7 +837,7 @@
                                         <li><a href="#">Fashion</a></li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> --}}
                             <!-- Sidebar Widget End -->
                         </div>
                         <!-- Sidebar End -->
