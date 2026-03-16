@@ -10,118 +10,55 @@
 <!-- Contact Section Start -->
 <div class="section section-padding">
     <div class="container">
-        <!-- Contact Wrapper Start -->
-        <div class="contact-wrapper">
-            <div class="row gx-0">
-                <div class="col-lg-4">
-                    <div class="contact-info">
-                        <h2 class="title">About Info</h2>
+        <div class="countdown-main-wrapper">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <!-- Countdown Content Start -->
+                    <div class="count-content">
+                        <h2 class="title">
+                            Welcome to Fervour! <span></span>
+                        </h2>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur
-                            adipisicing elit sed eiusmod
+                            At Fervour, we believe that lighting serves not only to illuminate a space but also create
+                            ambiance and enhance its aesthetic appeal. We are committed to providing top-notch products
+                            at
+                            an economical price and ensuring that you find the perfect lighting products for your space.
                         </p>
+                        <p>
+                            Our range of products are designed to meet your lighting need. Explore our collection to
+                            discover lights tailored for a variety of applications and environments. From sleek and
+                            modern
+                            fixtures to customizable modules and frames, we provide a wide array of options to match
+                            various
+                            styles and preferences.
+                        </p>
+                        <p>
+                            What sets us apart is our commitment to quality. We do not sell under-quality products.
+                            Whether
+                            you’re an architect, designer, contractor, or simply an enthusiast looking to brighten up
+                            your
+                            space, Fervour is the brand for you to deliver top-notch lighting products that elevate your
+                            space.
+                        </p>
+                        <p>
+                            Fervour prioritize quality and satisfaction. To ensure the highest standards of quality and
+                            compliance, we only work with registered electricians who hold a valid EWR (Electrical
+                            Workers
+                            Registration) license.
+                        </p>
+                        <p>Experience the difference with Fervour hi-end lighting.</p>
 
-                        <!-- Contact Info Items Start -->
-                        <div class="contact-info-items">
-                            <div class="single-contact-info">
-                                <div class="info-icon">
-                                    <i class="pe-7s-call"></i>
-                                </div>
-                                <div class="info-content">
-                                    <p>
-                                        <a href="tel:+6493930900">+ 64 93 930 900</a>
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="single-contact-info">
-                                <div class="info-icon">
-                                    <i class="pe-7s-mail"></i>
-                                </div>
-                                <div class="info-content">
-                                    <p>
-                                        <a href="mailto:contact@flinkglobal.com">contact@flinkglobal.com</a>
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="single-contact-info">
-                                <div class="info-icon">
-                                    <i class="pe-7s-map-marker"></i>
-                                </div>
-                                <div class="info-content">
-                                    <p>The Gardens, Auckland</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Contact Info Items End -->
-
-                        <!-- Contact Social Start -->
-                        <ul class="social">
-                            <li>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-tumblr"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-facebook-f"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                            </li>
-                        </ul>
-                        <!-- Contact Social End -->
-
-                        <img src="assets/images/contact-info.png" alt="Contact-info" />
                     </div>
                 </div>
-                <div class="col-lg-8">
-                    <!-- Contact Form Start  -->
-                    <div class="contact-form">
-                        <form id="contact-form" action="#" method="post">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="single-form">
-                                        <input type="text" name="name" placeholder="Name*" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="single-form">
-                                        <input type="email" name="email" placeholder="Email*" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="single-form">
-                                        <input type="text" name="subject" placeholder="Subject" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="single-form">
-                                        <input type="text" name="phone" placeholder="Phone No" />
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="single-form">
-                                        <textarea name="message" placeholder="Write your comments here"></textarea>
-                                    </div>
-                                </div>
-                                <p class="form-message"></p>
-                                <div class="col-md-12">
-                                    <div class="single-form">
-                                        <button type="submit" class="btn btn-dark btn-hover-primary">
-                                            Submit Review
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                <div class="col-lg-5">
+                    <div class="countdown-images">
+                        <div class="image-box">
+                            <img src="assets/images/about-us.webp" width="480" height="383" alt="Countdown">
+                        </div>
                     </div>
-                    <!-- Contact Form End  -->
                 </div>
             </div>
         </div>
-        <!-- Contact Wrapper End -->
     </div>
-</div>
+    </section>
 @endsection

@@ -1,14 +1,15 @@
 <nav class="sidebar">
     <div class="logo d-flex justify-content-between">
-        <a class="large_logo" style="width: 100px;" href="dashboard.html"><img src="{{ asset('assets/images/fervour-logo.webp')}}" alt=""></a>
-        <a class="small_logo" href="dashboard.html"><img src="{{ asset('admin/img/mini-logo.webp') }}" alt=""></a>
+        <a class="large_logo" style="width: 100px;" href="{{ route('admin.index')}}"><img
+                src="{{ asset('assets/images/fervour-logo.webp') }}" alt=""></a>
+        <a class="small_logo" href="{{ route('admin.index')}}"><img src="{{ asset('admin/img/mini-logo.webp') }}" alt=""></a>
         <div class="sidebar_close_icon d-lg-none">
             <i class="ti-close"></i>
         </div>
     </div>
     <ul id="sidebar_menu">
         <li class="">
-            <a href="dashboard.html" aria-expanded="false">
+            <a href="{{ route('admin.index')}}" aria-expanded="false">
                 <div class="nav_icon_small">
                     <img src="{{ asset('admin/img/menu-icon/dashboard.svg') }}" alt="">
                 </div>
@@ -27,8 +28,8 @@
                 </div>
             </a>
             <ul>
-                <li><a href="brand-add.html">Add Brand</a></li>
-                <li><a href="brands.html">Brands</a></li>
+                <li><a href="{{ route('admin.brand.add') }}">Add Brand</a></li>
+                <li><a href="{{ route('admin.brands') }}">Brands</a></li>
             </ul>
         </li>
         <li class="">
@@ -41,8 +42,8 @@
                 </div>
             </a>
             <ul>
-                <li><a href="category-add.html">Add Category</a></li>
-                <li><a href="categories.html">Categories</a></li>
+                <li><a href="{{ route('admin.category.add') }}">Add Category</a></li>
+                <li><a href="{{ route('admin.categories') }}">Categories</a></li>
             </ul>
         </li>
         <li class="">
@@ -55,13 +56,13 @@
                 </div>
             </a>
             <ul>
-                <li><a href="product-add.html">Add Product</a></li>
-                <li><a href="products.html">Products</a></li>
+                <li><a href="{{ route('admin.product.add') }}">Add Product</a></li>
+                <li><a href="{{ route('admin.product.add') }}">Products</a></li>
             </ul>
         </li>
 
         <li class="">
-            <a href="orders.html" aria-expanded="false">
+            <a href="" aria-expanded="false">
                 <div class="nav_icon_small">
                     <img src="{{ asset('admin/img/menu-icon/11.svg') }}" alt="">
                 </div>
@@ -72,7 +73,7 @@
         </li>
 
         <li class="">
-            <a href="slider.html" aria-expanded="false">
+            <a href="{{ route('admin.slide.add') }}" aria-expanded="false">
                 <div class="nav_icon_small">
                     <img src="{{ asset('admin/img/menu-icon/6.svg') }}" alt="">
                 </div>
@@ -83,7 +84,7 @@
         </li>
 
         <li class="">
-            <a href="coupons.html" aria-expanded="false">
+            <a href="{{ route('admin.coupon.add') }}" aria-expanded="false">
                 <div class="nav_icon_small">
                     <img src="{{ asset('admin/img/menu-icon/20.svg') }}" alt="">
                 </div>
@@ -116,3 +117,99 @@
         </li>
     </ul>
 </nav>
+<section class="main_content dashboard_part large_header_bg">
+    <div class="container-fluid g-0">
+        <div class="row">
+            <div class="col-lg-12 p-0 ">
+                <div class="header_iner d-flex justify-content-between align-items-center">
+                    <div class="sidebar_icon d-lg-none">
+                        <i class="ti-menu"></i>
+                    </div>
+                    <div class="line_icon open_miniSide d-none d-lg-block">
+                        <img src="{{ asset('admin/img/line_img.png') }}" alt="">
+                    </div>
+                    <div class="serach_field-area d-flex align-items-center">
+                        <div class="search_inner">
+                            <form action="#">
+                                <div class="search_field">
+                                    <input type="text" placeholder="Search">
+                                </div>
+                                <button type="submit"> <img src="{{ asset('admin/img/icon/icon_search.svg') }}"
+                                        alt=""> </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="header_right d-flex justify-content-between align-items-center">
+                        <div class="header_notification_warp d-flex align-items-center">
+                            <li>
+                                <a class="bell_notification_clicker" href="#"> <img
+                                        src="{{ asset('admin/img/icon/bell.svg') }}" alt="">
+                                    <span>2</span>
+                                </a>
+                                <!-- Menu_NOtification_Wrap  -->
+                                <div class="Menu_NOtification_Wrap">
+                                    <div class="notification_Header">
+                                        <h4>Notifications</h4>
+                                    </div>
+                                    <div class="Notification_body">
+                                        <!-- single_notify  -->
+                                        <div class="single_notify d-flex align-items-center">
+                                            <div class="notify_thumb">
+                                                <a href="#"><img src="{{ asset('admin/img/staf/2.png') }}"
+                                                        alt=""></a>
+                                            </div>
+                                            <div class="notify_content">
+                                                <a href="#">
+                                                    <h5>Cool Marketing </h5>
+                                                </a>
+                                                <p>Lorem ipsum dolor sit amet</p>
+                                            </div>
+                                        </div>
+                                        <!-- single_notify  -->
+                                        <div class="single_notify d-flex align-items-center">
+                                            <div class="notify_thumb">
+                                                <a href="#"><img src="{{ asset('admin/img/staf/4.png') }}"
+                                                        alt=""></a>
+                                            </div>
+                                            <div class="notify_content">
+                                                <a href="#">
+                                                    <h5>Awesome packages</h5>
+                                                </a>
+                                                <p>Lorem ipsum dolor sit amet</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="nofity_footer">
+                                        <div class="submit_button text-center pt_20">
+                                            <a href="#" class="btn_1">See More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/ Menu_NOtification_Wrap  -->
+                            </li>
+                        </div>
+                        <div class="profile_info">
+                            <img src="{{ asset('admin/img/client_img.png') }}" alt="#">
+                            <div class="profile_info_iner">
+                                <div class="profile_author_name">
+                                    <p>Admin </p>
+                                </div>
+                                <div class="profile_info_details">
+                                    <a href="profile.html">My Profile </a>
+                                    <form method="POST" action="{{ route('logout') }}" id="logout-form">
+                                        @csrf
+                                        <a href="{{ route('logout') }}" class=""
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <div class="icon"><i class="icon-settings"></i></div>
+                                            <div class="text">Log Out</div>
+                                        </a>
+                                    </form>
+                                    {{-- <a href="#">Log Out </a> --}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

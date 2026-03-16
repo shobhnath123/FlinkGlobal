@@ -7,10 +7,10 @@
                 <div class="col-12">
                     <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
                         <div class="page_title_left d-flex align-items-center">
-                            <h3 class="f_s_25 f_w_700 dark_text mr_30">Products</h3>
+                            <h3 class="f_s_25 f_w_700 dark_text mr_30">Coupons</h3>
                             <ol class="breadcrumb page_bradcam mb-0">
                                 <li class="breadcrumb-item"><a href="dashboard.html">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Products</li>
+                                <li class="breadcrumb-item active">Coupons</li>
                             </ol>
                         </div>
                         <div class="page_title_right">
@@ -29,12 +29,12 @@
                                 <div class="col-6">
                                     <div class="box_header m-0">
                                         <div class="main-title">
-                                            <h3 class="m-0">Products</h3>
+                                            <h3 class="m-0">Coupons</h3>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <a href="product-add.html" class="btn btn-sm btn-outline-primary float-end"
+                                    <a href="coupon-add.html" class="btn btn-sm btn-outline-primary float-end"
                                         style="display: flex; align-items: center; vertical-align: middle;">
                                         <i class="material-icons" style="margin-right: 4px;">add</i>
                                         Add New
@@ -47,49 +47,24 @@
                                 <table class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Name</th>
-                                            <th>Price</th>
-                                            <th>SalePrice</th>
-                                            <th>SKU</th>
-                                            <th>Category</th>
-                                            <th>Brand</th>
-                                            <th>Featured</th>
-                                            <th>Stock</th>
-                                            <th>Quantity</th>
-                                            <th>Action</th>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Code Type</th>
+                                            <th scope="col">Value</th>
+                                            <th scope="col">Cart Value</th>
+                                            <th scope="col">Expiry Date</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>6</td>
-                                            <td>
-                                                <img src="img/products/img-5.png" alt="" height="52">
-                                                <p class="d-inline-block align-middle mb-0">
-                                                    <a href="#"
-                                                        class="d-inline-block align-middle mb-0 f_s_16 f_w_600 color_theme2">
-                                                        Reebok Beg
-                                                    </a>
-                                                    <br>
-                                                    <span class="text-muted font_s_13">size-08 (Model 2025)</span>
-                                                </p>
-                                            </td>
-                                            <td>$128.00</td>
-                                            <td>$110.00</td>
-                                            <td>SKU7868</td>
-                                            <td>Category3</td>
-                                            <td>Brand2</td>
-                                            <td>Yes</td>
-                                            <td>instock</td>
-                                            <td>11</td>
+                                            <th scope="row">1</th>
+                                            <td>Off10</td>
+                                            <td>10</td>
+                                            <td>200</td>
+                                            <td>05-05-2025</td>
                                             <td>
                                                 <div class="list-icon-function" bis_skin_checked="1">
-                                                    <a href="#" target="_blank">
-                                                        <div class="item eye" bis_skin_checked="1">
-                                                            <i class="fa fa-eye"></i>
-                                                        </div>
-                                                    </a>
-                                                    <a href="product-edit.html">
+                                                    <a href="coupon-edit.html">
                                                         <div class="item edit" bis_skin_checked="1">
                                                             <i class="fa fa-edit"></i>
                                                         </div>

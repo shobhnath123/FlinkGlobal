@@ -17,17 +17,15 @@ class AuthAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check())
-        {
-            if(Auth::user()->utype==='ADM'){
-                return $next($request);
-            }else{
-                Session::flash('error', 'Access denied. Admin only.');
-                return redirect()->route('login');
-            }
-        }else{
-            return redirect()->route('login');          
-           
+        if (!auth()->check()) {
+            return redirect()->route('login');
         }
+
+        if (auth()->user()->utype !== 'ADM') {
+            return redirect()->route('home.index')
+                ->with('error', 'Access denied. Admin only.');
+        }
+
+        return $next($request);
     }
 }
