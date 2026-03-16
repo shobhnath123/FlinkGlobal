@@ -53,47 +53,16 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('admin')->middleware(['auth', AuthAdmin::class])->group(function(){
-
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.index');
+    Route::resources([
+        'brands' => BrandController::class,
+        'categories' => CategoriesController::class,
+        'products'=> ProductController::class,
+        'orders' => OrderController::class,
+        'coupons' => CouponController::class,
+        'slides' => SliderController::class
 
-    Route::get('/brands', [BrandController::class,'index'])->name('admin.brands');
-    Route::get('/brand/add', [BrandController::class,'create'])->name('admin.brand.add');
-
-    Route::get('/categories', [CategoriesController::class,'index'])->name('admin.categories');
-    Route::get('/category/add', [CategoriesController::class,'create'])->name('admin.category.add');
-
-    Route::get('/products', [ProductController::class,'index'])->name('admin.products');
-    Route::get('/product/add', [ProductController::class,'create'])->name('admin.product.add');
-
-    Route::get('/coupons', [CouponController::class,'index'])->name('admin.coupons');
-    Route::get('/coupon/add', [CouponController::class,'create'])->name('admin.coupon.add');
-
-    Route::get('/orders', [OrderController::class,'index'])->name('admin.orders');
-    Route::get('/order/{order_id}/details', [OrderController::class,'create'])->name('admin.order.details');
-
-    Route::get('/slides', [SliderController::class,'index'])->name('admin.slides');
-    Route::get('/slide/add', [SliderController::class,'create'])->name('admin.slide.add');
-
+    ]);
 });
-//  Route::middleware(['auth',AuthAdmin::class])->group(function(){
-//     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.index');
 
-// Route::get('/admin/brands', [BrandController::class,'index'])->name('admin.brands');
-// Route::get('/admin/brand/add', [BrandController::class,'create'])->name('admin.brand.add');
-
-// Route::get('/admin/categories', [CategoriesController::class,'index'])->name('admin.categories');
-// Route::get('/admin/category/add', [CategoriesController::class,'create'])->name('admin.category.add');
-
-// Route::get('/admin/products', [ProductController::class,'index'])->name('admin.products');
-// Route::get('/admin/product/add', [ProductController::class,'create'])->name('admin.product.add');
-
-// Route::get('/admin/coupons', [CouponController::class,'index'])->name('admin.coupons');
-// Route::get('/admin/coupon/add', [CouponController::class,'create'])->name('admin.coupon.add');
-
-// Route::get('/admin/orders', [OrderController::class,'index'])->name('admin.orders');
-// Route::get('/admin/order/{order_id}/details', [OrderController::class,'create'])->name('admin.order.details');
-
-// Route::get('/admin/slides', [SliderController::class,'index'])->name('admin.slides');
-// Route::get('/admin/slide/add', [SliderController::class,'create'])->name('admin.slide.add');
-// });
 require __DIR__.'/auth.php';

@@ -28,8 +28,8 @@
                 </div>
             </a>
             <ul>
-                <li><a href="{{ route('admin.brand.add') }}">Add Brand</a></li>
-                <li><a href="{{ route('admin.brands') }}">Brands</a></li>
+                <li><a href="{{ route('brands.create') }}">Add Brand</a></li>
+                <li><a href="{{ route('brands.index') }}">Brands</a></li>
             </ul>
         </li>
         <li class="">
@@ -42,8 +42,8 @@
                 </div>
             </a>
             <ul>
-                <li><a href="{{ route('admin.category.add') }}">Add Category</a></li>
-                <li><a href="{{ route('admin.categories') }}">Categories</a></li>
+                <li><a href="{{ route('categories.create') }}">Add Category</a></li>
+                <li><a href="{{ route('categories.index') }}">Categories</a></li>
             </ul>
         </li>
         <li class="">
@@ -56,8 +56,8 @@
                 </div>
             </a>
             <ul>
-                <li><a href="{{ route('admin.product.add') }}">Add Product</a></li>
-                <li><a href="{{ route('admin.product.add') }}">Products</a></li>
+                <li><a href="{{ route('products.create') }}">Add Product</a></li>
+                <li><a href="{{ route('products.index') }}">Products</a></li>
             </ul>
         </li>
 
@@ -73,7 +73,7 @@
         </li>
 
         <li class="">
-            <a href="{{ route('admin.slide.add') }}" aria-expanded="false">
+            <a href="{{ route('slides.create') }}" aria-expanded="false">
                 <div class="nav_icon_small">
                     <img src="{{ asset('admin/img/menu-icon/6.svg') }}" alt="">
                 </div>
@@ -82,9 +82,8 @@
                 </div>
             </a>
         </li>
-
         <li class="">
-            <a href="{{ route('admin.coupon.add') }}" aria-expanded="false">
+            <a href="{{ route('coupons.create') }}" aria-expanded="false">
                 <div class="nav_icon_small">
                     <img src="{{ asset('admin/img/menu-icon/20.svg') }}" alt="">
                 </div>

@@ -1,6 +1,5 @@
 @extends('layouts.admin')
 @section('content')
-
 <div class="main_content_iner overly_inner ">
     <div class="container-fluid p-0 ">
         <!-- page title  -->
@@ -35,7 +34,7 @@
                                 </div>
                             </div>
                             <div class="col-6">
-                                <a href="brand-add.html" class="btn btn-sm btn-outline-primary float-end"
+                                <a href="{{ route('brands.create') }}" class="btn btn-sm btn-outline-primary float-end"
                                     style="display: flex; align-items: center; vertical-align: middle;">
                                     <i class="material-icons" style="margin-right: 4px;">add</i>
                                     Add New
@@ -50,40 +49,53 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Name</th>
-                                        <th scope="col">Slug</th>
                                         <th scope="col">Products</th>
+                                        <th scope="col">Slug</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($brands as $key => $brand)
                                     <tr>
-                                        <th scope="row">1</th>
+                                        <th scope="row">{{ $key + 1 }}</th>
+                                       
                                         <td>
                                             <div class="customer d-flex align-items-center">
                                                 <div class="thumb_34 mr_15 mt-0"><img class="img-fluid radius_50"
-                                                        src="img/customers/pro_1.png" alt=""></div>
-                                                <span class="f_s_12 f_w_600 color_text_5">Brand 1</span>
+                                                        src="{{ asset('storage/'.$brand->image) }}" alt=""></div>
+                                                <span class="f_s_12 f_w_600 color_text_5">{{ $brand->name }}</span>
                                             </div>
                                         </td>
-                                        <td>brand-1</td>
-                                        <td>2</td>
-                                        <td>
-                                            <div class="list-icon-function" bis_skin_checked="1">
-                                                <a href="brand-edit.html">
-                                                    <div class="item edit" bis_skin_checked="1">
-                                                        <i class="fa fa-edit"></i>
+                                        <td>{{ $brand->name }}</td>
+                                        <td>{{ $brand->slug }}</td>
+                                         <td>
+                                            <div scope="row" bis_skin_checked="1">
+                                                <div class="dropdown" bis_skin_checked="1">
+                                                    <span class="dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                                                        <i class="ti-more-alt"></i>
+                                                    </span>
+                                                    <div class="dropdown-menu dropdown-menu-right"
+                                                        aria-labelledby="dropdownMenuButton" bis_skin_checked="1">
+                                                        <a class="dropdown-item" href="#"> <i class="ti-eye"></i>
+                                                            Action</a>
+                                                            <a class="dropdown-item" href="{{ route('brands.edit',$brand->id) }}"> <i class="fas fa-edit"></i>
+                                                            Edit</a>
+                                                            <form action="{{ route('brands.destroy',$brand->id) }}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <a class="dropdown-item" href="#"> <i class="ti-trash"></i>
+                                                                Delete</a>
+                                                            </form>
+                                                        
                                                     </div>
-                                                </a>
-                                                <form action="#" method="POST">
-                                                    <div class="item text-danger delete" bis_skin_checked="1">
-                                                        <i class="fa fa-trash"></i>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </div> 
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
+                            {{ $brands->links() }}
                         </div>
                     </div>
                 </div>

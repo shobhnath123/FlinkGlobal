@@ -34,22 +34,23 @@
                         </div>
                         <div class="white_card_body">
                             <div class="card-body">
-                                <form data-parsley-validate>
+                                <form action="{{ route('brands.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <label class="form-label" for="name">Name</label>
-                                            <input type="text" class="form-control" id="name" placeholder=""
+                                            <input type="text" class="form-control" name="name" value="{{ old('name') }}" id="name" placeholder=""
                                                 required data-parsley-trigger="change">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label" for="slug">Slug</label>
-                                            <input type="text" class="form-control" id="slug" placeholder=""
+                                            <input type="text" class="form-control" name="slug" value="{{ old('slug') }}" id="slug" placeholder=""
                                                 required data-parsley-trigger="change">
                                         </div>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="image">Image</label>
-                                        <input type="file" class="form-control" id="image" accept="image/*"
+                                        <input type="file" class="form-control" id="image"  name="image" accept="image/*"
                                             onchange="previewImage(event)" required data-parsley-trigger="change">
                                     </div>
                                     <div class="mb-3">
@@ -70,4 +71,52 @@
             </div>
         </div>
     </div>
+    <script>
+function previewImage(event) {
+
+    const input = event.target;
+    const preview = document.getElementById('image-preview');
+    const removeBtn = document.getElementById('remove-image');
+
+    if (input.files && input.files[0]) {
+
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+            removeBtn.style.display = 'inline-block';
+
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function removeImage() {
+
+    const input = document.getElementById('image');
+    const preview = document.getElementById('image-preview');
+    const removeBtn = document.getElementById('remove-image');
+
+    input.value = "";
+    preview.src = "#";
+    preview.style.display = "none";
+    removeBtn.style.display = "none";
+
+}
+</script>
+<script>
+document.getElementById('name').addEventListener('keyup', function(){
+
+    let slug = this.value
+        .toLowerCase()
+        .replace(/[^\w ]+/g,'')
+        .replace(/ +/g,'-');
+
+    document.getElementById('slug').value = slug;
+
+});
+</script>
 @endsection

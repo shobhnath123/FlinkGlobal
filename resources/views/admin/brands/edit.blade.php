@@ -34,34 +34,42 @@
                         </div>
                         <div class="white_card_body">
                             <div class="card-body">
-                                <form data-parsley-validate>
+                                <form action="{{ route('brands.update', $brand->id) }}" method="POST"
+                                    enctype="multipart/form-data" data-parsley-validate>
+
+                                    @csrf
+                                    @method('PUT')
+
                                     <div class="row mb-3">
                                         <div class="col-md-6">
-                                            <label class="form-label" for="name">Name</label>
-                                            <input type="text" class="form-control" id="name" placeholder=""
-                                                required data-parsley-trigger="change">
+                                            <label class="form-label">Name</label>
+                                            <input type="text" name="name" id="name" class="form-control"
+                                                value="{{ $brand->name }}" required data-parsley-trigger="change">
                                         </div>
+
                                         <div class="col-md-6">
-                                            <label class="form-label" for="slug">Slug</label>
-                                            <input type="text" class="form-control" id="slug" placeholder=""
-                                                required data-parsley-trigger="change">
+                                            <label class="form-label">Slug</label>
+                                            <input type="text" name="slug" id="slug" class="form-control"
+                                                value="{{ $brand->slug }}" required data-parsley-trigger="change">
                                         </div>
                                     </div>
+
                                     <div class="mb-3">
-                                        <label class="form-label" for="image">Image</label>
-                                        <input type="file" class="form-control" id="image" accept="image/*"
-                                            onchange="previewImage(event)" required data-parsley-trigger="change">
+                                        <label class="form-label">Image</label>
+                                        <input type="file" name="image" class="form-control" id="myfile"
+                                            accept="image/*">
                                     </div>
                                     <div class="mb-3">
-                                        <img id="image-preview" src="#" alt="Image Preview"
-                                            style="display: none; max-width: 120px; height: auto;">
+                                        <img 
+                                            id="image-preview"
+                                            src="{{ $brand->image ? asset('storage/'.$brand->image) : '' }}"
+                                            width="120"
+                                            style="{{ $brand->image ? '' : 'display:none;' }}">
                                     </div>
-                                    <div class="mb-3">
-                                        <button type="button" class="btn btn-danger btn-sm" id="remove-image"
-                                            style="display: none;" onclick="removeImage()">Remove Image</button>
-                                        <p id="message" style="color: green;"></p>
+                                    <div id="imgpreview" class="mb-3" style="display:none;">
+                                        <img src="" width="120">
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Update Brand</button>
                                 </form>
                             </div>
                         </div>
@@ -70,4 +78,30 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script>
+            $(function() {
+
+                $("#myfile").on("change", function() {
+                    const [file] = this.files;
+
+                    if (file) {
+                        $("#imgpreview img").attr('src', URL.createObjectURL(file));
+                        $("#imgpreview").show();
+                    }
+                });
+
+                $("#name").on("keyup", function() {
+                    $("#slug").val(StringToSlug($(this).val()));
+                });
+
+            });
+
+            function StringToSlug(Text) {
+                return Text.toLowerCase()
+                    .replace(/[^\w ]+/g, '')
+                    .replace(/ +/g, '-');
+            }
+        </script>
+    @endpush
 @endsection
