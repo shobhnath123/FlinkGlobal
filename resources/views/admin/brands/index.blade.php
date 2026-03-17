@@ -83,10 +83,11 @@
                                                             <form action="{{ route('brands.destroy',$brand->id) }}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <a class="dropdown-item" href="#"> <i class="ti-trash"></i>
-                                                                Delete</a>
+                                                                <button type="submit" class="dropdown-item"
+                                                                    onclick="return confirm('Are you sure you want to delete this brand?')">
+                                                                    <i class="ti-trash"></i> Delete
+                                                                </button>
                                                             </form>
-                                                        
                                                     </div>
                                                 </div>
                                             </div> 

@@ -34,7 +34,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <a href="product-add.html" class="btn btn-sm btn-outline-primary float-end"
+                                    <a href="{{ route('products.create') }}" class="btn btn-sm btn-outline-primary float-end"
                                         style="display: flex; align-items: center; vertical-align: middle;">
                                         <i class="material-icons" style="margin-right: 4px;">add</i>
                                         Add New
@@ -61,49 +61,59 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                         @foreach($products as $key => $product)
                                         <tr>
-                                            <td>6</td>
+                                            <td>{{$product->id}}</td>
                                             <td>
-                                                <img src="img/products/img-5.png" alt="" height="52">
+                                                <img src="{{ asset('storage/'.$product->image) }}" alt="" height="52">
                                                 <p class="d-inline-block align-middle mb-0">
                                                     <a href="#"
                                                         class="d-inline-block align-middle mb-0 f_s_16 f_w_600 color_theme2">
-                                                        Reebok Beg
+                                                        {{ $product->name??'' }}
                                                     </a>
                                                     <br>
-                                                    <span class="text-muted font_s_13">size-08 (Model 2025)</span>
+                                                    {{-- <span class="text-muted font_s_13">size-08 (Model 2025)</span> --}}
                                                 </p>
                                             </td>
-                                            <td>$128.00</td>
-                                            <td>$110.00</td>
-                                            <td>SKU7868</td>
-                                            <td>Category3</td>
-                                            <td>Brand2</td>
-                                            <td>Yes</td>
-                                            <td>instock</td>
-                                            <td>11</td>
+                                            <td>${{ $product->regular_price??'' }}</td>
+                                            <td>${{ $product->sale_price??'' }}</td>
+                                            <td>{{ $product->sku??'' }}</td>
+                                            <td>{{ $product->category->name ?? '' }}</td>
+                                            <td>{{ $product->brand->name ?? '' }}</td>
+                                            <td>{{ $product->featured ? 'Yes' : 'No' }}</td>
+                                            <td>{{ $product->stock }}</td>
+                                            <td>{{ $product->quantity }}</td>
                                             <td>
-                                                <div class="list-icon-function" bis_skin_checked="1">
-                                                    <a href="#" target="_blank">
-                                                        <div class="item eye" bis_skin_checked="1">
-                                                            <i class="fa fa-eye"></i>
+                                                <div scope="row" bis_skin_checked="1">
+                                                    <div class="dropdown" bis_skin_checked="1">
+                                                        <span class="dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                                                            <i class="ti-more-alt"></i>
+                                                        </span>
+                                                        <div class="dropdown-menu dropdown-menu-right"
+                                                            aria-labelledby="dropdownMenuButton" bis_skin_checked="1">
+                                                            <a class="dropdown-item" href="#"> <i class="ti-eye"></i>
+                                                                Action</a>
+                                                                <a class="dropdown-item" href="{{ route('products.edit',$product->id) }}"> <i class="fas fa-edit"></i>
+                                                                Edit</a>
+                                                                <form action="{{ route('products.destroy',$product->id) }}" method="POST">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="dropdown-item"
+                                                                        onclick="return confirm('Are you sure you want to delete this products?')">
+                                                                        <i class="ti-trash"></i> Delete
+                                                                    </button>
+                                                                </form>
                                                         </div>
-                                                    </a>
-                                                    <a href="product-edit.html">
-                                                        <div class="item edit" bis_skin_checked="1">
-                                                            <i class="fa fa-edit"></i>
-                                                        </div>
-                                                    </a>
-                                                    <form action="#" method="POST">
-                                                        <div class="item text-danger delete" bis_skin_checked="1">
-                                                            <i class="fa fa-trash"></i>
-                                                        </div>
-                                                    </form>
+                                                    </div>
                                                 </div>
                                             </td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
+                                <div class="d-flex justify-content-left">
+                                    {{ $products->links() }}
+                                </div>  
                             </div>
                         </div>
                     </div>

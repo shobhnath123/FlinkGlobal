@@ -9,8 +9,8 @@
                         <div class="page_title_left d-flex align-items-center">
                             <h3 class="f_s_25 f_w_700 dark_text mr_30">New Product</h3>
                             <ol class="breadcrumb page_bradcam mb-0">
-                                <li class="breadcrumb-item"><a href="dashboard.html">Dashbord</a></li>
-                                <li class="breadcrumb-item"><a href="products.html">Products</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashbord</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('products.index') }}">Products</a></li>
                                 <li class="breadcrumb-item active">New Product</li>
                             </ol>
                         </div>
@@ -24,60 +24,60 @@
             </div>
             <div class="row ">
                 <div class="col-lg-12">
-                    <div class="white_card card_height_100 mb_30">
-                        <div class="white_card_header">
-                            <div class="box_header m-0">
-                                <div class="main-title">
-                                    <h3 class="m-0">New Product</h3>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="white_card card_height_100 mb_30">                        
                         <div class="white_card_body">
                             <div class="card-body">
-                                <form data-parsley-validate>
+                                <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data" data-parsley-validate>
+                                    @csrf
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <label class="form-label" for="name">Name</label>
-                                            <input type="text" class="form-control" id="name" placeholder=""
-                                                required>
+                                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" id="name" placeholder="" required>
+                                           @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label" for="slug">Slug</label>
-                                            <input type="text" class="form-control" id="slug" placeholder=""
+                                            <input type="text" class="form-control @error('name') is-invalid @enderror" name="slug" value="{{ old('slug') }}" id="slug" placeholder=""
                                                 required>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-md-6">
-                                            <label class="form-label" for="category">Category</label>
-                                            <select class="form-select" id="category" required>
+                                            <label class="form-label" for="category">Category</label>                                           
+                                            <select name="category_id" class="form-select" required>
                                                 <option value="">Select Category</option>
-                                                <option value="category1">Category 1</option>
-                                                <option value="category2">Category 2</option>
-                                                <option value="category3">Category 3</option>
+                                                @foreach($categories as $category)
+                                                    <option value="{{ $category->id }}" 
+                                                        {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                                        {{ $category->name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="col-md-6">
-                                            <label class="form-label" for="brand">Brand</label>
-                                            <select class="form-select" id="brand" required>
+                                            <label class="form-label" for="brand">Brand</label>                                           
+                                            <select name="brand_id" id="brand" class="form-select">
                                                 <option value="">Select Brand</option>
-                                                <option value="brand1">Brand 1</option>
-                                                <option value="brand2">Brand 2</option>
-                                                <option value="brand3">Brand 3</option>
+                                                @foreach($brands as $brand)
+                                                   <option value="{{ $brand->id }}" 
+                                                    {{ old('brand_id') == $brand->id ? 'selected' : '' }}>
+                                                    {{ $brand->name }}
+                                                </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="short-description">Short Description</label>
-                                        <textarea class="form-control" id="short-description" required></textarea>
+                                        <textarea class="form-control" name="short_description" id="short-description" required>{{ old('short_description') }}</textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="information">Information</label>
-                                        <textarea class="form-control" id="information" rows="3" required></textarea>
+                                        <textarea class="form-control" name="information" value="{{ old('information') }}" id="information" rows="3" required></textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="description">Description</label>
-                                        <textarea class="form-control" id="description" rows="3" required></textarea>
+                                        <textarea class="form-control" name="description" value="{{ old('description') }}" id="description" rows="3" required></textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="image">Upload Image</label>
@@ -97,39 +97,46 @@
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <label class="form-label" for="regular-price">Regular Price</label>
-                                            <input type="text" class="form-control" id="regular-price" placeholder=""
+                                            <input type="text" name="regular_price" value="{{ old('regular_price') }}" class="form-control" id="regular-price" placeholder=""
                                                 required>
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label" for="sale-price">Sale Price</label>
-                                            <input type="text" class="form-control" id="sale-price" placeholder="">
+                                            <input type="text" name="sale_price" value="{{ old('sale_price') }}" class="form-control" id="sale-price" placeholder="">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <label class="form-label" for="sku">SKU</label>
-                                            <input type="text" class="form-control" id="sku" placeholder=""
+                                            <input type="text" name="sku" value="{{ old('sku') }}" class="form-control" id="sku" placeholder=""
                                                 required>
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label" for="quantity">Quantity</label>
-                                            <input type="number" class="form-control" id="quantity" placeholder=""
+                                            <input type="number"  name="quantity" value="{{ old('quantity') }}" class="form-control" id="quantity" placeholder=""
                                                 required>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <label class="form-label" for="stock">Stock</label>
-                                            <select class="form-select" id="stock" required>
-                                                <option value="in-stock">In Stock</option>
-                                                <option value="out-of-stock">Out of Stock</option>
+                                            <select class="form-select" name="stock" id="stock" required>
+                                           <option value="in-stock" 
+                                                {{ old('stock', $product->stock ?? '') == 'in-stock' ? 'selected' : '' }}>
+                                                In Stock
+                                            </option>
+
+                                            <option value="out-of-stock" 
+                                                {{ old('stock', $product->stock ?? '') == 'out-of-stock' ? 'selected' : '' }}>
+                                                Out of Stock
+                                            </option>
                                             </select>
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label" for="featured">Featured</label>
-                                            <select class="form-select" id="featured" required>
-                                                <option value="yes">Yes</option>
-                                                <option value="no">No</option>
+                                           <select class="form-select" name="featured" id="featured" required>
+                                                <option value="1" {{ old('featured', $product->featured ?? '') == '1' ? 'selected' : '' }}> Yes </option>
+                                                <option value="0" {{ old('featured', $product->featured ?? '') == '0' ? 'selected' : '' }}> No  </option>
                                             </select>
                                         </div>
                                     </div>
