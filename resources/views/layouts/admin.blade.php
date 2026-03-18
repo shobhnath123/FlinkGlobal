@@ -124,6 +124,53 @@
         };
         (chart = new ApexCharts(document.querySelector("#management_bar"), options)).render();
     </script>
+    <script>
+       function previewImage(event) {
+        const imagePreview = document.getElementById('image-preview');
+        const removeButton = document.getElementById('remove-image');
+        imagePreview.src = URL.createObjectURL(event.target.files[0]);
+        imagePreview.style.display = 'block';
+        removeButton.style.display = 'inline-block'; // Show remove button
+    }
+
+        function removeImage() {
+        const imagePreview = document.getElementById('image-preview');
+        const removeButton = document.getElementById('remove-image');
+        imagePreview.src = '';
+        imagePreview.style.display = 'none';
+        removeButton.style.display = 'none'; // Hide remove button
+        document.getElementById('image').value = ''; // Clear file input
+    }
+    
+        function previewGalleryImages(event) {
+            const galleryPreview = document.getElementById('gallery-preview');
+            galleryPreview.innerHTML = ''; // Clear previous previews
+            const files = event.target.files;
+    
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.style.width = '100px';
+                img.style.marginRight = '10px';
+                img.style.marginTop = '10px';
+                img.alt = 'Gallery Image Preview';
+    
+                const removeButton = document.createElement('button');
+                removeButton.className = 'btn btn-sm btn-danger';
+                removeButton.innerText = 'Remove';
+                removeButton.style.marginLeft = '5px';
+                removeButton.style.marginRight = '5px';
+                removeButton.onclick = function() {
+                    galleryPreview.removeChild(img);
+                    galleryPreview.removeChild(removeButton);
+                };
+    
+                galleryPreview.appendChild(img);
+                galleryPreview.appendChild(removeButton);
+            }
+        }
+    </script>
     @stack('scripts')
 </body>
 </html>

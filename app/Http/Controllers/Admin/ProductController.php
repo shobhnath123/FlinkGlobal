@@ -4,19 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Product;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use App\Models\Category;
 use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-
+    // use Illuminate\Support\Str;
     public function index()
     {
         try {
@@ -45,6 +42,7 @@ class ProductController extends Controller
         try {
             $categories = Category::all();
             $brands = Brand::all();
+
             return view('admin.products.create', compact('categories', 'brands'));
         } catch (\Exception $e) {
             Log::error('Product Create Page Error', [
@@ -55,9 +53,6 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         try {
@@ -68,34 +63,42 @@ class ProductController extends Controller
                 'regular_price' => 'required',
                 'sku' => 'required|unique:products',
                 'quantity' => 'required',
+                'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+                'gallery_images.*' => 'image|mimes:jpg,jpeg,png,webp|max:2048',
             ]);
 
-            $data = $request->all();
+            $data = $request->except(['image', 'gallery_images']);
 
-            // Upload main image
+            //  Main Image (Storage)
             if ($request->hasFile('image')) {
-                $data['image'] = time().'_'.$request->image->getClientOriginalName();
-                $request->image->move(public_path('uploads/products'), $data['image']);
+                $data['image'] = $request->file('image')->store('products', 'public');
             }
 
-            // Upload gallery images
+            //  Gallery Images (Storage)
             if ($request->hasFile('gallery_images')) {
                 $gallery = [];
+
                 foreach ($request->file('gallery_images') as $file) {
-                    $name = time().'_'.$file->getClientOriginalName();
-                    $file->move(public_path('uploads/products'), $name);
-                    $gallery[] = $name;
+                    $path = $file->store('products/gallery', 'public');
+                    $gallery[] = $path;
                 }
-                $data['gallery_images'] = $gallery;
+
+                $data['gallery_images'] = json_encode($gallery);
             }
 
-            $data['featured'] = $request->featured == 'yes' ? 1 : 0;
+            //  Featured
+            $data['featured'] = $request->featured;
+
+            //  Optional slug fix
+            $data['slug'] = Str::slug($request->slug);
 
             Product::create($data);
 
-            return redirect()->route('products.index')->with('success', 'Product Created');
+            return redirect()->route('products.index')
+                ->with('success', 'Product Created');
 
         } catch (\Exception $e) {
+
             Log::error('Product Store Error', [
                 'message' => $e->getMessage(),
             ]);
@@ -103,7 +106,7 @@ class ProductController extends Controller
             return back()->with('error', 'Product creation failed.');
         }
     }
-
+   
     /**
      * Display the specified resource.
      */
@@ -119,8 +122,10 @@ class ProductController extends Controller
     {
         try {
             $product = Product::findOrFail($id);
+            $categories = Category::all();
+            $brands = Brand::all();
 
-            return view('admin.products.edit', compact('product'));
+            return view('admin.products.edit', compact('product', 'categories', 'brands'));
         } catch (\Exception $e) {
             Log::error('Product Edit Error', [
                 'message' => $e->getMessage(),

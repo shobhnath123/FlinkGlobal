@@ -81,7 +81,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="image">Upload Image</label>
-                                        <input type="file" class="form-control" id="image" accept="image/*"
+                                        <input type="file" class="form-control" name="image" id="image" accept="image/*"
                                             onchange="previewImage(event)" required>
                                         <img id="image-preview" src="#" alt="Image Preview"
                                             style="display:none; width:130px; margin-top:10px; max-width:100%;" />
@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="gallery-image">Upload Gallery Images</label>
-                                        <input type="file" class="form-control" id="gallery-image" accept="image/*"
+                                        <input type="file" class="form-control" name="gallery_images[]" id="gallery-image" accept="image/*"
                                             multiple onchange="previewGalleryImages(event)">
                                         <div id="gallery-preview" style="margin-top:10px;"></div>
                                     </div>
@@ -149,4 +149,5 @@
             </div>
         </div>
     </div>
+
 @endsection
