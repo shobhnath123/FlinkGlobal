@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use App\Models\Brand;
-use App\Models\Category;
-use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -106,7 +106,7 @@ class ProductController extends Controller
             return back()->with('error', 'Product creation failed.');
         }
     }
-   
+
     /**
      * Display the specified resource.
      */
@@ -135,43 +135,60 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         try {
-
             $product = Product::findOrFail($id);
-
-            $data = $request->all();
-
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'slug' => 'required|string|max:255|unique:products,slug,'.$product->id,
+                'category_id' => 'required|exists:categories,id',
+                'brand_id' => 'nullable|exists:brands,id',
+                'short_description' => 'required|string',
+                'information' => 'required|string',
+                'description' => 'required|string',
+                'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+                'gallery_images' => 'nullable|array',
+                'gallery_images.*' => 'image|mimes:jpg,jpeg,png,webp|max:2048',
+                'regular_price' => 'required|numeric',
+                'sale_price' => 'nullable|numeric',
+                'sku' => 'required|string|max:100',
+                'quantity' => 'required|integer',
+                'stock' => 'required|in:in-stock,out-of-stock',
+                'featured' => 'required|boolean',
+            ]);
+            unset($validated['image'], $validated['gallery_images']);
+            $product->update($validated);
             if ($request->hasFile('image')) {
-                $data['image'] = time().'_'.$request->image->getClientOriginalName();
-                $request->image->move(public_path('uploads/products'), $data['image']);
-            }
-
-            if ($request->hasFile('gallery_images')) {
-                $gallery = [];
-                foreach ($request->file('gallery_images') as $file) {
-                    $name = time().'_'.$file->getClientOriginalName();
-                    $file->move(public_path('uploads/products'), $name);
-                    $gallery[] = $name;
+                if ($product->image && Storage::disk('public')->exists($product->image)) {
+                    Storage::disk('public')->delete($product->image);
                 }
-                $data['gallery_images'] = $gallery;
+                $product->image = $request->file('image')->store('products', 'public');
+                $product->save();
             }
-
-            $data['featured'] = $request->featured == 'yes' ? 1 : 0;
-
-            $product->update($data);
-
-            return redirect()->route('products.index')->with('success', 'Product Updated');
-
+            $existingGallery = json_decode($product->gallery_images ?? '[]', true) ?? [];
+            if ($request->filled('removed_gallery')) {
+                $removedImages = json_decode($request->removed_gallery, true) ?? [];
+                foreach ($removedImages as $img) {
+                    if (Storage::disk('public')->exists($img)) {
+                        Storage::disk('public')->delete($img);
+                    }
+                }
+                $existingGallery = array_diff($existingGallery, $removedImages);
+            }
+            if ($request->hasFile('gallery_images')) {
+                foreach ($request->file('gallery_images') as $file) {
+                    $existingGallery[] = $file->store('products/gallery', 'public');
+                }
+            }
+            $product->gallery_images = json_encode(array_values($existingGallery));
+            $product->save();
+            return redirect()->route('products.index')
+                ->with('success', 'Product updated successfully!');
         } catch (\Exception $e) {
             Log::error('Product Update Error', [
                 'message' => $e->getMessage(),
             ]);
-
             return back()->with('error', 'Product update failed.');
         }
     }
