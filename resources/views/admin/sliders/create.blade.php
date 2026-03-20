@@ -34,26 +34,27 @@
                         </div>
                         <div class="white_card_body">
                             <div class="card-body">
-                                <form data-parsley-validate>
+                                <form action="{{ route('slides.store') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <label class="form-label" for="title">Title</label>
-                                            <input type="text" class="form-control" id="title" placeholder=""
+                                            <input type="text"name="title" value="{{ old('title') }}" class="form-control" id="title" placeholder=""
                                                 required>
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label" for="line1">Line 1</label>
-                                            <input type="text" class="form-control" id="line1" placeholder=""
+                                            <input type="text"  name="line1" value="{{ old('line1') }}" class="form-control" id="line1" placeholder=""
                                                 required>
                                         </div>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="line2">Line 2</label>
-                                        <input type="text" class="form-control" id="line2" placeholder="" required>
+                                        <input type="text" class="form-control" name="line2" value="{{ old('line2') }}"id="line2" placeholder="" required>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label" for="image">Upload Image</label>
-                                        <input type="file" class="form-control" id="image" accept="image/*"
+                                        <input type="file" name="image" class="form-control" id="image" accept="image/*"
                                             onchange="previewImage(event)" required>
                                         <img id="image-preview" src="#" alt="Image Preview"
                                             style="display:none; margin-top:10px; width: 160px; max-width:100%;" />

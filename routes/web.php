@@ -14,10 +14,10 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoriesController;
-use App\Http\Controllers\admin\ProductController;
-use App\Http\Controllers\admin\SliderController;
-use App\Http\Controllers\admin\CouponController;
-use App\Http\Controllers\admin\OrderController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\OrderController;
 
 // Route::get('/', function () {
 //     return view('welcome');

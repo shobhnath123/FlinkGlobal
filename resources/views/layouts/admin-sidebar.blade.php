@@ -73,7 +73,7 @@
         </li>
 
         <li class="">
-            <a href="{{ route('slides.create') }}" aria-expanded="false">
+            <a href="{{ route('slides.index') }}" aria-expanded="false">
                 <div class="nav_icon_small">
                     <img src="{{ asset('admin/img/menu-icon/6.svg') }}" alt="">
                 </div>
