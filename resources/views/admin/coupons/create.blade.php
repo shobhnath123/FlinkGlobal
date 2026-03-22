@@ -34,44 +34,85 @@
                         </div>
                         <div class="white_card_body">
                             <div class="card-body">
-                                <form data-parsley-validate>
+                                <form action="{{ route('coupons.store') }}" method="POST">
+                                    @csrf
+
                                     <div class="row mb-3">
                                         <div class="col-md-6">
-                                            <label class="form-label" for="coupon-code">Coupon Code</label>
-                                            <input type="text" class="form-control" id="coupon-code" placeholder=""
-                                                required>
+                                            <label>Coupon Code</label>
+                                            <input type="text" name="code" value="{{ old('code') }}"
+                                                class="form-control" required style="text-transform:uppercase;">
                                         </div>
+
                                         <div class="col-md-6">
-                                            <label class="form-label" for="coupon-type">Coupon Type</label>
-                                            <select class="form-select" id="coupon-type" required>
-                                                <option value="">Select Coupon Type</option>
-                                                <option value="percentage">Percentage</option>
-                                                <option value="fixed">Fixed Amount</option>
+                                            <label>Coupon Type</label>
+                                            <select name="type" class="form-control" required>
+                                                <option value="">Select Type</option>
+                                                <option value="percent" {{ old('type') == 'percent' ? 'selected' : '' }}>
+                                                    Percentage</option>
+                                                <option value="fixed" {{ old('type') == 'fixed' ? 'selected' : '' }}>Fixed
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="value">Value</label>
-                                        <input type="text" class="form-control" id="value" placeholder="" required>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label>Value</label>
+                                            <input type="number" name="value" value="{{ old('value') }}"
+                                                class="form-control" required>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Minimum Cart Value</label>
+                                            <input type="number" name="cart_value" value="{{ old('cart_value') }}"
+                                                class="form-control">
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="cart-value">Cart Value</label>
-                                        <input type="text" class="form-control" id="cart-value" placeholder="" required>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label>Expiry Date</label>
+                                            <input type="date" name="expiry_date" value="{{ old('expiry_date') }}"
+                                                class="form-control" required>
+                                        </div>
+                                       
                                     </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="expiry-date">Expiry Date</label>
-                                        <input type="date" class="form-control" id="expiry-date" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="image">Image</label>
-                                        <input type="file" class="form-control" id="image" accept="image/*"
-                                            onchange="previewImage(event)" required>
-                                        <img id="image-preview" src="#" alt="Image Preview"
-                                            style="display:none; margin-top:10px; width:160px; max-width:100%;" />
-                                        <button type="button" id="remove-image" class="btn btn-sm btn-danger"
-                                            style="display:none; margin-top:5px;" onclick="removeImage()">Remove</button>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                                    {{-- User Type + Status --}}
+<div class="row mb-3">
+    <div class="col-md-6">
+        <label>User Type</label>
+        <select name="user_type" id="user_type" class="form-control" required>
+            <option value="all">All Users</option>
+            <option value="new">New Users</option>
+            <option value="existing">Existing Users</option>
+            <option value="specific">Specific Users</option>
+        </select>
+    </div>
+
+    <div class="col-md-6">
+        <label>Status</label>
+        <select name="status" class="form-control" required>
+            <option value="1">Active</option>
+            <option value="0">Inactive</option>
+        </select>
+    </div>
+</div>
+
+{{-- ✅ Specific Users --}}
+<div class="row mb-3 d-none" id="specific_users_div">
+    <div class="col-md-12">
+        <label>Select Users</label>
+        <select name="users[]" class="form-control" multiple>
+            @foreach ($users as $user)
+                <option value="{{ $user->id }}">
+                    {{ $user->name }} ({{ $user->email }})
+                </option>
+            @endforeach
+        </select>
+    </div>
+</div>
+                                    <button type="submit" class="btn btn-primary">Create Coupon</button>
                                 </form>
                             </div>
                         </div>
@@ -80,4 +121,21 @@
             </div>
         </div>
     </div>
+   <script>
+    function toggleUsers() {
+        let type = document.getElementById('user_type').value;
+        let div = document.getElementById('specific_users_div');
+
+        if (type === 'specific') {
+            div.classList.remove('d-none');
+        } else {
+            div.classList.add('d-none');
+        }
+    }
+
+    document.getElementById('user_type').addEventListener('change', toggleUsers);
+
+    // ✅ run on page load
+    window.onload = toggleUsers;
+</script>
 @endsection

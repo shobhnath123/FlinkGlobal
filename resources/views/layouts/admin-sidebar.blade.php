@@ -83,7 +83,7 @@
             </a>
         </li>
         <li class="">
-            <a href="{{ route('coupons.create') }}" aria-expanded="false">
+            <a href="{{ route('coupons.index') }}" aria-expanded="false">
                 <div class="nav_icon_small">
                     <img src="{{ asset('admin/img/menu-icon/20.svg') }}" alt="">
                 </div>
