@@ -57,14 +57,12 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($coupons as $coupon) 
-                                            
-                                      
                                         <tr>
-                                            <th scope="row">1</th>
+                                            <th scope="row">{{$coupon->id}}</th>
                                             <td>{{$coupon->type ?? ''}}</td>
                                             <td>{{$coupon->code ?? ''}}</td>
                                             <td>{{ $coupon->value ?? '' }}</td>
-                                            <td>{{ $coupon->expiry_date ?? ''}}</td>
+                                           <td> {{ $coupon->expiry_date ? \Carbon\Carbon::parse($coupon->expiry_date)->format('d-m-Y') : '' }}</td>
                                              <td>
                                                 <div scope="row" bis_skin_checked="1">
                                                     <div class="dropdown" bis_skin_checked="1">

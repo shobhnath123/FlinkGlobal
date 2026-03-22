@@ -18,6 +18,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\UsersController;
+
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -54,14 +56,14 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('admin')->middleware(['auth', AuthAdmin::class])->group(function(){
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/customer', [AdminController::class, 'showAllUsers'])->name('admin.customer');
     Route::resources([
         'brands' => BrandController::class,
         'categories' => CategoriesController::class,
         'products'=> ProductController::class,
         'orders' => OrderController::class,
         'coupons' => CouponController::class,
-        'slides' => SliderController::class
-
+        'slides' => SliderController::class,
     ]);
 });
 

@@ -94,7 +94,7 @@
         </li>
 
         <li class="">
-            <a href="users.html" aria-expanded="false">
+            <a href="{{ route('admin.customer') }}" aria-expanded="false">
                 <div class="nav_icon_small">
                     <img src="{{ asset('admin/img/menu-icon/4.svg') }}" alt="">
                 </div>
@@ -105,7 +105,7 @@
         </li>
 
         <li class="">
-            <a href="settings.html" aria-expanded="false">
+            <a href="{{ route('profile.edit') }}" aria-expanded="false">
                 <div class="nav_icon_small">
                     <img src="{{ asset('admin/img/menu-icon/10.svg') }}" alt="">
                 </div>

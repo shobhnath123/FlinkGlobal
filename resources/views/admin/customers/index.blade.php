@@ -48,10 +48,12 @@
                                             <th>Phone</th>
                                             <th>Email</th>
                                             <th class="text-center">Total Orders</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($customers as $customer)
                                         <tr>
                                             <td>1</td>
                                             <td class="pname">
@@ -59,23 +61,40 @@
                                                     <img src="img/staf/2.png" alt="" class="image">
                                                 </div>
                                                 <div class="name" bis_skin_checked="1">
-                                                    <a href="#" class="body-title-2">Admin</a>
-                                                    <div class="text-tiny" bis_skin_checked="1">ADM</div>
+                                                    <a href="#" class="body-title-2">{{ $customer->name ?? '' }}</a>
+                                                    <div class="text-tiny" bis_skin_checked="1">{{ $customer->utype ?? '' }}</div>
                                                 </div>
                                             </td>
-                                            <td>1234567890</td>
-                                            <td>admin@surfsidemedia.in</td>
+                                            <td>{{ $customer->mobile ?? ''}}</td>
+                                            <td>{{ $customer->email ?? '' }}</td>
                                             <td class="text-center"><a href="#" target="_blank">0</a></td>
+                                            <td class="text-center"><a href="#" target="_blank">Active</a></td>
                                             <td>
-                                                <div class="list-icon-function" bis_skin_checked="1">
-                                                    <a href="#">
-                                                        <div class="item edit" bis_skin_checked="1">
-                                                            <i class="icon-edit-3"></i>
-                                                        </div>
-                                                    </a>
+                                            <div scope="row" bis_skin_checked="1">
+                                                <div class="dropdown" bis_skin_checked="1">
+                                                    <span class="dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                                                        <i class="ti-more-alt"></i>
+                                                    </span>
+                                                    <div class="dropdown-menu dropdown-menu-right"
+                                                        aria-labelledby="dropdownMenuButton" bis_skin_checked="1">
+                                                        <a class="dropdown-item" href="#"> <i class="ti-eye"></i>
+                                                            Action</a>
+                                                            <a class="dropdown-item" href=""> <i class="fas fa-edit"></i>
+                                                            Edit</a>
+                                                            <form action="" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="dropdown-item"
+                                                                    onclick="return confirm('Are you sure you want to delete this brand?')">
+                                                                    <i class="ti-trash"></i> Delete
+                                                                </button>
+                                                            </form>
+                                                    </div>
                                                 </div>
-                                            </td>
+                                            </div> 
+                                        </td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

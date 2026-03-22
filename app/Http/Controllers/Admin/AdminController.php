@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Log;
+use App\Models\User;
 class AdminController extends Controller
 {
     /**
@@ -62,5 +63,17 @@ class AdminController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function showAllUsers(){
+        try {
+            $customers = User::all();
+            return view('admin.customers.index', compact('customers'));
+        }catch(\Exception $e){
+            Log::error('Users Index Error', [
+                'message' => $e->getMessage(),
+            ]);
+            return back()->with('error', 'Unable to load users.');
+        }
     }
 }
