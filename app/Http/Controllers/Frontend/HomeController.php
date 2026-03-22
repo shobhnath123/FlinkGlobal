@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
@@ -12,7 +13,32 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('frontend.home');
+
+     $featuredProducts = Product::featured()
+            ->latest()
+            ->take(8)
+            ->get();
+
+        // Sale
+        $saleProducts = Product::onSale()
+            ->latest()
+            ->take(8)
+            ->get();
+
+        // New
+        $newProducts = Product::newArrivals()
+            ->latest()
+            ->take(8)
+            ->get();
+
+        return view('frontend.home', compact(
+            'featuredProducts',
+            'saleProducts',
+            'newProducts'
+        ));
+
+    
+        // return view('frontend.home');
     }
 
     /**

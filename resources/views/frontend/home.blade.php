@@ -266,11 +266,12 @@
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="tab1">
                             <div class="row">
+                                @foreach ($featuredProducts as $product)
                                 <div class="col-lg-3 col-sm-6">
                                     <!-- Single Product Start -->
                                     <div class="single-product-02">
                                         <div class="product-images">
-                                            <a href="details.html"><img src="assets/images/product/1.webp" width="270" height="303" alt="product" /></a>
+                                            <a href="details.html"><img src="{{ asset('storage/'.$product->image) }}" width="270" height="303" alt="product" /></a>
 
                                             <ul class="product-meta">
                                                 <li>
@@ -292,17 +293,17 @@
                                         </div>
                                         <div class="product-content">
                                             <h4 class="title">
-                                                <a href="details.html">Elona bedside grey
-                                                    table</a>
+                                                <a href="details.html">{{ $product->name ?? ''}}</a>
                                             </h4>
                                             <div class="price">
                                                 <span class="sale-price"
-                                                        >$40.00</span>
+                                                        >${{ $product->regular_price??''}}</span>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- Single Product End -->
                                 </div>
+                                @endforeach
                                 <div class="col-lg-3 col-sm-6">
                                     <!-- Single Product Start -->
                                     <div class="single-product-02">
