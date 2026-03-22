@@ -9,7 +9,7 @@
                         <div class="page_title_left d-flex align-items-center">
                             <h3 class="f_s_25 f_w_700 dark_text mr_30">New Coupon</h3>
                             <ol class="breadcrumb page_bradcam mb-0">
-                                <li class="breadcrumb-item"><a href="dashboard.html">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
                                 <li class="breadcrumb-item"><a href="coupons.html">Coupons</a></li>
                                 <li class="breadcrumb-item active">New Coupon</li>
                             </ol>
