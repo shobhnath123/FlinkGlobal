@@ -124,12 +124,8 @@
                                         </div>
 
                                         {{-- Existing Images (Edit Page) --}}
-                                        @php
-                                            $gallery = json_decode($product->gallery_images ?? '[]', true);
-                                        @endphp
-
                                         <div id="existing-gallery" style="margin-top:10px; display:flex; flex-wrap:wrap;">
-                                            @foreach ($gallery as $index => $img)
+                                            @foreach ($product->gallery_images ?? [] as $index => $img)
                                                 <div class="img-box" style="position:relative; margin:5px;">
 
                                                     <img src="{{ asset('storage/' . $img) }}" width="80"

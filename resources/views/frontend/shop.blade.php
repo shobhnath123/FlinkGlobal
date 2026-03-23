@@ -335,7 +335,7 @@
                                             <ul class="product-meta">
                                                 <li>
                                                     <a class="action" data-bs-toggle="modal" data-bs-target="#quickView"
-                                                        href="#"><i class="pe-7s-search"></i></a>
+                                                        href="#"><i class="pe-7s-shuffle"></i></a>
                                                 </li>
                                                 <li>
                                                     <a class="action" href="#"><i class="pe-7s-shopbag"></i></a>
@@ -371,7 +371,7 @@
                                             <ul class="product-meta">
                                                 <li>
                                                     <a class="action" data-bs-toggle="modal" data-bs-target="#quickView"
-                                                        href="#"><i class="pe-7s-search"></i></a>
+                                                        href="#"><i class="pe-7s-shuffle"></i></a>
                                                 </li>
                                                 <li>
                                                     <a class="action" href="#"><i class="pe-7s-shopbag"></i></a>
@@ -407,7 +407,7 @@
                                             <ul class="product-meta">
                                                 <li>
                                                     <a class="action" data-bs-toggle="modal" data-bs-target="#quickView"
-                                                        href="#"><i class="pe-7s-search"></i></a>
+                                                        href="#"><i class="pe-7s-shuffle"></i></a>
                                                 </li>
                                                 <li>
                                                     <a class="action" href="#"><i class="pe-7s-shopbag"></i></a>
@@ -443,7 +443,7 @@
                                             <ul class="product-meta">
                                                 <li>
                                                     <a class="action" data-bs-toggle="modal" data-bs-target="#quickView"
-                                                        href="#"><i class="pe-7s-search"></i></a>
+                                                        href="#"><i class="pe-7s-shuffle"></i></a>
                                                 </li>
                                                 <li>
                                                     <a class="action" href="#"><i class="pe-7s-shopbag"></i></a>
@@ -479,7 +479,7 @@
                                             <ul class="product-meta">
                                                 <li>
                                                     <a class="action" data-bs-toggle="modal" data-bs-target="#quickView"
-                                                        href="#"><i class="pe-7s-search"></i></a>
+                                                        href="#"><i class="pe-7s-shuffle"></i></a>
                                                 </li>
                                                 <li>
                                                     <a class="action" href="#"><i class="pe-7s-shopbag"></i></a>
@@ -515,7 +515,7 @@
                                             <ul class="product-meta">
                                                 <li>
                                                     <a class="action" data-bs-toggle="modal" data-bs-target="#quickView"
-                                                        href="#"><i class="pe-7s-search"></i></a>
+                                                        href="#"><i class="pe-7s-shuffle"></i></a>
                                                 </li>
                                                 <li>
                                                     <a class="action" href="#"><i class="pe-7s-shopbag"></i></a>
@@ -551,7 +551,7 @@
                                             <ul class="product-meta">
                                                 <li>
                                                     <a class="action" data-bs-toggle="modal" data-bs-target="#quickView"
-                                                        href="#"><i class="pe-7s-search"></i></a>
+                                                        href="#"><i class="pe-7s-shuffle"></i></a>
                                                 </li>
                                                 <li>
                                                     <a class="action" href="#"><i class="pe-7s-shopbag"></i></a>
@@ -587,7 +587,7 @@
                                             <ul class="product-meta">
                                                 <li>
                                                     <a class="action" data-bs-toggle="modal" data-bs-target="#quickView"
-                                                        href="#"><i class="pe-7s-search"></i></a>
+                                                        href="#"><i class="pe-7s-shuffle"></i></a>
                                                 </li>
                                                 <li>
                                                     <a class="action" href="#"><i class="pe-7s-shopbag"></i></a>
@@ -623,7 +623,7 @@
                                             <ul class="product-meta">
                                                 <li>
                                                     <a class="action" data-bs-toggle="modal" data-bs-target="#quickView"
-                                                        href="#"><i class="pe-7s-search"></i></a>
+                                                        href="#"><i class="pe-7s-shuffle"></i></a>
                                                 </li>
                                                 <li>
                                                     <a class="action" href="#"><i class="pe-7s-shopbag"></i></a>

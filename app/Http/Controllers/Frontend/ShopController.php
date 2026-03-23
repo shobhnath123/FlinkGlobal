@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ShopController extends Controller
 {
@@ -61,5 +62,10 @@ class ShopController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+     public function product_details($product_slug){
+        $product = Product::where('slug',$product_slug)->first();
+        $rproducts = Product::where('slug','<>',$product_slug)->get()->take(8);
+        return view('frontend.details', compact('product','rproducts'));
     }
 }

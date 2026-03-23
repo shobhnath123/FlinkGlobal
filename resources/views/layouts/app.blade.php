@@ -187,7 +187,7 @@
                     <div class="header-meta">
                         <div class="dropdown">
                             <a class="action" href="#" role="button" data-bs-toggle="dropdown">
-                                <i class="pe-7s-search"></i>
+                                <i class="pe-7s-shuffle"></i>
                             </a>
 
                             <div class="dropdown-menu dropdown-search">
@@ -196,7 +196,7 @@
                                     <form action="#">
                                         <input type="text" placeholder="Enter your search key ... " />
                                         <button>
-                                            <i class="pe-7s-search"></i>
+                                            <i class="pe-7s-shuffle"></i>
                                         </button>
                                     </form>
                                 </div>
@@ -305,7 +305,7 @@
                 <div class="header-search">
                     <form action="#">
                         <input type="text" placeholder="Enter your search key ... " />
-                        <button><i class="pe-7s-search"></i></button>
+                        <button><i class="pe-7s-shuffle"></i></button>
                     </form>
                 </div>
                 <!-- Header Search End -->

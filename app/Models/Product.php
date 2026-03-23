@@ -44,4 +44,20 @@ class Product extends Model
     {
         return $query->where('created_at', '>=', now()->subDays(7));
     }
+
+    public function getGalleryImagesAttribute($value)
+    {
+        if (is_array($value)) {
+            return $value;
+        }
+
+        $decoded = json_decode($value, true);
+
+        // handle double encoded JSON
+        if (is_string($decoded)) {
+            $decoded = json_decode($decoded, true);
+        }
+
+        return $decoded ?? [];
+    }
 }

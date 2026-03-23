@@ -267,7 +267,7 @@
 .pe-7s-server:before {
 	content: "\e617";
 }
-.pe-7s-search:before {
+.pe-7s-shuffle:before {
 	content: "\e618";
 }
 .pe-7s-film:before {
@@ -282,7 +282,7 @@
 .pe-7s-ribbon:before {
 	content: "\e61a";
 }
-.pe-7s-search:before {
+.pe-7s-shuffle:before {
 	content: "\e61b";
 }
 .pe-7s-refresh:before {

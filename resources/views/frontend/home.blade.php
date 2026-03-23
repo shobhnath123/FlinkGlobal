@@ -271,12 +271,12 @@
                                     <!-- Single Product Start -->
                                     <div class="single-product-02">
                                         <div class="product-images">
-                                            <a href="details.html"><img src="{{ asset('storage/'.$product->image) }}" width="270" height="303" alt="product" /></a>
+                                            <a href="{{ route('shop.product.details', $product->slug) }}"><img src="{{ asset('storage/'.$product->image) }}" width="270" height="303" alt="product" /></a>
 
                                             <ul class="product-meta">
                                                 <li>
                                                     <a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i
-                                                                class="pe-7s-search"
+                                                                class="pe-7s-shuffle"
                                                             ></i></a>
                                                 </li>
                                                 <li>
@@ -293,7 +293,7 @@
                                         </div>
                                         <div class="product-content">
                                             <h4 class="title">
-                                                <a href="details.html">{{ $product->name ?? ''}}</a>
+                                                <a href="{{ route('shop.product.details', $product->slug) }}">{{ $product->name ?? ''}}</a>
                                             </h4>
                                             <div class="price">
                                                 <span class="sale-price"
@@ -313,7 +313,7 @@
                                             <ul class="product-meta">
                                                 <li>
                                                     <a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i
-                                                                class="pe-7s-search"
+                                                                class="pe-7s-shuffle"
                                                             ></i></a>
                                                 </li>
                                                 <li>
@@ -354,7 +354,7 @@
                                             <ul class="product-meta">
                                                 <li>
                                                     <a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i
-                                                                class="pe-7s-search"
+                                                                class="pe-7s-shuffle"
                                                             ></i></a>
                                                 </li>
                                                 <li>
@@ -391,7 +391,7 @@
                                             <ul class="product-meta">
                                                 <li>
                                                     <a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i
-                                                                class="pe-7s-search"
+                                                                class="pe-7s-shuffle"
                                                             ></i></a>
                                                 </li>
                                                 <li>
@@ -433,7 +433,7 @@
                                             <ul class="product-meta">
                                                 <li>
                                                     <a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i
-                                                                class="pe-7s-search"
+                                                                class="pe-7s-shuffle"
                                                             ></i></a>
                                                 </li>
                                                 <li>
@@ -475,7 +475,7 @@
                                             <ul class="product-meta">
                                                 <li>
                                                     <a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i
-                                                                class="pe-7s-search"
+                                                                class="pe-7s-shuffle"
                                                             ></i></a>
                                                 </li>
                                                 <li>
@@ -512,7 +512,7 @@
                                             <ul class="product-meta">
                                                 <li>
                                                     <a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i
-                                                                class="pe-7s-search"
+                                                                class="pe-7s-shuffle"
                                                             ></i></a>
                                                 </li>
                                                 <li>
@@ -553,7 +553,7 @@
                                             <ul class="product-meta">
                                                 <li>
                                                     <a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i
-                                                                class="pe-7s-search"
+                                                                class="pe-7s-shuffle"
                                                             ></i></a>
                                                 </li>
                                                 <li>

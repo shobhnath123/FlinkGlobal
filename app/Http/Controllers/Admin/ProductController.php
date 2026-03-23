@@ -83,7 +83,7 @@ class ProductController extends Controller
                     $gallery[] = $path;
                 }
 
-                $data['gallery_images'] = json_encode($gallery);
+                $data['gallery_images'] = $gallery;
             }
 
             //  Featured
@@ -166,7 +166,7 @@ class ProductController extends Controller
                 $product->image = $request->file('image')->store('products', 'public');
                 $product->save();
             }
-            $existingGallery = json_decode($product->gallery_images ?? '[]', true) ?? [];
+            $existingGallery = $product->gallery_images ?? '[]' ?? [];
             if ($request->filled('removed_gallery')) {
                 $removedImages = json_decode($request->removed_gallery, true) ?? [];
                 foreach ($removedImages as $img) {
@@ -181,7 +181,7 @@ class ProductController extends Controller
                     $existingGallery[] = $file->store('products/gallery', 'public');
                 }
             }
-            $product->gallery_images = json_encode(array_values($existingGallery));
+            $product->gallery_images = array_values($existingGallery);
             $product->save();
             return redirect()->route('products.index')
                 ->with('success', 'Product updated successfully!');

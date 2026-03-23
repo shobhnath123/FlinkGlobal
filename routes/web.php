@@ -27,6 +27,8 @@ use App\Http\Controllers\Admin\UsersController;
 
 Route::get('/',[HomeController::class,'index'])->name('home.index');
 Route::get('/shop',[ShopController::class,'index'])->name('shop.index');
+Route::get('/shop/{product_slug}',[ShopController::class, 'product_details'])->name('shop.product.details');
+
 Route::get('/cart',[CartController::class,'index'])->name('cart.index');
 Route::get('/wishlist',[WishlistController::class,'index'])->name('wishlist.index');
 Route::get('/checkout',[CheckoutController::class,'index'])->name('checkout.index');
