@@ -1,0 +1,1 @@
+<?php $im = imagecreatefromwebp('public/images/FG-Combine.webp'); imagepng($im, 'public/images/FG-Combine.png'); imagedestroy($im); $im2 = imagecreatefromwebp('public/ec.webp'); imagepng($im2, 'public/ec.png'); imagedestroy($im2); echo 'Done';
